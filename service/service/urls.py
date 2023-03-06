@@ -22,17 +22,35 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 
-from JWTUser.views import UserViewSet, UserRegisterView, UserUpdateView
+from JWTUser.views import (
+    UserViewSet,
+    UserRegisterView,
+    UserUpdateView
+)
+
+from Queue.views import (
+    QueueViewSet,
+    QueueRegisterView,
+    QueueListView,
+    QueueRetrieveView
+)
 
 router = SimpleRouter()
-router.register(r'api/user', UserViewSet)
+router.register(r'api/admin/user', UserViewSet)
+router.register(r'api/admin/queue', QueueViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-    path('api/user/register/', UserRegisterView.as_view(), name='register'),
-    path('api/user/update/<int:pk>', UserUpdateView.as_view(), name='update'),
+
+    path('api/user/register/', UserRegisterView.as_view(), name='register_user'),
+    path('api/user/update/<int:pk>', UserUpdateView.as_view(), name='update_user'),
+
+    path('api/queue/register/', QueueRegisterView.as_view(), name='register_queue'),
+    path('api/queue/', QueueListView.as_view(), name='list_queue'),
+    path('api/queue/<int:pk>', QueueRetrieveView.as_view(), name='retrieve_queue'),
 ]
 urlpatterns += router.urls
