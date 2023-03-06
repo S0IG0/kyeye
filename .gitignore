@@ -1,3 +1,5 @@
 .idea
 service/JWTUser/migrations
 service/JWTUser/migrations/
+service/Queue/migrations
+service/Queue/migrations/
