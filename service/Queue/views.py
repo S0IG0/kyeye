@@ -6,8 +6,8 @@ from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from rest_framework.viewsets import ModelViewSet
 
-from Queue.models import Queue
-from Queue.serializers import QueueSerializer
+from Queue.models import Queue, UserQueueRelation
+from Queue.serializers import QueueSerializer, UserQueueRelationRegisterSerializer
 
 
 # Create your views here.
@@ -50,4 +50,9 @@ class QueueListView(ListAPIView):
 class QueueRetrieveView(RetrieveAPIView):
     queryset = Queue.objects.all()
     serializer_class = QueueSerializer
+    permission_classes = (AllowAny, )
+
+class UserQueueRelationRegisterView(CreateAPIView):
+    queryset = UserQueueRelation.objects.all()
+    serializer_class = UserQueueRelationRegisterSerializer
     permission_classes = (AllowAny, )
