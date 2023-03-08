@@ -32,7 +32,7 @@ from Queue.views import (
     QueueViewSet,
     QueueRegisterView,
     QueueListView,
-    QueueRetrieveView, UserQueueRelationRegisterView
+    QueueRetrieveView, UserQueueRelationRegisterView, UserQueueRelationDestroyView
 )
 
 router = SimpleRouter()
@@ -80,6 +80,9 @@ urlpatterns = [
     # Регистрация пользователя в очереди, нужно предоставить id пользователя и id очереди,
     # возвращает id пользователя и id очереди
     path('api/queue/user/register/', UserQueueRelationRegisterView.as_view(), name='register_user_in_queue'),
+    # Удаление пользователя из очереди, нужно составить правильный url, возвращает HTTP_204_NO_CONTENT
+    path('api/queue/user/destroy/<int:user_id>/<int:queue_id>/',
+         UserQueueRelationDestroyView.as_view(), name='destroy_user_in_queue'),
     # Регистрация очереди, нужно предоставить название очереди, возвращает всю информацию об очереди
     path('api/queue/register/', QueueRegisterView.as_view(), name='register_queue'),
     # Просмотр информации о всех очередях
