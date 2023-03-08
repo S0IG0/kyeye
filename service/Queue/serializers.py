@@ -39,11 +39,34 @@ class UserQueueRelationSerializer(ModelSerializer):
         )
 
 
+class UserQueueRelationRegisterSerializer(ModelSerializer):
+    class Meta:
+        model = UserQueueRelation
+        fields = (
+            'user',
+            'queue',
+            'date_joined',
+        )
+        extra_kwargs = {
+            'user': {
+                'required': True,
+            },
+            'queue': {
+                'required': True,
+            },
+            'date_joined': {
+                'read_only': True,
+            },
+
+        }
+
+
 class QueueSerializer(ModelSerializer):
     owner = QueueOwnerSerializer(read_only=True)
     users = UserQueueRelationSerializer(
         source='userqueuerelation_set', many=True, read_only=True
     )
+
     class Meta:
         model = Queue
         fields = (
