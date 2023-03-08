@@ -32,7 +32,7 @@ from Queue.views import (
     QueueViewSet,
     QueueRegisterView,
     QueueListView,
-    QueueRetrieveView
+    QueueRetrieveView, UserQueueRelationRegisterView
 )
 
 router = SimpleRouter()
@@ -40,17 +40,51 @@ router.register(r'api/admin/user', UserViewSet)
 router.register(r'api/admin/queue', QueueViewSet)
 
 urlpatterns = [
+    # Панель администратора
     path('admin/', admin.site.urls),
 
+    # Получение токена, нужно предоставить email и password, возвращает access и refresh токен
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # Обновление токена, нужно предоставить refresh токен, возвращает access токен
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # Верификация токена, нужно предоставить access токен, возвращает status 200 если верификация пройдена
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
+    # Регистрация пользователей, нужно предоставить (
+    #             'username',
+    #             'first_name',
+    #             'last_name',
+    #             'email',
+    #             'password',
+    # )
+    # Возвращает поля (
+    #             'id',
+    #             'username',
+    #             'first_name',
+    #             'last_name',
+    #             'email',
+    #             'is_active',
+    # )
     path('api/user/register/', UserRegisterView.as_view(), name='register_user'),
+    # Изменение данных пользователей, нужно предоставить поле которое нужно изменить.
+    # Возвращает поля (
+    #             'id',
+    #             'username',
+    #             'first_name',
+    #             'last_name',
+    #             'email',
+    #             'is_active',
+    # )
     path('api/user/update/<int:pk>', UserUpdateView.as_view(), name='update_user'),
 
+    # Регистрация пользователя в очереди, нужно предоставить id пользователя и id очереди,
+    # возвращает id пользователя и id очереди
+    path('api/queue/user/register/', UserQueueRelationRegisterView.as_view(), name='register_user_in_queue'),
+    # Регистрация очереди, нужно предоставить название очереди, возвращает всю информацию об очереди
     path('api/queue/register/', QueueRegisterView.as_view(), name='register_queue'),
+    # Просмотр информации о всех очередях
     path('api/queue/', QueueListView.as_view(), name='list_queue'),
+    # Просмотр информации конкретной очереди
     path('api/queue/<int:pk>', QueueRetrieveView.as_view(), name='retrieve_queue'),
 ]
 urlpatterns += router.urls
