@@ -5,3 +5,4 @@ service/Queue/migrations
 service/Queue/migrations/
 service/.DS_Store
 .DS_Store
+frontend/node_modules
