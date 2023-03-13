@@ -10,7 +10,5 @@ RUN npm install
 
 COPY . /app
 
-RUN npm run build
-
 RUN adduser --disabled-password service-user
 USER service-user

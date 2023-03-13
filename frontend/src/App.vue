@@ -1,6 +1,7 @@
 <template>
   <div class="app">
     <router-view></router-view>
+    <user-item v-for="user in users" :user="user"></user-item>
   </div>
 </template>
 
