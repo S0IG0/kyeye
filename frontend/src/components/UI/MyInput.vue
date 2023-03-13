@@ -1,5 +1,5 @@
 <template>
-    <input :value="modelValue" @input="" class="input" type="text">
+    <input :value="modelValue" @input="updateInput" class="input" type="text">
 </template>
 
 <script>
@@ -8,8 +8,10 @@
         props: {
             modelValue: [String, Number]
         },
-        updateInput(event){
+        methods: {
+          updateInput(event) {
             this.$emit('update:modelValue', event.target.value)
+          }
         }
     }
 </script>
