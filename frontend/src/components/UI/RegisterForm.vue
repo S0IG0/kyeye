@@ -43,14 +43,15 @@ export default {
   },
   methods: {
     validateData(){
-      let x = validatePassword(this.user.password, this.user.repeat_password)
-      console.log(x);
-      let validators = [x];
-      console.log(validators);
-      validators.forEach(item => {
-        this.errors += item;
-        console.log(item);
-          })
+      [
+          validatePassword(
+              this.user.password,
+              this.user.repeat_password,
+          ),
+
+      ].forEach(errors => {
+        this.errors.push(...errors);
+      })
     },
 
   }
