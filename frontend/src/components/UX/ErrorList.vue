@@ -1,8 +1,8 @@
 <template>
-  <div class="error-list"
-  v-for="error in errors"
-  :key="error">
-    <error>{{ error }}</error>
+  <div class="error-list" v-show="errors.length !== 0">
+      <error v-for="error in errors"
+      :key="error">{{ error }}
+      </error>
   </div>
 </template>
 
@@ -23,10 +23,15 @@ export default {
 
 <style scoped>
   .error-list{
-    width: 500px;
-    height: 200px;
-    border: 2px solid red;
+    width: 100%;
+    height: auto;
     margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    transition: 0.5s;
   }
-
 </style>

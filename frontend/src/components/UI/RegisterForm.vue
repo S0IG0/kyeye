@@ -1,24 +1,36 @@
 <template>
-  <div class="reg">
-    Регистрация
-    <my-input placeholder="Email"
-              v-model="user.email"></my-input>
-    <my-input placeholder="Username"
-              v-model="user.username"></my-input>
-    <my-input placeholder="First name"
-              v-model="user.first_name"></my-input>
-    <my-input placeholder="Last name"
-              v-model="user.last_name"></my-input>
-    <my-input placeholder="Password"
-              v-model="user.password"></my-input>
-    <my-input placeholder="Password(repeat)"
-              v-model="user.repeat_password"></my-input>
-    <my-button class="sign-up"
-               @click="validateData"
-    >Sign up
-    </my-button>
+  <div class="wrapper">
+    <div class="registration">
+      <div class="title">Регистрация</div>
+      <my-input placeholder="Email"
+      v-model="user.email"
+      required
+      ></my-input>
+      <my-input placeholder="Имя пользователя"
+      v-model="user.username"
+      required></my-input>
+      <my-input placeholder="Имя"
+      v-model="user.first_name"
+      required></my-input>
+      <my-input placeholder="Фамилия"
+      v-model="user.last_name"
+      required></my-input>
+      <my-input placeholder="Пароль"
+      v-model="user.password"
+      type="password"
+      required></my-input>
+      <my-input placeholder="Пароль (повторить)"
+      v-model="user.repeat_password"
+      type="password"
+      required></my-input>
+      <div class="button__container">
+        <my-button class="sign-up"
+                   @click="validateData"
+        >Зарегистрироваться</my-button>
+      </div>
+    </div>
+    <error-list :errors="errors" class="error-list"></error-list>
   </div>
-  <error-list :errors="errors"></error-list>
 </template>
 
 <script>
@@ -106,7 +118,23 @@ export default {
 </script>
 
 <style scoped>
-.sign-up {
-  margin-top: 50px;
-}
+  .sign-up{
+    margin-top: 15px;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button__container{
+    display: flex;
+    flex-direction: column;
+  }
+  .registration .title{
+    font-family: Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+  }
 </style>
