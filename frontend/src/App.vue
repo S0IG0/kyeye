@@ -15,27 +15,6 @@ export default {
     MyButton,
     UserList, UserItem
   },
-  data() {
-    return {
-      users: [],
-    }
-  },
-  methods: {
-    async getAPIRequest() {
-      const x = await axios({
-        method: "get",
-        url: "http://localhost:8000/api/queue/",
-      });
-      // console.log(x.data[0].owner);
-      x.data[0].users.forEach(element => {
-        console.log(element.user);
-        this.users.push(element.user);
-      });
-    },
-  },
-  mounted() {
-    this.getAPIRequest();
-  },
 }
 </script>
 
