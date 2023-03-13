@@ -37,7 +37,8 @@
 import MyInput from "@/components/UI/MyInput.vue";
 import MyButton from "@/components/UI/MyButton.vue";
 import ErrorList from "@/components/UX/ErrorList.vue";
-import validatePassword from "@/components/validators/validators";
+import {validateEmail, validateName, validatePassword} from "@/components/validators/validators";
+import axios from "axios";
 
 
 export default {
@@ -49,24 +50,69 @@ export default {
       required: true,
     }
   },
-  data(){
+  data() {
     return {
-      errors: []
+      errors: [],
+      user_: {},
     }
   },
   methods: {
-    validateData(){
+    validateData() {
+      this.errors = [];
       [
-          validatePassword(
-              this.user.password,
-              this.user.repeat_password,
-          ),
+        validatePassword(
+            this.user.password,
+            this.user.repeat_password,
+        ),
+        validateEmail(
+            this.user.email,
+        ),
+        validateName(
+          'First',
+            this.user.first_name,
+        ),
+        validateName(
+            'Last',
+            this.user.last_name,
+        ),
 
       ].forEach(errors => {
         this.errors.push(...errors);
       })
+      if (this.errors.length === 0) {
+        const x = this.postRequestToBackend();
+        x.then(response => {
+          if (response) {
+            console.log(response.data)
+            // Пользователь зарегестрирован
+          }
+        })
+      }
     },
 
+    async postRequestToBackend() {
+      let value = null;
+      try {
+       await axios({
+         method: 'post',
+         url: 'http://localhost:8000/api/user/register/',
+         data: {
+           "username": this.user.username,
+           "first_name": this.user.first_name,
+           "last_name": this.user.last_name,
+           "email": this.user.email,
+           "password": this.user.password,
+         }
+       }).then(response => {
+         value = response;
+       })
+     } catch (error) {
+       for (const key in error.response.data) {
+         this.errors.push(...error.response.data[key])
+       }
+     }
+     return value;
+    }
   }
 }
 </script>
