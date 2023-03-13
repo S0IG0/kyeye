@@ -75,6 +75,10 @@ export default {
             'Last',
             this.user.last_name,
         ),
+        validateName(
+            'User',
+            this.user.username,
+        ),
 
       ].forEach(errors => {
         this.errors.push(...errors);
