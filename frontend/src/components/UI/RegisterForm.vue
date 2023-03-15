@@ -39,6 +39,7 @@ import MyButton from "@/components/UI/MyButton.vue";
 import ErrorList from "@/components/UX/ErrorList.vue";
 import {validateEmail, validateName, validatePassword} from "@/components/validators/validators";
 import axios from "axios";
+import {urlBackend} from "@/components/config";
 
 
 export default {
@@ -99,7 +100,7 @@ export default {
       try {
        await axios({
          method: 'post',
-         url: 'http://localhost:8000/api/user/register/',
+         url: `${urlBackend}/api/user/register/`,
          data: {
            "username": this.user.username,
            "first_name": this.user.first_name,
