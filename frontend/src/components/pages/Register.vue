@@ -39,6 +39,7 @@ import MyButton from "@/components/UI/MyButton.vue";
 import {validateEmail, validateName, validatePassword} from "@/components/validators/validators";
 import axios from "axios";
 import router from "@/components/routers/router";
+import {Auth} from "@/components/js/AuthModule";
 
 
 export default {
@@ -48,6 +49,7 @@ export default {
     user: {
       type: Object,
       required: true,
+      Auth: Auth,
     }
   },
   data(){
@@ -91,7 +93,8 @@ export default {
           if (response) {
             console.log(response.data)
             // Пользователь зарегестрирован
-            // router.push('/login')
+            Auth.logIn(this.user.email, this.user.password)
+            router.push('/login')
           }
         })
       }
