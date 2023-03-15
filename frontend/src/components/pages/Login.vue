@@ -13,7 +13,7 @@
         <div class="forgot__password">
           <a>Забыли пароль?</a>
         </div>
-        <my-button @click="Auth.logIn(email, password)">Войти</my-button>
+        <my-button @click="logIn">Войти</my-button>
       </form>
       <div class="text">
         У вас нет аккаунта? <a class="link" @click="$router.push('/register')">Зарегистрироваться</a>
@@ -31,14 +31,21 @@ import {Auth} from "@/components/js/AuthModule";
 
 export default {
   name: "login-form",
+  methods: {
+    logIn() {
+      this.errors = [];
+      this.Auth.logIn(this.email, this.password, this.errors);
+    }
+  },
   components: {MyButton, MyInput},
   data() {
     return {
       email: "",
       password: "",
       Auth: Auth,
+      errors: [],
     }
-  }
+  },
 }
 </script>
 
