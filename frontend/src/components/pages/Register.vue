@@ -38,6 +38,7 @@ import ErrorList from "@/components/UX/ErrorList.vue";
 import MyButton from "@/components/UI/MyButton.vue";
 import {validateEmail, validateName, validatePassword} from "@/components/validators/validators";
 import axios from "axios";
+import router from "@/components/routers/router";
 
 
 export default {
@@ -90,6 +91,7 @@ export default {
           if (response) {
             console.log(response.data)
             // Пользователь зарегестрирован
+            // router.push('/login')
           }
         })
       }
