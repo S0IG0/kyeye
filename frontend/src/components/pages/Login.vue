@@ -64,12 +64,13 @@ export default {
         this.errors.push(...errors);
       })
     },
-    logIn() {
+    async logIn() {
       this.errors = [];
       this.validateData();
       if (this.errors.length === 0) {
-        this.Auth.logIn(this.email, this.password, this.errors);
+        await this.Auth.logIn(this.email, this.password, this.errors);
       }
+      console.log(Auth.JwtToken.decodeAccess().user_id)
     }
 }
 
