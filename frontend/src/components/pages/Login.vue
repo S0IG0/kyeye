@@ -37,14 +37,6 @@ import {validateEmail, validateName} from "@/components/validators/validators";
 export default {
   name: "login-form",
   components: {ErrorList, MyButton, MyInput},
-
-  methods: {
-    logIn() {
-      this.errors = [];
-      this.Auth.logIn(this.email, this.password, this.errors);
-    }
-  },
-  components: {MyButton, MyInput},
   data() {
     return {
       email: "",
@@ -54,8 +46,8 @@ export default {
     }
   },
   methods: {
+
     validateData() {
-      this.errors = [];
       [
         validateEmail(
             this.email,
@@ -71,21 +63,15 @@ export default {
       ].forEach(errors => {
         this.errors.push(...errors);
       })
-      if (this.errors.length === 0) {
-        const x = this.postRequestToBackend();
-        x.then(response => {
-          if (response) {
-            console.log(response.data)
-            // Пользователь зарегестрирован
-          }
-        })
-      }
     },
-  }
-
-      errors: [],
+    logIn() {
+      this.errors = [];
+      this.validateData();
+      if (this.errors.length === 0) {
+        this.Auth.logIn(this.email, this.password, this.errors);
+      }
     }
-  },
+}
 
 }
 </script>

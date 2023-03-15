@@ -31,12 +31,19 @@ class AuthModule {
         }).catch(error => {
             if (error.response) {
                 console.log("response", error.response.status)
+                console.log(error.response)
                 if (errors !== undefined) {
-                    for (let key in error.response.data) {
-                        error.response.data[key].forEach(error => {
-                            errors.push(`${key}: ${error}`)
-                        })
+                    if (error.response.data.detail) { errors.push(error.response.data.detail) }
+                    try {
+                        for (let key in error.response.data) {
+                            error.response.data[key].forEach(error => {
+                                errors.push(`${key}: ${error}`)
+                            })
+                        }
+                    } catch (except) {
+                        console.log(except)
                     }
+
                 }
             } else if (error.request) {
                 console.log("request", error.request)
