@@ -9,17 +9,20 @@
         ></my-input>
         <my-input placeholder="Пароль"
                   v-model="this.password"
-                  required></my-input>
+                  required
+                  type="password"
+                  ></my-input>
         <div class="forgot__password">
           <a>Забыли пароль?</a>
         </div>
-        <my-button @click="Auth.logIn(email, password)">Войти</my-button>
+        <my-button @click="validateData">Войти</my-button>
       </form>
       <div class="text">
         У вас нет аккаунта? <a class="link" @click="$router.push('/register')">Зарегистрироваться</a>
       </div>
     </div>
     <my-button v-else @click="Auth.logOut()">Выйти</my-button>
+    <error-list :errors="errors" class="error-list"></error-list>
   </div>
 </template>
 
@@ -28,16 +31,48 @@
 import MyInput from "@/components/UI/MyInput.vue";
 import MyButton from "@/components/UI/MyButton.vue";
 import {Auth} from "@/components/js/AuthModule";
+import ErrorList from "@/components/UX/ErrorList.vue";
+import {validateEmail, validateName} from "@/components/validators/validators";
 
 export default {
   name: "login-form",
-  components: {MyButton, MyInput},
+  components: {ErrorList, MyButton, MyInput},
   data() {
     return {
       email: "",
       password: "",
       Auth: Auth,
+      errors: []
     }
+  },
+  methods: {
+    validateData() {
+      this.errors = [];
+      [
+        validateEmail(
+            this.email,
+        ),
+        validateName(
+            'e-mail',
+            this.email,
+        ),
+        validateName(
+            'пароль',
+            this.password,
+        ),
+      ].forEach(errors => {
+        this.errors.push(...errors);
+      })
+      if (this.errors.length === 0) {
+        const x = this.postRequestToBackend();
+        x.then(response => {
+          if (response) {
+            console.log(response.data)
+            // Пользователь зарегестрирован
+          }
+        })
+      }
+    },
   }
 }
 </script>
