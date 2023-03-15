@@ -24,7 +24,7 @@ export default {
   margin-top: 15px;
   font-size: 15px;
   font-weight: 600;
-  color: gray;
+  color: black;
   border-radius: 5px;
 }
 

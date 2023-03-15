@@ -1,48 +1,64 @@
 <template>
-  <div v-if="!auth.onLogin">
-    <my-input v-model="email" placeholder="Email"></my-input>
-    <my-input v-model="password" placeholder="Пароль"></my-input>
-    <div class="forgot__password">
-      <a>Забыли пароль?</a>
+  <div class="wrapper">
+    <div class="title">Авторизация</div>
+    <form>
+      <my-input placeholder="E-mail"
+      v-model="this.email"
+      required
+      ></my-input>
+      <my-input placeholder="Пароль"
+      v-model="this.password"
+      required></my-input>
+      <div class="forgot__password">
+        <a>Забыли пароль?</a>
+      </div>
+      <my-button>Войти</my-button>
+    </form>
+    <div class="text">
+      У вас нет аккаунта? <a class="link" @click="$router.push('/register')">Зарегистрироваться</a>
     </div>
-    <my-button @click="logIn">Войти</my-button>
-  </div>
-  <my-button @click="logOut">Выйти</my-button>
-  <div class="text">
-    У вас нет аккаунта? <a>Зарегистрироваться</a>
-  </div>
-  <div>
-    {{ this.auth }}
   </div>
 </template>
 
 <script>
 
-import MyButton from "@/components/UI/MyButton.vue";
 import MyInput from "@/components/UI/MyInput.vue";
-import {Auth} from "@/components/js/AuthModule";
+import MyButton from "@/components/UI/MyButton.vue";
 
 export default {
-  name: "Login",
-  components: {MyInput, MyButton},
-  data() {
-    return {
-      email: 'test1@mail.ru',
-      password: 'ss261645',
-      auth: Auth,
-    }
-  },
-  methods: {
-    logIn() {
-      this.auth.logIn(this.email, this.password)
-    },
-    logOut() {
-      this.auth.logOut();
+  name: "login-form",
+  components: {MyButton, MyInput},
+  data(){
+    return{
+      email: "",
+      password: "",
     }
   }
 }
 </script>
 
 <style scoped>
-
+  .link{
+    color: rgb(52, 114, 238);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .text{
+    margin-top: 15px;
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+    font-size: 15px;
+  }
+  .forgot__password{
+    text-align: right;
+    margin: 15px 0;
+    color: gray;
+    font-family: Helvetica, sans-serif;
+    font-size: 13px;
+  }
+  .title{
+    font-family: Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+  }
 </style>
