@@ -1,12 +1,10 @@
 <template>
   <div class="app">
     <router-view></router-view>
-    <user-item v-for="user in users" :user="user"></user-item>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 import UserList from "@/components/User/UserList.vue"
 import UserItem from "@/components/User/UserItem.vue"
 import MyButton from "@/components/UI/MyButton.vue";
