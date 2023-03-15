@@ -1,5 +1,5 @@
 # Create your views here.
-from rest_framework.generics import CreateAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.viewsets import ModelViewSet
 
@@ -23,3 +23,7 @@ class UserUpdateView(UpdateAPIView):
     serializer_class = UserSerializer
     permission_classes = (IsOwner | IsAdminUser, )
 
+class UserRetrieveView(RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsOwner | IsAdminUser,)
