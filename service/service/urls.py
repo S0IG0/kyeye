@@ -25,7 +25,8 @@ from rest_framework_simplejwt.views import (
 from JWTUser.views import (
     UserViewSet,
     UserRegisterView,
-    UserUpdateView
+    UserUpdateView,
+    UserRetrieveView,
 )
 
 from Queue.views import (
@@ -65,6 +66,7 @@ urlpatterns = [
     #             'email',
     #             'is_active',
     # )
+    path('api/user/<int:pk>', UserRetrieveView.as_view(), name='user_concrete'),
     path('api/user/register/', UserRegisterView.as_view(), name='register_user'),
     # Изменение данных пользователей, нужно предоставить поле которое нужно изменить.
     # Возвращает поля (
