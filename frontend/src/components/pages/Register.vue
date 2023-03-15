@@ -94,8 +94,10 @@ export default {
             console.log(response.data)
             // Пользователь зарегестрирован
             await Auth.logIn(this.user.email, this.user.password, undefined, true)
-            router.push('/account')
+            router.push('/account').then()
           }
+        }).catch(error => {
+          console.log(error)
         })
       }
     },
