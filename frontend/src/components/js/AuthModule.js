@@ -13,7 +13,7 @@ class AuthModule {
         }
     }
 
-    async logIn(email, password) {
+    async logIn(email, password, errors) {
         if (this.onLogin === true) { return }
         await axios({
             method: 'post',
@@ -31,6 +31,13 @@ class AuthModule {
         }).catch(error => {
             if (error.response) {
                 console.log("response", error.response.status)
+                if (errors !== undefined) {
+                    for (let key in error.response.data) {
+                        error.response.data[key].forEach(error => {
+                            errors.push(`${key}: ${error}`)
+                        })
+                    }
+                }
             } else if (error.request) {
                 console.log("request", error.request)
             } else {
