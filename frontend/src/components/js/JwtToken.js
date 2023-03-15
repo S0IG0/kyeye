@@ -66,6 +66,6 @@ export class JwtToken {
     }
 
     getAuthorization() {
-        return `${specialWord}} ${this.access}`
+        return `${specialWord} ${this.access}`
     }
 }
