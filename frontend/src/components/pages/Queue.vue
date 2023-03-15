@@ -9,6 +9,7 @@ import axios from 'axios'
 import UserList from "@/components/User/UserList.vue"
 import UserItem from "@/components/User/UserItem.vue"
 import MyButton from "@/components/UI/MyButton.vue";
+import {urlBackend} from "@/components/config";
 
 export default {
   components: {
@@ -24,7 +25,7 @@ export default {
     async getAPIRequest() {
       const x = await axios({
         method: "get",
-        url: "http://localhost:8000/api/queue/",
+        url: `${urlBackend}/api/queue/`,
       });
       // console.log(x.data[0].owner);
       x.data[0].users.forEach(element => {
