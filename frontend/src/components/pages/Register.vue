@@ -40,6 +40,7 @@ import {validateEmail, validateName, validatePassword} from "@/components/valida
 import axios from "axios";
 import router from "@/components/routers/router";
 import {Auth} from "@/components/js/AuthModule";
+import {urlBackend} from "@/components/config";
 
 
 export default {
@@ -104,7 +105,7 @@ export default {
       try {
         await axios({
           method: 'post',
-          url: 'http://localhost:8000/api/user/register/',
+          url: `${urlBackend}/api/user/register/`,
           data: {
             "username": this.user.username,
             "first_name": this.user.first_name,
