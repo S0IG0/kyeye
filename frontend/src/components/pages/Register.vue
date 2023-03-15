@@ -67,7 +67,7 @@ export default {
     }
   },
   methods: {
-    validateData() {
+    async validateData() {
       this.errors = [];
       [
         validatePassword(
@@ -89,13 +89,12 @@ export default {
         this.errors.push(...errors);
       })
       if (this.errors.length === 0) {
-        const x = this.postRequestToBackend();
-        x.then(response => {
+        await this.postRequestToBackend().then(async response => {
           if (response) {
             console.log(response.data)
             // Пользователь зарегестрирован
-            Auth.logIn(this.user.email, this.user.password)
-            router.push('/login')
+            await Auth.logIn(this.user.email, this.user.password, undefined, true)
+            router.push('/account')
           }
         })
       }

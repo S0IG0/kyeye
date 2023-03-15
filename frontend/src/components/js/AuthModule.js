@@ -13,8 +13,8 @@ class AuthModule {
         }
     }
 
-    async logIn(email, password, errors) {
-        if (this.onLogin === true) { return }
+    async logIn(email, password, errors, is_register) {
+        if (this.onLogin === true && is_register === undefined) { return }
         await axios({
             method: 'post',
             url: `${urlBackend}/api/token/`,

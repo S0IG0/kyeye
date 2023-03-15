@@ -1,5 +1,5 @@
 import axios from "axios";
-import {specialWord} from "@/components/config";
+import {specialWord, urlBackend} from "@/components/config";
 
 export class JwtToken {
     constructor(access, refresh) {
@@ -30,12 +30,14 @@ export class JwtToken {
         let is_active = false;
         await axios({
             method: "post",
-            url: "http://localhost:8000/api/token/verify/",
+            url: `${urlBackend}/api/token/verify/`,
             data: {
                 'token': token,
             },
         }).then(() => {
             is_active = true;
+        }).catch(error => {
+            console.log('checkIsActiveToken', error)
         })
 
         return is_active;
@@ -45,7 +47,7 @@ export class JwtToken {
     async refreshAccess() {
         await axios({
             method: 'post',
-            url: 'http://localhost:8000/api/token/refresh/',
+            url: `${urlBackend}/api/token/refresh/`,
             data: {
                 'refresh': this.refresh,
             }

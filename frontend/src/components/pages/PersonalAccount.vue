@@ -29,25 +29,43 @@
       <my-button class="button">Присоединиться к очереди</my-button>
     </div>
   </div>
-
 </template>
 
 <script>
 import MyButton from "@/components/UI/MyButton.vue";
+import {Auth} from "@/components/js/AuthModule";
+import {urlBackend} from "@/components/config";
 
 export default {
   name: "PersonalAccount",
   components: {MyButton},
   data(){
     return{
+      Auth: Auth,
       user: {
-        username: "asdad",
-        email: "aboba",
-        password: "sdad",
-        first_name: "sada",
-        last_name: "sasdfa"
+        id: '',
+        username: "",
+        email: "",
+        password: "",
+        first_name: "",
+        last_name: "",
       }
     }
+  },
+  methods: {
+    async getUser() {
+      const response = await this.Auth.requestToBackend(
+          'get',
+          `${urlBackend}/api/user/${this.Auth.JwtToken.decodeAccess().user_id}`,
+          {},
+      )
+      for (let key in response.data) {
+        this.user[key] = response.data[key]
+      }
+    }
+  },
+  mounted() {
+    this.getUser()
   }
 }
 </script>
