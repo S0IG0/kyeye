@@ -57,6 +57,14 @@ export class JwtToken {
         })
     }
 
+    decodeAccess() {
+        try {
+            return JSON.parse(atob(this.access.split('.')[1]));
+        } catch (exception) {
+            return null;
+        }
+    }
+
     getAuthorization() {
         return `${specialWord}} ${this.access}`
     }
