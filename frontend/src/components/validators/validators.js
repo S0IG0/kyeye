@@ -1,13 +1,13 @@
 export function validatePassword(password, repeat_password) {
     let errors = []
     if (password !== repeat_password) {
-        errors.push("Invalid password");
+        errors.push("Пароли не совпадают");
     }
     if (!String(password).match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
-        errors.push("The password is too simple");
+        errors.push("Пароль слишком простой");
     }
     if (password === '') {
-        errors.push("Password is require");
+        errors.push("Заполните пароль");
     }
 
     return errors;
@@ -20,7 +20,7 @@ export function validateEmail(email) {
         .match(
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         )) {
-        errors.push("Invalid email");
+        errors.push("Неправильно указан e-mail");
     }
     return errors;
 }
@@ -28,7 +28,7 @@ export function validateEmail(email) {
 export function validateName(type, name) {
     let errors = []
     if (name === '') {
-        errors.push(`${type} name is require`);
+        errors.push(`Укажите ${type}`);
     }
     return errors;
 }
