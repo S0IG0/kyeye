@@ -8,7 +8,17 @@ from django.utils import timezone
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-
+    """
+    Custom user model that inherits from AbstractBaseUser and PermissionsMixin.
+    Fields:
+    - username: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+    - first_name: First name of the user.
+    - last_name: Last name of the user.
+    - email: Required. Unique email address of the user.
+    - is_staff: Designates whether the user can log into this admin site.
+    - is_active: Designates whether this user should be treated as active.
+    - date_joined: Date and time when the user joined the platform.
+    """
 
     username_validator = UnicodeUsernameValidator()
     email_validator = EmailValidator()

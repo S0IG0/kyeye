@@ -94,6 +94,6 @@ urlpatterns = [
     # Можно предавать в запросе user_id и owner_id
     path('api/queue/', QueueListView.as_view(), name='list_queue'),
     # Просмотр информации конкретной очереди
-    path('api/queue/<int:pk>', QueueRetrieveView.as_view(), name='retrieve_queue'),
+    path('api/queue/<int:pk>/', QueueRetrieveView.as_view(), name='retrieve_queue'),
 ]
 urlpatterns += router.urls
