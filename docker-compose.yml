@@ -1,15 +1,14 @@
 version: 3.2.47
 
 services:
-  backend:
+  web-app:
     container_name: Django
     build:
-      context: ./backend/
-      dockerfile: Dockerfile
+      context: .
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/backend
+      - ./service:/service
     environment:
       - DB_HOST=database
       - DB_NAME=dbname
@@ -33,7 +32,7 @@ services:
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=pass
 
-  frontend:
+  vue:
     container_name: Vue
     build:
       context: ./frontend/
@@ -45,4 +44,4 @@ services:
     ports:
       - '8081:8081'
     depends_on:
-      - backend
+      - web-app

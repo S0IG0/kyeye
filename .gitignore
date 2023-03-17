@@ -1,8 +1,8 @@
 .idea
-backend/JWTUser/migrations
-backend/JWTUser/migrations/
-backend/Queue/migrations
-backend/Queue/migrations/
-backend/.DS_Store
+service/JWTUser/migrations
+service/JWTUser/migrations/
+service/Queue/migrations
+service/Queue/migrations/
+service/.DS_Store
 .DS_Store
 frontend/node_modules
