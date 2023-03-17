@@ -11,6 +11,7 @@ services:
     volumes:
       - ./backend/service/:/service
     environment:
+      - PYTHONUNBUFFERED=0
       - DB_HOST=database
       - DB_NAME=dbname
       - DB_USER=dbuser
