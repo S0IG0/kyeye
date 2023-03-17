@@ -4,11 +4,12 @@ services:
   web-app:
     container_name: Django
     build:
-      context: .
+      context: ./service/
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
-      - ./service:/service
+      - ./service/:/service
     environment:
       - DB_HOST=database
       - DB_NAME=dbname
