@@ -1,8 +1,16 @@
 .idea
 backend/JWTUser/migrations
 backend/JWTUser/migrations/
+backend/JWTUser/__pycache__
+backend/JWTUser/__pycache__/
 backend/Queue/migrations
+backend/Queue/__pycache__
+backend/Queue/__pycache__/
 backend/Queue/migrations/
+backend/service/__pycache__/
+service/JWTUser/migrations/
+service/Queue/migrations/
+
 backend/.DS_Store
 .DS_Store
 frontend/node_modules
