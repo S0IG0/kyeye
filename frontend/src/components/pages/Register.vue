@@ -1,34 +1,39 @@
 <template>
   <div class="wrapper">
-    <div class="registration">
-      <div class="title">Регистрация</div>
-      <my-input placeholder="E-mail"
-      v-model="user.email"
-      required></my-input>
-      <my-input placeholder="Имя пользователя"
-      v-model="user.username"
-      required></my-input>
-      <my-input placeholder="Имя"
-      v-model="user.first_name"
-      required></my-input>
-      <my-input placeholder="Фамилия"
-      v-model="user.last_name"
-      required></my-input>
-      <my-input placeholder="Пароль"
-      v-model="user.password"
-      type="password"
-      required></my-input>
-      <my-input placeholder="Пароль (повторить)"
-      v-model="user.repeat_password"
-      type="password"
-      required></my-input>
-      <div class="button__container">
-        <my-button class="sign-up"
-        @click="validateData"
-        >Зарегистрироваться</my-button>
+    <div class="registration-form" v-if="!is_register">
+      <div class="registration">
+        <div class="title">Регистрация</div>
+        <my-input placeholder="E-mail"
+        v-model="user.email"
+        required></my-input>
+        <my-input placeholder="Имя пользователя"
+        v-model="user.username"
+        required></my-input>
+        <my-input placeholder="Имя"
+        v-model="user.first_name"
+        required></my-input>
+        <my-input placeholder="Фамилия"
+        v-model="user.last_name"
+        required></my-input>
+        <my-input placeholder="Пароль"
+        v-model="user.password"
+        type="password"
+        required></my-input>
+        <my-input placeholder="Пароль (повторить)"
+        v-model="user.repeat_password"
+        type="password"
+        required></my-input>
+        <div class="button__container">
+          <my-button class="sign-up"
+          @click="validateData"
+          >Зарегистрироваться</my-button>
+        </div>
       </div>
+      <error-list :errors="errors" class="error-list"></error-list>
     </div>
-    <error-list :errors="errors" class="error-list"></error-list>
+    <div v-else>
+      Loading...
+    </div>
   </div>
 </template>
 
@@ -50,11 +55,11 @@ export default {
     user: {
       type: Object,
       required: true,
-      Auth: Auth,
     }
   },
   data(){
     return{
+      Auth: Auth,
       user: {
         email: "",
         first_name: "",
@@ -63,7 +68,8 @@ export default {
         password: "",
         repeat_password: "",
       },
-      errors: []
+      errors: [],
+      is_register: false,
     }
   },
   methods: {
@@ -116,6 +122,7 @@ export default {
           }
         }).then(response => {
           value = response;
+          this.is_register = true;
         })
       } catch (error) {
         for (const key in error.response.data) {
