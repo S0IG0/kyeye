@@ -33,6 +33,7 @@ import MyButton from "@/components/UI/MyButton.vue";
 import {Auth} from "@/components/js/AuthModule";
 import ErrorList from "@/components/UX/ErrorList.vue";
 import {validateEmail, validateName} from "@/components/validators/validators";
+import router from "@/components/routers/router";
 
 export default {
   name: "login-form",
@@ -68,9 +69,11 @@ export default {
       this.errors = [];
       this.validateData();
       if (this.errors.length === 0) {
-        await this.Auth.logIn(this.email, this.password, this.errors);
+        await this.Auth.logIn(this.email, this.password, this.errors)
       }
-      console.log(Auth.JwtToken.decodeAccess().user_id)
+      if (this.Auth.onLogin) {
+        router.push('/account').then()
+      }
     }
 }
 

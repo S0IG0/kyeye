@@ -15,7 +15,7 @@ export default {
   padding: 10px 15px;
   background: rgb(52, 114, 238);
   color: white;
-  border: 1px solid transparent;
+  border: none;
   border-radius: 5px;
   font-family: Helvetica, sans-serif;
   font-size: 18px;
