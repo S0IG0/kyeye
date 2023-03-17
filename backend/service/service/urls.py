@@ -33,7 +33,9 @@ from Queue.views import (
     QueueViewSet,
     QueueRegisterView,
     QueueListView,
-    QueueRetrieveView, UserQueueRelationRegisterView, UserQueueRelationDestroyView
+    QueueRetrieveView,
+    UserQueueRelationRegisterView,
+    UserQueueRelationDestroyView,
 )
 
 router = SimpleRouter()
@@ -66,8 +68,9 @@ urlpatterns = [
     #             'email',
     #             'is_active',
     # )
-    path('api/user/<int:pk>', UserRetrieveView.as_view(), name='user_concrete'),
     path('api/user/register/', UserRegisterView.as_view(), name='register_user'),
+    # Получение информации о конкретном пользователе
+    path('api/user/<int:pk>', UserRetrieveView.as_view(), name='user_concrete'),
     # Изменение данных пользователей, нужно предоставить поле которое нужно изменить.
     # Возвращает поля (
     #             'id',
@@ -88,6 +91,7 @@ urlpatterns = [
     # Регистрация очереди, нужно предоставить название очереди, возвращает всю информацию об очереди
     path('api/queue/register/', QueueRegisterView.as_view(), name='register_queue'),
     # Просмотр информации о всех очередях
+    # Можно предавать в запросе user_id и owner_id
     path('api/queue/', QueueListView.as_view(), name='list_queue'),
     # Просмотр информации конкретной очереди
     path('api/queue/<int:pk>', QueueRetrieveView.as_view(), name='retrieve_queue'),
