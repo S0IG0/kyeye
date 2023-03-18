@@ -4,5 +4,8 @@ backend/service/JWTUser/migrations/
 backend/service/Queue/migrations
 backend/service/Queue/migrations/
 backend/service/.DS_Store
+service/JWTUser/__pycache__/
+service/Queue/__pycache__/
+service/service/__pycache__/
 .DS_Store
 frontend/node_modules
