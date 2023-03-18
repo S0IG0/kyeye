@@ -29,6 +29,13 @@
       <my-button class="button">Присоединиться к очереди</my-button>
     </div>
   </div>
+  <my-button @click="getQueue">GET</my-button>
+  <div>
+    {{ queue_subscriber }}
+  </div>
+  <div>
+    {{ queue_owner }}
+  </div>
 </template>
 
 <script>
@@ -49,7 +56,11 @@ export default {
         password: "",
         first_name: "",
         last_name: "",
-      }
+      },
+      // Массив для хранение очередей где пользователь явлеться участником
+      queue_subscriber: [],
+      // Массив для хранение очередей где пользователь являеться создателейм очереди
+      queue_owner: [],
     }
   },
   methods: {
@@ -62,6 +73,26 @@ export default {
       for (let key in response.data) {
         this.user[key] = response.data[key]
       }
+    },
+    // Функция для получение очередей роботает только после выполнение функции getUser.
+    // Так как для генерации url запроса к бекенду использует поле this.user.id,
+    // которое не известы до выполнения функции getUser.
+    async getQueue() {
+      const response = await this.Auth.requestToBackend(
+          'get',
+          `${urlBackend}/api/queue/?user_id=${this.user.id}&owner_id=${this.user.id}`,
+          {},
+      )
+        for (let obj of response.data) {
+          if (obj.owner.id === this.user.id) {
+            this.queue_owner.push(obj)
+          }
+
+          if (obj.users.find((item) => item.user.id === this.user.id) !== 1) {
+            this.queue_subscriber.push(obj)
+          }
+          console.log(obj)
+        }
     }
   },
   mounted() {
