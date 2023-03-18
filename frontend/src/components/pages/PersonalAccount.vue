@@ -121,7 +121,7 @@ export default {
     showModal(){
       this.modalVisible = true
     },
-    async createQueue(){ // Добавить response.data в queue owner
+    async createQueue() { // Добавить response.data в queue owner
       const response = await this.Auth.requestToBackend(
           'post',
           `${urlBackend}/api/queue/register/`,
@@ -129,6 +129,7 @@ export default {
             "name": this.queue.name,
             "time": this.queue.time
           })
+    },
     // Функция для получение очередей роботает только после выполнение функции getUser.
     // Так как для генерации url запроса к бекенду использует поле this.user.id,
     // которое не известы до выполнения функции getUser.
