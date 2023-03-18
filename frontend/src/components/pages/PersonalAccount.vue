@@ -25,9 +25,38 @@
       </div>
     </div>
     <div class="queue__buttons">
-      <my-button class="button">Создать очередь</my-button>
+      <my-button class="button" @click="showModal">Создать очередь</my-button>
       <my-button class="button">Присоединиться к очереди</my-button>
     </div>
+    <modal-window v-model:show="modalVisible">
+      <div class="modal__header">Создание очереди</div>
+      <div class="input__container">
+        <div class="modal__title">Название и время</div>
+        <div class="input__block">
+          <my-input id="modal-input1"
+                    class="input"
+                    placeholder="Например: Очередь на БД"
+                    v-model="queue.name"
+                    required
+          ></my-input>
+          <my-input id="modal-input2"
+                    class="input"
+                    placeholder="##:##"
+                    v-model="queue.time"
+                    required></my-input>
+        </div>
+        <div class="input__button">
+          <my-button @click="createQueue" id="create">Создать очередь</my-button>
+        </div>
+      </div>
+      <div class="link__container">
+        <div class="modal__title">Скопировать</div>
+        <my-button id="copy">Скопировать</my-button>
+      </div>
+    </modal-window>
+    <my-input placeholder="Новый пароль" v-model="this.password"></my-input>
+    <my-input placeholder="Повторите новый пароль"></my-input>
+    <my-button>Сменить пароль</my-button>
   </div>
 </template>
 
@@ -35,10 +64,12 @@
 import MyButton from "@/components/UI/MyButton.vue";
 import {Auth} from "@/components/js/AuthModule";
 import {urlBackend} from "@/components/config";
+import MyInput from "@/components/UI/MyInput.vue";
+import ModalWindow from "@/components/UI/ModalWindow.vue";
 
 export default {
   name: "PersonalAccount",
-  components: {MyButton},
+  components: {ModalWindow, MyInput, MyButton},
   data(){
     return{
       Auth: Auth,
@@ -49,7 +80,13 @@ export default {
         password: "",
         first_name: "",
         last_name: "",
-      }
+      },
+      password: "",
+      queue: {
+        name: "",
+        time: 120,
+      },
+      modalVisible: false,
     }
   },
   methods: {
@@ -62,6 +99,25 @@ export default {
       for (let key in response.data) {
         this.user[key] = response.data[key]
       }
+    },
+    // async changePassword() {
+    //   const response = await this.Auth.requestToBackend(
+    //     'put',
+    //       `${urlBackend}/api/user/update/${this.Auth.JwtToken.decodeAccess().user_id}`,
+    //       {},
+    //   )
+    // },
+    showModal(){
+      this.modalVisible = true
+    },
+    async createQueue(){ // Добавить response.data в queue owner
+      const response = await this.Auth.requestToBackend(
+          'post',
+          `${urlBackend}/api/queue/register/`,
+          {
+            "name": this.queue.name,
+            "time": this.queue.time
+          })
     }
   },
   mounted() {
@@ -123,5 +179,64 @@ export default {
     width: 100%;
     height: 51px;
   }
+  .modal__header{
+    background: rgb(52, 114, 238);
+    padding: 20px 25px;
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+  }
+  .input__container{
+    padding: 20px 25px;
+  }
+  .modal__title{
+    font-family: Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: #333333;
+  }
+  .input__block{
+    display: flex;
+    margin-top: 20px;
+    gap: 15px;
+  }
+  .input{
+    margin-top: 0;
+    color: #333333;
+    border-radius: 10px;
+    border: 3px solid rgb(52, 114, 238);
+  }
+  #modal-input1{
+    width: 100%;
+    font-size: 18px;
+  }
+  #modal-input2{
+    width: 100px;
+    font-size: 20px;
+    letter-spacing: 5px;
+    text-align: center;
+    font-weight: 600;
+    padding: 15px 10px;
+  }
+  .input__button{
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+  #create, #copy{
+    width: 100%;
+    border-radius: 10px;
+    height: 60px;
+  }
+  .link__container{
+    padding: 0 25px;
+  }
+  #copy{
+    margin: 20px 0;
+    background: #333333;
+  }
+
 </style>
 
