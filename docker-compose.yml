@@ -11,7 +11,6 @@ services:
     volumes:
       - ./backend/service/:/service
     environment:
-      - PYTHONUNBUFFERED=0
       - DB_HOST=database
       - DB_NAME=dbname
       - DB_USER=dbuser
@@ -47,3 +46,44 @@ services:
       - '8081:8081'
     depends_on:
       - backend
+
+  redis:
+    container_name: Redis
+    image: redis:7.0.5-alpine3.17
+    hostname: redis
+
+  worker:
+    container_name: Celery
+    build:
+      context: ./backend/
+    hostname: worker
+    entrypoint: celery
+    command: -A celery_app.app worker --loglevel=info
+    volumes:
+      - ./backend/service/:/service
+    environment:
+      - DB_HOST=database
+      - DB_NAME=dbname
+      - DB_USER=dbuser
+      - DB_PASS=pass
+    links:
+      - redis
+    depends_on:
+      - redis
+      - database
+
+  flower:
+    container_name: Flower
+    build:
+      context: ./backend/
+    hostname: flower
+    entrypoint: celery
+    command: -A celery_app.app flower
+    volumes:
+      - ./backend/service/:/service
+    links:
+      - redis
+    depends_on:
+      - redis
+    ports:
+      - "5555:5555"
