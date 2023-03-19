@@ -15,6 +15,10 @@ class Queue(models.Model):
     - name (str): The name of the queue.
     - owner (ForeignKey): The user who owns the queue.
     - users (ManyToManyField): The list of users subscribed to the queue.
+    - date_created (DateTimeField): The time at which the queue was created.
+    - date_activation (DateTimeField): The time after which the queue should become active.
+    - is_active (BooleanField): The Indicator of the queue's readiness for use.
+
 
     Methods:
     - __str__(): Returns a string representation of the queue, which includes the queue name and its primary key.
@@ -36,6 +40,20 @@ class Queue(models.Model):
         User,
         through='UserQueueRelation',
         related_name='subscribers'
+    )
+
+    date_creation = models.DateTimeField(
+        'date creation',
+        default=timezone.now
+    )
+
+    date_activation = models.DateTimeField(
+        'date activation',
+    )
+
+    is_active = models.BooleanField(
+        'is_active',
+        default=False
     )
 
     def __str__(self) -> str:
