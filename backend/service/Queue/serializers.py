@@ -57,7 +57,6 @@ class UserQueueRelationRegisterSerializer(ModelSerializer):
             'date_joined': {
                 'read_only': True,
             },
-
         }
 
 
@@ -74,4 +73,18 @@ class QueueSerializer(ModelSerializer):
             'name',
             'owner',
             'users',
+            'date_creation',
+            'date_activation',
+            'is_active',
         )
+        extra_kwargs = {
+            'date_activation': {
+                'required': True,
+            },
+            'is_active': {
+                'read_only': True,
+            },
+            'date_creation': {
+                'read_only': True,
+            },
+        }
