@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from JWTUser.models import User
-
+from JWTUser.services import now_time_plus_2_minutes
 
 # Create your models here.
 class Queue(models.Model):
@@ -49,6 +49,7 @@ class Queue(models.Model):
 
     date_activation = models.DateTimeField(
         'date activation',
+        default=now_time_plus_2_minutes,
     )
 
     is_active = models.BooleanField(
