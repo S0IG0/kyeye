@@ -37,12 +37,16 @@ from Queue.views import (
     UserQueueRelationRegisterView,
     UserQueueRelationDestroyView,
 )
+from graphene_django.views import GraphQLView
+from django.views.decorators.csrf import csrf_exempt
 
 router = SimpleRouter()
 router.register(r'api/admin/user', UserViewSet)
 router.register(r'api/admin/queue', QueueViewSet)
 
 urlpatterns = [
+    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+
     # Панель администратора
     path('admin/', admin.site.urls),
 
