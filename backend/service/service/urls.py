@@ -45,7 +45,7 @@ router.register(r'api/admin/user', UserViewSet)
 router.register(r'api/admin/queue', QueueViewSet)
 
 urlpatterns = [
-    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path('graphql', csrf_exempt(GraphQLView.as_view(graphiql=True))),
 
     # Панель администратора
     path('admin/', admin.site.urls),
