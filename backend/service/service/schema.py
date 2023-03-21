@@ -1,60 +1,50 @@
-from graphene_django import DjangoObjectType
-import graphene
+from graphene import (
+    ObjectType,
+    Schema,
+    Int,
+)
+from graphql import GraphQLError
 
-from JWTUser.models import User
-from Queue.models import Queue, UserQueueRelation
+from Queue.types import (
+    QueueType,
+    UserQueueRelationType,
+)
 
+from graphene_django.filter import DjangoFilterConnectionField
+from rest_framework_simplejwt.tokens import AccessToken
 
-class UserType(DjangoObjectType):
-    class Meta:
-        model = User
-        fields = (
-            'id',
-            'username',
-            'first_name',
-            'last_name',
-            'email',
-            'is_active',
-        )
-
-
-class UserQueueRelationType(DjangoObjectType):
-    class Meta:
-        model = UserQueueRelation
+from JWTUser.types import UserType
+from Queue.models import Queue
 
 
-class QueueType(DjangoObjectType):
-    users = graphene.List(UserQueueRelationType)
+class Query(ObjectType):
+    userType = UserType
+    userQueueRelationType = UserQueueRelationType
+    queues = DjangoFilterConnectionField(
+        QueueType,
+        user_id=Int(required=False),
+        owner_id=Int(required=False),
+    )
 
-    class Meta:
-        model = Queue
-        fields = (
-            'id',
-            'name',
-            'owner',
-            'users',
-            'date_creation',
-            'date_activation',
-            'is_active',
-        )
+    def resolve_queues(self, info, **kwargs):
+        try:
+            AccessToken(info.context.headers.get('Authorization', None).split()[1])
+        except Exception as exception:
+            print(exception)
+            return Queue.objects.none()
 
-    def resolve_users(self, info):
-        return self.userqueuerelation_set.all()
+        user_id = kwargs.get('user_id', None)
+        owner_id = kwargs.get('owner_id', None)
+        queryset = Queue.objects.all()
+        if user_id is not None and owner_id is not None:
+            queryset = (queryset.filter(users__id=user_id) | queryset.filter(owner_id=owner_id)).distinct()
+        elif user_id is not None:
+            queryset = queryset.filter(users__id=user_id)
+        elif owner_id is not None:
+            queryset = queryset.filter(owner_id=owner_id)
 
-
-class Query(graphene.ObjectType):
-    users = graphene.List(UserType)
-    queues = graphene.List(QueueType)
-    user_queue_relations = graphene.List(UserQueueRelationType)
-
-    def resolve_users(self, info):
-        return User.objects.all()
-
-    def resolve_queues(self, info):
-        return Queue.objects.all()
-
-    def resolve_user_queue_relations(self, info):
-        return UserQueueRelation.objects.all()
+        return queryset
+        # return queryset
 
 
-schema = graphene.Schema(query=Query)
+schema = Schema(query=Query)
