@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
     'corsheaders',
+    # 'django_filters',
 
     'rest_framework_simplejwt',
 
@@ -185,3 +187,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
+
+GRAPHENE = {
+    "SCHEMA": "service.schema.schema"
+}
