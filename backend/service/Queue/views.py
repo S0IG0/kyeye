@@ -14,7 +14,7 @@ from rest_framework.permissions import (
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from JWTUser.permissions import IsOwnerQueue
+from JWTUser.permissions import IsOwnerQueue, IsSubscriberQueue
 from Queue.models import Queue, UserQueueRelation
 from Queue.serializers import QueueSerializer, UserQueueRelationRegisterSerializer
 
@@ -240,7 +240,7 @@ class UserQueueRelationDestroyView(DestroyAPIView):
 
     queryset = UserQueueRelation.objects.all()
     serializer_class = UserQueueRelationRegisterSerializer
-    permission_classes = (IsOwnerQueue, IsAuthenticated)
+    permission_classes = (IsSubscriberQueue | IsOwnerQueue, IsAuthenticated)
 
     def delete(self, request, *args, **kwargs):
         self.check_permissions(request)
@@ -252,6 +252,7 @@ class UserQueueRelationDestroyView(DestroyAPIView):
                 request=self.request,
                 obj=queue,
             )
+
             user_queue_relation = UserQueueRelation.objects.filter(user=user_id, queue=queue_id).last()
             user_queue_relation.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
