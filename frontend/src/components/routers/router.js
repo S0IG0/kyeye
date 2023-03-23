@@ -5,7 +5,6 @@ import Main from "@/components/pages/Main.vue";
 import Login from "@/components/pages/Login.vue";
 import PersonalAccount from "@/components/pages/PersonalAccount.vue";
 
-
 const routes = [
     {
         path: '/register',
@@ -26,7 +25,7 @@ const routes = [
     {
         path: '/account',
         component: PersonalAccount
-    }
+    },
 ]
 
 const router = createRouter({
