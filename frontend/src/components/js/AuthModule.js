@@ -66,15 +66,7 @@ class AuthModule {
         url,
         data,
     ) {
-        if (this.onLogin === false) { return ;}
-        if (await this.JwtToken.checkIsActiveToken(this.JwtToken.refresh) === false) {
-            this.logOut();
-            return ;
-        }
-
-        if (await this.JwtToken.checkIsActiveToken(this.JwtToken.access) === false) {
-            await this.JwtToken.refreshAccess();
-        }
+        await this.__activate()
 
 
         let responseData = null;
@@ -98,6 +90,29 @@ class AuthModule {
         })
 
         return responseData;
+    }
+    async __activate() {
+        if (this.onLogin === false) { return ;}
+        if (await this.JwtToken.checkIsActiveToken(this.JwtToken.refresh) === false) {
+            this.logOut();
+            return ;
+        }
+
+        if (await this.JwtToken.checkIsActiveToken(this.JwtToken.access) === false) {
+            await this.JwtToken.refreshAccess();
+        }
+    }
+
+    async getAuthorization() {
+        let token = '';
+        await this.__activate()
+        try {
+            token = this.JwtToken.getAuthorization();
+        } catch (e) {
+            console.log(e);
+        }
+
+        return token
     }
 }
 
