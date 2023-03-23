@@ -44,7 +44,6 @@ class Query(ObjectType):
             queryset = queryset.filter(owner_id=owner_id)
 
         return queryset
-        # return queryset
 
 
 schema = Schema(query=Query)
