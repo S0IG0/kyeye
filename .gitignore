@@ -10,3 +10,4 @@ service/service/__pycache__/
 .DS_Store
 frontend/node_modules
 /backend/venv/
+/frontend/.graphqlconfig
