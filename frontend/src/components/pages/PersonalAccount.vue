@@ -60,10 +60,20 @@
   </div>
   <my-button @click="getQueue">GET</my-button>
   <div>
-    {{ queue_subscriber }}
-  </div>
-  <div>
-    {{ queue_owner }}
+<!--    {{ queues_subscriber }}-->
+
+    <div v-for="edge in queues_owner">
+      {{edge['node']['name']}}
+      {{edge['node']['owner']['email']}}
+    </div>
+    <br>
+    <div v-for="edge in queues_subscriber">
+      {{edge['node']['name']}}
+      <div v-for="user in edge['node']['users']['edges']">
+        {{user['node']['user']['email']}}
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -73,6 +83,7 @@ import {Auth} from "@/components/js/AuthModule";
 import {urlBackend} from "@/components/config";
 import MyInput from "@/components/UI/MyInput.vue";
 import ModalWindow from "@/components/UI/ModalWindow.vue";
+import gql from "graphql-tag";
 
 export default {
   name: "PersonalAccount",
@@ -95,11 +106,41 @@ export default {
       },
       modalVisible: false,
       // Массив для хранение очередей где пользователь явлеться участником
-      queue_subscriber: [],
+      queues_subscriber: [],
       // Массив для хранение очередей где пользователь являеться создателейм очереди
-      queue_owner: [],
+      queues_owner: [],
+      queues: [],
     }
   },
+
+  apollo: {
+    queues: {
+      query: gql`query($userId: Int!, $ownerId: Int!){queues (first: 100, userId: $userId, ownerId: $ownerId) {edges {node {name, dateActivation, owner{email}, users{edges{node{id, user{email}}}}}}}}`,
+      variables() {
+        this.getUser()
+        return {
+          userId: this.user.id,
+          ownerId: this.user.id
+        }
+      },
+    },
+  },
+
+  watch: {
+    queues: {
+      handler(queues) {
+        for (let edge of queues['edges']) {
+          if (edge['node']['owner']['email'] === this.user.email) {
+            this.queues_owner.push(edge)
+          }
+          if (edge['node']['users']['edges'].find((item) => item['node']['user']['email'] === this.user.email) !== -1) {
+            this.queues_subscriber.push(edge)
+          }
+        }
+      }
+    }
+  },
+
   methods: {
     async getUser() {
       const response = await this.Auth.requestToBackend(
@@ -130,26 +171,6 @@ export default {
             "time": this.queue.time
           })
     },
-    // Функция для получение очередей роботает только после выполнение функции getUser.
-    // Так как для генерации url запроса к бекенду использует поле this.user.id,
-    // которое не известы до выполнения функции getUser.
-    async getQueue() {
-      const response = await this.Auth.requestToBackend(
-          'get',
-          `${urlBackend}/api/queue/?user_id=${this.user.id}&owner_id=${this.user.id}`,
-          {},
-      )
-        for (let obj of response.data) {
-          if (obj.owner.id === this.user.id) {
-            this.queue_owner.push(obj)
-          }
-
-          if (obj.users.find((item) => item.user.id === this.user.id) !== 1) {
-            this.queue_subscriber.push(obj)
-          }
-          console.log(obj)
-        }
-    }
   },
   mounted() {
     this.getUser()
