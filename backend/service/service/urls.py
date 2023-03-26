@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import SimpleRouter
@@ -40,15 +42,16 @@ from Queue.views import (
 from graphene_django.views import GraphQLView
 from django.views.decorators.csrf import csrf_exempt
 
+
 router = SimpleRouter()
 router.register(r'api/admin/user', UserViewSet)
 router.register(r'api/admin/queue', QueueViewSet)
 
 urlpatterns = [
-    path('graphql', csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path('api/graphql', csrf_exempt(GraphQLView.as_view(graphiql=True))),
 
     # Панель администратора
-    path('admin/', admin.site.urls),
+    path('api/admin/', admin.site.urls),
 
     # Получение токена, нужно предоставить email и password, возвращает access и refresh токен
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -101,3 +104,4 @@ urlpatterns = [
     path('api/queue/<int:pk>/', QueueRetrieveView.as_view(), name='retrieve_queue'),
 ]
 urlpatterns += router.urls
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
