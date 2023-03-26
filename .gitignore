@@ -14,3 +14,5 @@ frontend/node_modules
 /backend/service/access.log
 /backend/service/static/
 /frontend/dist/
+/nginx/loggs/access.log
+/nginx/loggs/errors.log
