@@ -2,6 +2,7 @@ import {InMemoryCache, ApolloClient, ApolloLink, HttpLink} from "@apollo/client"
 import {createApolloProvider} from "@vue/apollo-option";
 import {setContext} from "@apollo/client/link/context";
 import {Auth} from "@/components/js/AuthModule";
+import {urlBackend} from "@/components/config";
 
 let token;
 const contextLink = setContext(async () => {
@@ -10,7 +11,7 @@ const contextLink = setContext(async () => {
 })
 
 const httpLink = new HttpLink({
-    uri: "http://localhost:8000/graphql",
+    uri: `${urlBackend}/api/graphql`,
 })
 
 const authLink = new ApolloLink((operation, forward) => {
