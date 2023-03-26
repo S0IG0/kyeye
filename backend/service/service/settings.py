@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-t8u$3e2_n%kzc!v3q9vnrdbu_)w#a=$l_2+2mn(w#uo@vlezn=
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'kyeye.local',
     # '192.168.1.64',
     # 'localhost',
 ]
@@ -128,7 +129,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
