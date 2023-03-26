@@ -11,3 +11,6 @@ service/service/__pycache__/
 frontend/node_modules
 /backend/venv/
 /frontend/.graphqlconfig
+/backend/service/access.log
+/backend/service/static/
+/frontend/dist/
