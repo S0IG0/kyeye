@@ -1,3 +1,3 @@
-// export const urlBackend = 'http://localhost:8000'
-export const urlBackend = 'http://kyeye.local'
+const HOST = 'localhost'
+export const urlBackend = `http://${HOST}`
 export const specialWord = 'Bearer'
