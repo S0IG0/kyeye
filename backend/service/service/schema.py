@@ -36,6 +36,7 @@ class Query(ObjectType):
         user_id = kwargs.get('user_id', None)
         owner_id = kwargs.get('owner_id', None)
         queryset = Queue.objects.all()
+
         if user_id is not None and owner_id is not None:
             queryset = (queryset.filter(users__id=user_id) | queryset.filter(owner_id=owner_id)).distinct()
         elif user_id is not None:
