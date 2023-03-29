@@ -1,3 +1,4 @@
+import graphene
 from graphene import relay
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
@@ -45,6 +46,11 @@ class QueueType(DjangoObjectType):
             'is_active',
         )
         interfaces = (relay.Node,)
+
+    id_ = graphene.Int()
+
+    def resolve_id_(self, info):
+        return self.id
 
     def resolve_users(self, info):
         return self.userqueuerelation_set.all()
