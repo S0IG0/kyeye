@@ -29,7 +29,5 @@ form {
   flex-direction: column;
 }
 
-.app {
-  padding: 30px;
-}
+
 </style>
