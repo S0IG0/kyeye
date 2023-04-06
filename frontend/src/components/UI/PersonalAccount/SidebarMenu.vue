@@ -94,6 +94,7 @@ button{
     display: flex;
     align-items: center;
     width: 100%;
+    cursor: pointer;
 }
 .btn{
     padding: 8px 16px;
