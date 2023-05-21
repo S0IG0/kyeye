@@ -29,10 +29,6 @@
                 </div>
             </div>
             <div class="page" v-if="currentPage === Pages.Queue" >
-                <div class="queue__buttons">
-                    <my-button class="button" @click="showModal">Создать очередь</my-button>
-                    <my-button class="button">Присоединиться к очереди</my-button>
-                </div>
                 <modal-window v-model:show="modalVisible">
                     <div class="modal__header">Создание очереди</div>
                     <div class="input__container">
@@ -48,7 +44,8 @@
                                       class="input"
                                       placeholder="##:##"
                                       v-model="queue.time"
-                                      required></my-input>
+                                      required>
+                            </my-input>
                         </div>
                         <div class="input__button">
                             <my-button @click="createQueue" id="create">Создать очередь</my-button>
@@ -59,20 +56,48 @@
                         <my-button id="copy">Скопировать</my-button>
                     </div>
                 </modal-window>
-                <div>
-                    <!--    {{ queues_subscriber }}-->
-
-                    <div v-for="edge in queues_owner">
-                        {{ edge['node']['name'] }}
-                        {{ edge['node']['owner']['username'] }}
-                    </div>
-                    <br>
-                    <div v-for="edge in queues_subscriber">
-                        {{ edge['node']['name'] }}
-                        <div v-for="user in edge['node']['users']['edges']">
-                            {{ user['node']['user']['username'] }}
+                <div class="queues">
+                    <div class="queues-own">
+                        <div class="queues__title">
+                            <h2>Созданные вами очереди</h2>
+                        </div>
+                        <div class="queues__list">
+                            <queue-item v-for="edge in queues_owner">
+                                <template v-slot:name>
+                                    {{ edge['node']['name'] }}
+                                </template>
+                                <template v-slot:text>
+                                    Количество участников:
+                                </template>
+                                <template v-slot:data>
+                                    {{ edge['node']['users']['edges'].length }}
+                                </template>
+                            </queue-item>
                         </div>
                     </div>
+                    <!--    {{ queues_subscriber }}-->
+                    <div class="queues-subscriber">
+                        <div class="queues__title">
+                            <h2>Очереди, в которых вы состоите</h2>
+                        </div>
+                        <div class="queues__list">
+                            <queue-item v-for="edge in queues_subscriber">
+                                <template v-slot:name>
+                                    {{ edge['node']['name'] }}
+                                </template>
+                                <template v-slot:text>
+                                    Номер в очереди:
+                                </template>
+                                <template v-slot:data>
+                                    {{ findUserPosition(edge['node']['users']['edges']) }}
+                                </template>
+                            </queue-item>
+                        </div>
+                    </div>
+                </div>
+                <div class="queue__buttons">
+                    <my-button class="button" @click="showModal">Создать очередь</my-button>
+                    <my-button class="button">Присоединиться к очереди</my-button>
                 </div>
             </div>
             <div class="page" v-if="currentPage === Pages.Settings">
@@ -94,7 +119,8 @@ import gql from "graphql-tag";
 import SidebarMenu from "@/components/UI/PersonalAccount/SidebarMenu.vue";
 import {Pages} from "@/components/UI/PersonalAccount/config";
 import {mapState} from "vuex";
-
+import Queue from "@/components/pages/Queue.vue";
+import QueueItem from "@/components/UI/PersonalAccount/QueueItem.vue";
 
 export default {
     name: "PersonalAccount",
@@ -106,7 +132,7 @@ export default {
             currentPage: state => state.currentPage
         }),
     },
-    components: {SidebarMenu, ModalWindow, MyInput, MyButton},
+    components: {Queue, SidebarMenu, ModalWindow, MyInput, MyButton, QueueItem},
     data() {
         return {
             Auth: Auth,
@@ -121,12 +147,13 @@ export default {
             password: "",
             queue: {
                 name: "",
-                time: 120,
+                time: new Date().getHours().toString().padStart(2, '0') + ":" +
+                    new Date().getMinutes().toString().padStart(2, '0'),
             },
             modalVisible: false,
-            // Массив для хранение очередей где пользователь явлеться участником
+            // Массив для хранение очередей где пользователь явлется участником
             queues_subscriber: [],
-            // Массив для хранение очередей где пользователь являеться создателейм очереди
+            // Массив для хранение очередей где пользователь является создателейм очереди
             queues_owner: [],
             queues: [],
             state: Pages.Queue
@@ -183,14 +210,29 @@ export default {
             this.modalVisible = true
         },
         async createQueue() { // Добавить response.data в queue owner
+            let dateCreation = new Date();
+            let dateActivation;
+            let [hours, minutes] = this.queue.time.split(':');
+            dateActivation = new Date();
+            dateActivation.setHours(hours);
+            dateActivation.setMinutes(minutes);
+
             const response = await this.Auth.requestToBackend(
                 'post',
                 `${urlBackend}/api/queue/register/`,
                 {
+                    "owner": this.user,
                     "name": this.queue.name,
-                    "time": this.queue.time
+                    "date_creation": dateCreation.toISOString(),
+                    "date_activation": dateActivation.toISOString(),
                 })
         },
+        findUserPosition(array){
+            for (let index in array){
+                if (array[index]['node']['user']['username'] === this.user.username)
+                    return Number(index) + 1;
+            }
+        }
     },
     mounted() {
         this.getUser()
@@ -342,12 +384,35 @@ export default {
     background: #333333;
 }
 
+.queues{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    font-family: Helvetica, sans-serif;
+    min-height: 500px;
+}
+.queues-own, .queues-subscriber{
+    width: 100%;
+}
+.queues__list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.queues__title{
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Helvetica, sans-serif;
+    font-size: 120%;
+}
+
 @media (max-width: 1024px) {
     .page {
-        margin: auto;
+        margin-top: 50px;
+
     }
     .pages{
-        width: calc(100% - 2rem - 32px);
+        width: 100%;
     }
 }
 
