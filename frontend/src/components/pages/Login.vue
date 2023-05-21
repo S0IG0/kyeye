@@ -81,6 +81,9 @@ export default {
 </script>
 
 <style scoped>
+.wrapper{
+    margin: 100px 500px;
+}
 .link {
   color: rgb(52, 114, 238);
   cursor: pointer;
@@ -92,6 +95,7 @@ export default {
   text-align: center;
   font-family: Helvetica, sans-serif;
   font-size: 15px;
+  line-height: 20px;
 }
 
 .forgot__password {
@@ -106,5 +110,15 @@ export default {
   font-family: Helvetica, sans-serif;
   font-size: 30px;
   font-weight: 600;
+}
+@media(max-width: 1024px){
+    .wrapper{
+        margin: 100px 200px;
+    }
+}
+@media(max-width: 768px){
+    .wrapper{
+        margin: 30px 60px;
+    }
 }
 </style>
