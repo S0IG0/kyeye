@@ -65,8 +65,7 @@ aside{
     padding: 16px;
     min-height: 100vh;
     width: calc(2rem + 32px);
-
-    z-index: 999;
+    z-index: 99;
     transition: 0.3s;
 }
 
