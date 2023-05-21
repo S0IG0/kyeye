@@ -1,0 +1,34 @@
+<template>
+    <div class="queue-item" @click="$router.push('/queue')">
+        <div class="queue__name">
+            Название:
+            <slot name="name"></slot>
+        </div>
+        <div class="queue__info">
+            <slot name="text">
+            </slot>
+            <slot name="data">
+            </slot>
+        </div>
+    </div>
+
+</template>
+
+<script>
+export default {
+    name: "QueueItem",
+}
+</script>
+
+<style scoped>
+.queue-item {
+    background: rgb(52, 114, 238);
+    padding: 20px 40px;
+    color: white;
+    font-weight: 600;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+</style>
