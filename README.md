@@ -52,6 +52,63 @@ queue/
 ### Архитектура проекта
 ![Архитектура проекта](https://i.ibb.co/qBT94Lp/Kyeye-project.png)
 
+### Обзор проекта
+<div class="slider-container">
+  <div class="slider">
+    <img src="https://i.ibb.co/TKNzkzP/5.jpg" alt="Image 1">
+    <img src="https://i.ibb.co/t2wKh1F/4.jpg" alt="Image 2">
+    <img src="https://i.ibb.co/2sXg933/3.jpg" alt="Image 3">
+    <img src="https://i.ibb.co/q0By9qK/2.jpg" alt="Image 4">
+    <img src="https://i.ibb.co/PxjDqLH/1.jpg" alt="Image 5">
+    <img src="https://i.ibb.co/TKNzkzP/5.jpg" alt="Image 1">
+    <img src="https://i.ibb.co/t2wKh1F/4.jpg" alt="Image 2">
+  </div>
+</div>
+
+<style>
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  animation: slider 20s infinite;
+}
+
+.slider img {
+  width: 100%;
+  max-width: 500px;
+  flex-shrink: 0;
+}
+
+@keyframes slider {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  14.28% {
+    transform: translateX(0);
+  }
+  28.56% {
+    transform: translateX(-100%);
+  }
+  42.84% {
+    transform: translateX(-200%);
+  }
+  57.12% {
+    transform: translateX(-300%);
+  }
+  71.4% {
+    transform: translateX(-400%);
+  }
+  85.68% {
+    transform: translateX(-500%);
+  }
+}
+</style>
+
+
+
 ### Авторы
 1. Чибиток Д.С
 2. Жаворонков М.А
