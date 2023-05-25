@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JWTUser package &mdash; service  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            service
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">JWTUser package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-JWTUser.admin">JWTUser.admin module</a></li>
+<li><a class="reference internal" href="#module-JWTUser.apps">JWTUser.apps module</a><ul>
+<li><a class="reference internal" href="#JWTUser.apps.JwtuserConfig"><code class="docutils literal notranslate"><span class="pre">JwtuserConfig</span></code></a><ul>
+<li><a class="reference internal" href="#JWTUser.apps.JwtuserConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">JwtuserConfig.default_auto_field</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.apps.JwtuserConfig.name"><code class="docutils literal notranslate"><span class="pre">JwtuserConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-JWTUser.models">JWTUser.models module</a><ul>
+<li><a class="reference internal" href="#JWTUser.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
+<li><a class="reference internal" href="#JWTUser.models.User.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">User.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.EMAIL_FIELD"><code class="docutils literal notranslate"><span class="pre">User.EMAIL_FIELD</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">User.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.REQUIRED_FIELDS"><code class="docutils literal notranslate"><span class="pre">User.REQUIRED_FIELDS</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.USERNAME_FIELD"><code class="docutils literal notranslate"><span class="pre">User.USERNAME_FIELD</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.clean"><code class="docutils literal notranslate"><span class="pre">User.clean()</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.date_joined"><code class="docutils literal notranslate"><span class="pre">User.date_joined</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.email"><code class="docutils literal notranslate"><span class="pre">User.email</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.email_user"><code class="docutils literal notranslate"><span class="pre">User.email_user()</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.email_validator"><code class="docutils literal notranslate"><span class="pre">User.email_validator</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.first_name"><code class="docutils literal notranslate"><span class="pre">User.first_name</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.get_full_name"><code class="docutils literal notranslate"><span class="pre">User.get_full_name()</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.get_next_by_date_joined"><code class="docutils literal notranslate"><span class="pre">User.get_next_by_date_joined()</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.get_previous_by_date_joined"><code class="docutils literal notranslate"><span class="pre">User.get_previous_by_date_joined()</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.get_short_name"><code class="docutils literal notranslate"><span class="pre">User.get_short_name()</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.groups"><code class="docutils literal notranslate"><span class="pre">User.groups</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.id"><code class="docutils literal notranslate"><span class="pre">User.id</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.is_active"><code class="docutils literal notranslate"><span class="pre">User.is_active</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.is_staff"><code class="docutils literal notranslate"><span class="pre">User.is_staff</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.is_superuser"><code class="docutils literal notranslate"><span class="pre">User.is_superuser</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.last_login"><code class="docutils literal notranslate"><span class="pre">User.last_login</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.last_name"><code class="docutils literal notranslate"><span class="pre">User.last_name</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.logentry_set"><code class="docutils literal notranslate"><span class="pre">User.logentry_set</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.objects"><code class="docutils literal notranslate"><span class="pre">User.objects</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.owner"><code class="docutils literal notranslate"><span class="pre">User.owner</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.password"><code class="docutils literal notranslate"><span class="pre">User.password</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.subscribers"><code class="docutils literal notranslate"><span class="pre">User.subscribers</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.user_permissions"><code class="docutils literal notranslate"><span class="pre">User.user_permissions</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.username_validator"><code class="docutils literal notranslate"><span class="pre">User.username_validator</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.models.User.userqueuerelation_set"><code class="docutils literal notranslate"><span class="pre">User.userqueuerelation_set</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-JWTUser.permissions">JWTUser.permissions module</a><ul>
+<li><a class="reference internal" href="#JWTUser.permissions.IsOwner"><code class="docutils literal notranslate"><span class="pre">IsOwner</span></code></a><ul>
+<li><a class="reference internal" href="#JWTUser.permissions.IsOwner.has_permission"><code class="docutils literal notranslate"><span class="pre">IsOwner.has_permission()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#JWTUser.permissions.IsOwnerQueue"><code class="docutils literal notranslate"><span class="pre">IsOwnerQueue</span></code></a><ul>
+<li><a class="reference internal" href="#JWTUser.permissions.IsOwnerQueue.has_object_permission"><code class="docutils literal notranslate"><span class="pre">IsOwnerQueue.has_object_permission()</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.permissions.IsOwnerQueue.message"><code class="docutils literal notranslate"><span class="pre">IsOwnerQueue.message</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#JWTUser.permissions.IsSubscriberQueue"><code class="docutils literal notranslate"><span class="pre">IsSubscriberQueue</span></code></a><ul>
+<li><a class="reference internal" href="#JWTUser.permissions.IsSubscriberQueue.has_object_permission"><code class="docutils literal notranslate"><span class="pre">IsSubscriberQueue.has_object_permission()</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.permissions.IsSubscriberQueue.message"><code class="docutils literal notranslate"><span class="pre">IsSubscriberQueue.message</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-JWTUser.serializers">JWTUser.serializers module</a><ul>
+<li><a class="reference internal" href="#JWTUser.serializers.UserSerializer"><code class="docutils literal notranslate"><span class="pre">UserSerializer</span></code></a><ul>
+<li><a class="reference internal" href="#JWTUser.serializers.UserSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">UserSerializer.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#JWTUser.serializers.UserSerializer.Meta.extra_kwargs"><code class="docutils literal notranslate"><span class="pre">UserSerializer.Meta.extra_kwargs</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.serializers.UserSerializer.Meta.fields"><code class="docutils literal notranslate"><span class="pre">UserSerializer.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.serializers.UserSerializer.Meta.model"><code class="docutils literal notranslate"><span class="pre">UserSerializer.Meta.model</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#JWTUser.serializers.UserSerializer.create"><code class="docutils literal notranslate"><span class="pre">UserSerializer.create()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-JWTUser.services">JWTUser.services module</a><ul>
+<li><a class="reference internal" href="#JWTUser.services.now_time_plus_2_minutes"><code class="docutils literal notranslate"><span class="pre">now_time_plus_2_minutes()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-JWTUser.tests">JWTUser.tests module</a></li>
+<li><a class="reference internal" href="#module-JWTUser.types">JWTUser.types module</a><ul>
+<li><a class="reference internal" href="#JWTUser.types.UserType"><code class="docutils literal notranslate"><span class="pre">UserType</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-JWTUser.views">JWTUser.views module</a><ul>
+<li><a class="reference internal" href="#JWTUser.views.UserRegisterView"><code class="docutils literal notranslate"><span class="pre">UserRegisterView</span></code></a><ul>
+<li><a class="reference internal" href="#JWTUser.views.UserRegisterView.permission_classes"><code class="docutils literal notranslate"><span class="pre">UserRegisterView.permission_classes</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.views.UserRegisterView.queryset"><code class="docutils literal notranslate"><span class="pre">UserRegisterView.queryset</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.views.UserRegisterView.serializer_class"><code class="docutils literal notranslate"><span class="pre">UserRegisterView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#JWTUser.views.UserRetrieveView"><code class="docutils literal notranslate"><span class="pre">UserRetrieveView</span></code></a><ul>
+<li><a class="reference internal" href="#JWTUser.views.UserRetrieveView.permission_classes"><code class="docutils literal notranslate"><span class="pre">UserRetrieveView.permission_classes</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.views.UserRetrieveView.queryset"><code class="docutils literal notranslate"><span class="pre">UserRetrieveView.queryset</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.views.UserRetrieveView.serializer_class"><code class="docutils literal notranslate"><span class="pre">UserRetrieveView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#JWTUser.views.UserUpdateView"><code class="docutils literal notranslate"><span class="pre">UserUpdateView</span></code></a><ul>
+<li><a class="reference internal" href="#JWTUser.views.UserUpdateView.permission_classes"><code class="docutils literal notranslate"><span class="pre">UserUpdateView.permission_classes</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.views.UserUpdateView.queryset"><code class="docutils literal notranslate"><span class="pre">UserUpdateView.queryset</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.views.UserUpdateView.serializer_class"><code class="docutils literal notranslate"><span class="pre">UserUpdateView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#JWTUser.views.UserViewSet"><code class="docutils literal notranslate"><span class="pre">UserViewSet</span></code></a><ul>
+<li><a class="reference internal" href="#JWTUser.views.UserViewSet.permission_classes"><code class="docutils literal notranslate"><span class="pre">UserViewSet.permission_classes</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.views.UserViewSet.queryset"><code class="docutils literal notranslate"><span class="pre">UserViewSet.queryset</span></code></a></li>
+<li><a class="reference internal" href="#JWTUser.views.UserViewSet.serializer_class"><code class="docutils literal notranslate"><span class="pre">UserViewSet.serializer_class</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-JWTUser">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">service</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">JWTUser package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/JWTUser.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jwtuser-package">
+<h1>JWTUser package<a class="headerlink" href="#jwtuser-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JWTUser.migrations.html">JWTUser.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JWTUser.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JWTUser.migrations.html#module-JWTUser.migrations.0001_initial">JWTUser.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="JWTUser.migrations.html#JWTUser.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="JWTUser.migrations.html#JWTUser.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="JWTUser.migrations.html#JWTUser.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="JWTUser.migrations.html#JWTUser.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="JWTUser.migrations.html#module-JWTUser.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-JWTUser.admin">
+<span id="jwtuser-admin-module"></span><h2>JWTUser.admin module<a class="headerlink" href="#module-JWTUser.admin" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-JWTUser.apps">
+<span id="jwtuser-apps-module"></span><h2>JWTUser.apps module<a class="headerlink" href="#module-JWTUser.apps" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.apps.JwtuserConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">JWTUser.apps.</span></span><span class="sig-name descname"><span class="pre">JwtuserConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/apps.html#JwtuserConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.apps.JwtuserConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.apps.JwtuserConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#JWTUser.apps.JwtuserConfig.default_auto_field" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.apps.JwtuserConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'JWTUser'</span></em><a class="headerlink" href="#JWTUser.apps.JwtuserConfig.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-JWTUser.models">
+<span id="jwtuser-models-module"></span><h2>JWTUser.models module<a class="headerlink" href="#module-JWTUser.models" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.models.User">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">JWTUser.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/models.html#User"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.models.User" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractBaseUser</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PermissionsMixin</span></code></p>
+<p>Custom user model that inherits from AbstractBaseUser and PermissionsMixin.
+Fields:
+- username: Required. 150 characters or fewer. Letters, digits and &#64;/./+/-/_ only.
+- first_name: First name of the user.
+- last_name: Last name of the user.
+- email: Required. Unique email address of the user.
+- is_staff: Designates whether the user can log into this admin site.
+- is_active: Designates whether this user should be treated as active.
+- date_joined: Date and time when the user joined the platform.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="JWTUser.models.User.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#JWTUser.models.User.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.EMAIL_FIELD">
+<span class="sig-name descname"><span class="pre">EMAIL_FIELD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'email'</span></em><a class="headerlink" href="#JWTUser.models.User.EMAIL_FIELD" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="JWTUser.models.User.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#JWTUser.models.User.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.REQUIRED_FIELDS">
+<span class="sig-name descname"><span class="pre">REQUIRED_FIELDS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['username']</span></em><a class="headerlink" href="#JWTUser.models.User.REQUIRED_FIELDS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.USERNAME_FIELD">
+<span class="sig-name descname"><span class="pre">USERNAME_FIELD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'email'</span></em><a class="headerlink" href="#JWTUser.models.User.USERNAME_FIELD" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="JWTUser.models.User.clean">
+<span class="sig-name descname"><span class="pre">clean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/models.html#User.clean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.models.User.clean" title="Permalink to this definition"></a></dt>
+<dd><p>Hook for doing any extra model-wide validation after clean() has been
+called on every field by self.clean_fields. Any ValidationError raised
+by this method will not be associated with a particular field; it will
+have a special-case association with the field defined by NON_FIELD_ERRORS.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.date_joined">
+<span class="sig-name descname"><span class="pre">date_joined</span></span><a class="headerlink" href="#JWTUser.models.User.date_joined" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#JWTUser.models.User.email" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="JWTUser.models.User.email_user">
+<span class="sig-name descname"><span class="pre">email_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_email</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/models.html#User.email_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.models.User.email_user" title="Permalink to this definition"></a></dt>
+<dd><p>Send an email to this user.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.email_validator">
+<span class="sig-name descname"><span class="pre">email_validator</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.core.validators.EmailValidator</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#JWTUser.models.User.email_validator" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.first_name">
+<span class="sig-name descname"><span class="pre">first_name</span></span><a class="headerlink" href="#JWTUser.models.User.first_name" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="JWTUser.models.User.get_full_name">
+<span class="sig-name descname"><span class="pre">get_full_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/models.html#User.get_full_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.models.User.get_full_name" title="Permalink to this definition"></a></dt>
+<dd><p>Return the first_name plus the last_name, with a space in between.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="JWTUser.models.User.get_next_by_date_joined">
+<span class="sig-name descname"><span class="pre">get_next_by_date_joined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">date_joined&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#JWTUser.models.User.get_next_by_date_joined" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="JWTUser.models.User.get_previous_by_date_joined">
+<span class="sig-name descname"><span class="pre">get_previous_by_date_joined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">date_joined&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#JWTUser.models.User.get_previous_by_date_joined" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="JWTUser.models.User.get_short_name">
+<span class="sig-name descname"><span class="pre">get_short_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/models.html#User.get_short_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.models.User.get_short_name" title="Permalink to this definition"></a></dt>
+<dd><p>Return the short name for the user.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.groups">
+<span class="sig-name descname"><span class="pre">groups</span></span><a class="headerlink" href="#JWTUser.models.User.groups" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#JWTUser.models.User.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.is_active">
+<span class="sig-name descname"><span class="pre">is_active</span></span><a class="headerlink" href="#JWTUser.models.User.is_active" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.is_staff">
+<span class="sig-name descname"><span class="pre">is_staff</span></span><a class="headerlink" href="#JWTUser.models.User.is_staff" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.is_superuser">
+<span class="sig-name descname"><span class="pre">is_superuser</span></span><a class="headerlink" href="#JWTUser.models.User.is_superuser" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.last_login">
+<span class="sig-name descname"><span class="pre">last_login</span></span><a class="headerlink" href="#JWTUser.models.User.last_login" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.last_name">
+<span class="sig-name descname"><span class="pre">last_name</span></span><a class="headerlink" href="#JWTUser.models.User.last_name" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.logentry_set">
+<span class="sig-name descname"><span class="pre">logentry_set</span></span><a class="headerlink" href="#JWTUser.models.User.logentry_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.contrib.auth.models.UserManager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#JWTUser.models.User.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.owner">
+<span class="sig-name descname"><span class="pre">owner</span></span><a class="headerlink" href="#JWTUser.models.User.owner" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.password">
+<span class="sig-name descname"><span class="pre">password</span></span><a class="headerlink" href="#JWTUser.models.User.password" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.subscribers">
+<span class="sig-name descname"><span class="pre">subscribers</span></span><a class="headerlink" href="#JWTUser.models.User.subscribers" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.user_permissions">
+<span class="sig-name descname"><span class="pre">user_permissions</span></span><a class="headerlink" href="#JWTUser.models.User.user_permissions" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.username">
+<span class="sig-name descname"><span class="pre">username</span></span><a class="headerlink" href="#JWTUser.models.User.username" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.username_validator">
+<span class="sig-name descname"><span class="pre">username_validator</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.contrib.auth.validators.UnicodeUsernameValidator</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#JWTUser.models.User.username_validator" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.models.User.userqueuerelation_set">
+<span class="sig-name descname"><span class="pre">userqueuerelation_set</span></span><a class="headerlink" href="#JWTUser.models.User.userqueuerelation_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-JWTUser.permissions">
+<span id="jwtuser-permissions-module"></span><h2>JWTUser.permissions module<a class="headerlink" href="#module-JWTUser.permissions" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.permissions.IsOwner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">JWTUser.permissions.</span></span><span class="sig-name descname"><span class="pre">IsOwner</span></span><a class="reference internal" href="_modules/JWTUser/permissions.html#IsOwner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.permissions.IsOwner" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BasePermission</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="JWTUser.permissions.IsOwner.has_permission">
+<span class="sig-name descname"><span class="pre">has_permission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/permissions.html#IsOwner.has_permission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.permissions.IsOwner.has_permission" title="Permalink to this definition"></a></dt>
+<dd><p>Return <cite>True</cite> if permission is granted, <cite>False</cite> otherwise.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.permissions.IsOwnerQueue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">JWTUser.permissions.</span></span><span class="sig-name descname"><span class="pre">IsOwnerQueue</span></span><a class="reference internal" href="_modules/JWTUser/permissions.html#IsOwnerQueue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.permissions.IsOwnerQueue" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BasePermission</span></code></p>
+<p>Custom permission to only allow owners of an object to delete it.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="JWTUser.permissions.IsOwnerQueue.has_object_permission">
+<span class="sig-name descname"><span class="pre">has_object_permission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/permissions.html#IsOwnerQueue.has_object_permission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.permissions.IsOwnerQueue.has_object_permission" title="Permalink to this definition"></a></dt>
+<dd><p>Return <cite>True</cite> if permission is granted, <cite>False</cite> otherwise.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.permissions.IsOwnerQueue.message">
+<span class="sig-name descname"><span class="pre">message</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'You</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">the</span> <span class="pre">owner</span> <span class="pre">of</span> <span class="pre">this</span> <span class="pre">queue</span> <span class="pre">to</span> <span class="pre">delete</span> <span class="pre">a</span> <span class="pre">subscriber.'</span></em><a class="headerlink" href="#JWTUser.permissions.IsOwnerQueue.message" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.permissions.IsSubscriberQueue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">JWTUser.permissions.</span></span><span class="sig-name descname"><span class="pre">IsSubscriberQueue</span></span><a class="reference internal" href="_modules/JWTUser/permissions.html#IsSubscriberQueue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.permissions.IsSubscriberQueue" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BasePermission</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="JWTUser.permissions.IsSubscriberQueue.has_object_permission">
+<span class="sig-name descname"><span class="pre">has_object_permission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/permissions.html#IsSubscriberQueue.has_object_permission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.permissions.IsSubscriberQueue.has_object_permission" title="Permalink to this definition"></a></dt>
+<dd><p>Return <cite>True</cite> if permission is granted, <cite>False</cite> otherwise.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.permissions.IsSubscriberQueue.message">
+<span class="sig-name descname"><span class="pre">message</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'You</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">the</span> <span class="pre">subscriber</span> <span class="pre">of</span> <span class="pre">this</span> <span class="pre">queue</span> <span class="pre">to</span> <span class="pre">delete</span> <span class="pre">a</span> <span class="pre">subscriber.'</span></em><a class="headerlink" href="#JWTUser.permissions.IsSubscriberQueue.message" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-JWTUser.serializers">
+<span id="jwtuser-serializers-module"></span><h2>JWTUser.serializers module<a class="headerlink" href="#module-JWTUser.serializers" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.serializers.UserSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">JWTUser.serializers.</span></span><span class="sig-name descname"><span class="pre">UserSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/serializers.html#UserSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.serializers.UserSerializer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.serializers.UserSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/JWTUser/serializers.html#UserSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.serializers.UserSerializer.Meta" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.serializers.UserSerializer.Meta.extra_kwargs">
+<span class="sig-name descname"><span class="pre">extra_kwargs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">{'required':</span> <span class="pre">True},</span> <span class="pre">'first_name':</span> <span class="pre">{'required':</span> <span class="pre">True},</span> <span class="pre">'id':</span> <span class="pre">{'read_only':</span> <span class="pre">True},</span> <span class="pre">'is_active':</span> <span class="pre">{'read_only':</span> <span class="pre">True},</span> <span class="pre">'last_name':</span> <span class="pre">{'required':</span> <span class="pre">True},</span> <span class="pre">'password':</span> <span class="pre">{'write_only':</span> <span class="pre">True}}</span></em><a class="headerlink" href="#JWTUser.serializers.UserSerializer.Meta.extra_kwargs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.serializers.UserSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'username',</span> <span class="pre">'first_name',</span> <span class="pre">'last_name',</span> <span class="pre">'email',</span> <span class="pre">'is_active',</span> <span class="pre">'password')</span></em><a class="headerlink" href="#JWTUser.serializers.UserSerializer.Meta.fields" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.serializers.UserSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#JWTUser.serializers.UserSerializer.Meta.model" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#JWTUser.models.User" title="JWTUser.models.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="JWTUser.serializers.UserSerializer.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validated_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/serializers.html#UserSerializer.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.serializers.UserSerializer.create" title="Permalink to this definition"></a></dt>
+<dd><p>We have a bit of extra checking around this in order to provide
+descriptive messages when something goes wrong, but this method is
+essentially just:</p>
+<blockquote>
+<div><p>return ExampleModel.objects.create(<a href="#id1"><span class="problematic" id="id2">**</span></a>validated_data)</p>
+</div></blockquote>
+<p>If there are many to many fields present on the instance then they
+cannot be set until the model is instantiated, in which case the
+implementation is like so:</p>
+<blockquote>
+<div><p>example_relationship = validated_data.pop(‘example_relationship’)
+instance = ExampleModel.objects.create(<a href="#id3"><span class="problematic" id="id4">**</span></a>validated_data)
+instance.example_relationship = example_relationship
+return instance</p>
+</div></blockquote>
+<p>The default implementation also does not handle nested relationships.
+If you want to support writable nested relationships you’ll need
+to write an explicit <cite>.create()</cite> method.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-JWTUser.services">
+<span id="jwtuser-services-module"></span><h2>JWTUser.services module<a class="headerlink" href="#module-JWTUser.services" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="JWTUser.services.now_time_plus_2_minutes">
+<span class="sig-prename descclassname"><span class="pre">JWTUser.services.</span></span><span class="sig-name descname"><span class="pre">now_time_plus_2_minutes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/services.html#now_time_plus_2_minutes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.services.now_time_plus_2_minutes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-JWTUser.tests">
+<span id="jwtuser-tests-module"></span><h2>JWTUser.tests module<a class="headerlink" href="#module-JWTUser.tests" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-JWTUser.types">
+<span id="jwtuser-types-module"></span><h2>JWTUser.types module<a class="headerlink" href="#module-JWTUser.types" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.types.UserType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">JWTUser.types.</span></span><span class="sig-name descname"><span class="pre">UserType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_active</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/types.html#UserType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.types.UserType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">InterObjectType</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DjangoObjectType</span></code></p>
+</dd></dl>
+
+</section>
+<section id="module-JWTUser.views">
+<span id="jwtuser-views-module"></span><h2>JWTUser.views module<a class="headerlink" href="#module-JWTUser.views" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.views.UserRegisterView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">JWTUser.views.</span></span><span class="sig-name descname"><span class="pre">UserRegisterView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/views.html#UserRegisterView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.views.UserRegisterView" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateAPIView</span></code></p>
+<p>User Register View</p>
+<p>API endpoint that allows new users to be registered.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>queryset: A queryset of all User objects.
+serializer_class: A serializer class to convert User objects to JSON and vice versa.
+permission_classes: A list of permission classes that the view requires for user access.</p>
+</dd>
+<dt>Methods:</dt><dd><p>create: Create a new user with the provided data.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserRegisterView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'rest_framework.permissions.AllowAny'&gt;,)</span></em><a class="headerlink" href="#JWTUser.views.UserRegisterView.permission_classes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserRegisterView.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#JWTUser.views.UserRegisterView.queryset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserRegisterView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#JWTUser.views.UserRegisterView.serializer_class" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#JWTUser.serializers.UserSerializer" title="JWTUser.serializers.UserSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserSerializer</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.views.UserRetrieveView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">JWTUser.views.</span></span><span class="sig-name descname"><span class="pre">UserRetrieveView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/views.html#UserRetrieveView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.views.UserRetrieveView" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RetrieveAPIView</span></code></p>
+<p>User Retrieve View</p>
+<p>API endpoint that allows a user to be retrieved.
+Accessible by the owner of the user account or by users with admin permissions.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>queryset: A queryset of all User objects.
+serializer_class: A serializer class to convert User objects to JSON and vice versa.
+permission_classes: A list of permission classes that the view requires for user access.</p>
+</dd>
+<dt>Methods:</dt><dd><p>retrieve: Retrieve the user with the provided ID.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserRetrieveView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;rest_framework.permissions.OperandHolder</span> <span class="pre">object&gt;,)</span></em><a class="headerlink" href="#JWTUser.views.UserRetrieveView.permission_classes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserRetrieveView.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#JWTUser.views.UserRetrieveView.queryset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserRetrieveView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#JWTUser.views.UserRetrieveView.serializer_class" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#JWTUser.serializers.UserSerializer" title="JWTUser.serializers.UserSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserSerializer</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.views.UserUpdateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">JWTUser.views.</span></span><span class="sig-name descname"><span class="pre">UserUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/views.html#UserUpdateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.views.UserUpdateView" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateAPIView</span></code></p>
+<p>User Update View</p>
+<p>API endpoint that allows a user to be updated.
+Accessible by the owner of the user account or by users with admin permissions.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>queryset: A queryset of all User objects.
+serializer_class: A serializer class to convert User objects to JSON and vice versa.
+permission_classes: A list of permission classes that the view requires for user access.</p>
+</dd>
+<dt>Methods:</dt><dd><p>update: Update the user with the provided data.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserUpdateView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;rest_framework.permissions.OperandHolder</span> <span class="pre">object&gt;,)</span></em><a class="headerlink" href="#JWTUser.views.UserUpdateView.permission_classes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserUpdateView.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#JWTUser.views.UserUpdateView.queryset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserUpdateView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#JWTUser.views.UserUpdateView.serializer_class" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#JWTUser.serializers.UserSerializer" title="JWTUser.serializers.UserSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserSerializer</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="JWTUser.views.UserViewSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">JWTUser.views.</span></span><span class="sig-name descname"><span class="pre">UserViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/JWTUser/views.html#UserViewSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#JWTUser.views.UserViewSet" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelViewSet</span></code></p>
+<p>User ViewSet</p>
+<p>API endpoint that allows users to be viewed, created, edited or deleted.
+Only accessible by users with admin permissions.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>queryset: A queryset of all User objects.
+serializer_class: A serializer class to convert User objects to JSON and vice versa.
+permission_classes: A list of permission classes that the view requires for user access.</p>
+</dd>
+<dt>Methods:</dt><dd><p>list: Get a list of all users.
+create: Create a new user.
+retrieve: Retrieve a specific user by ID.
+update: Update an existing user by ID.
+destroy: Delete a user by ID.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserViewSet.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'rest_framework.permissions.IsAdminUser'&gt;,)</span></em><a class="headerlink" href="#JWTUser.views.UserViewSet.permission_classes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserViewSet.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#JWTUser.views.UserViewSet.queryset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="JWTUser.views.UserViewSet.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#JWTUser.views.UserViewSet.serializer_class" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#JWTUser.serializers.UserSerializer" title="JWTUser.serializers.UserSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserSerializer</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-JWTUser">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JWTUser" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Daniil C. S..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

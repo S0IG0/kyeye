@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Queue package &mdash; service  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            service
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Queue package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-Queue.admin">Queue.admin module</a></li>
+<li><a class="reference internal" href="#module-Queue.apps">Queue.apps module</a><ul>
+<li><a class="reference internal" href="#Queue.apps.QueueConfig"><code class="docutils literal notranslate"><span class="pre">QueueConfig</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.apps.QueueConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">QueueConfig.default_auto_field</span></code></a></li>
+<li><a class="reference internal" href="#Queue.apps.QueueConfig.name"><code class="docutils literal notranslate"><span class="pre">QueueConfig.name</span></code></a></li>
+<li><a class="reference internal" href="#Queue.apps.QueueConfig.ready"><code class="docutils literal notranslate"><span class="pre">QueueConfig.ready()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Queue.models">Queue.models module</a><ul>
+<li><a class="reference internal" href="#Queue.models.Queue"><code class="docutils literal notranslate"><span class="pre">Queue</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.models.Queue.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Queue.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Queue.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.date_activation"><code class="docutils literal notranslate"><span class="pre">Queue.date_activation</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.date_creation"><code class="docutils literal notranslate"><span class="pre">Queue.date_creation</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.get_next_by_date_activation"><code class="docutils literal notranslate"><span class="pre">Queue.get_next_by_date_activation()</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.get_next_by_date_creation"><code class="docutils literal notranslate"><span class="pre">Queue.get_next_by_date_creation()</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.get_previous_by_date_activation"><code class="docutils literal notranslate"><span class="pre">Queue.get_previous_by_date_activation()</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.get_previous_by_date_creation"><code class="docutils literal notranslate"><span class="pre">Queue.get_previous_by_date_creation()</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.id"><code class="docutils literal notranslate"><span class="pre">Queue.id</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.is_active"><code class="docutils literal notranslate"><span class="pre">Queue.is_active</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.name"><code class="docutils literal notranslate"><span class="pre">Queue.name</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.objects"><code class="docutils literal notranslate"><span class="pre">Queue.objects</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.owner"><code class="docutils literal notranslate"><span class="pre">Queue.owner</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.owner_id"><code class="docutils literal notranslate"><span class="pre">Queue.owner_id</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.userqueuerelation_set"><code class="docutils literal notranslate"><span class="pre">Queue.userqueuerelation_set</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.Queue.users"><code class="docutils literal notranslate"><span class="pre">Queue.users</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation.MultipleObjectsReturned</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation.date_joined"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation.date_joined</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation.get_next_by_date_joined"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation.get_next_by_date_joined()</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation.get_previous_by_date_joined"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation.get_previous_by_date_joined()</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation.id"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation.id</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation.objects"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation.objects</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation.queue"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation.queue</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation.queue_id"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation.queue_id</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation.user"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation.user</span></code></a></li>
+<li><a class="reference internal" href="#Queue.models.UserQueueRelation.user_id"><code class="docutils literal notranslate"><span class="pre">UserQueueRelation.user_id</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Queue.serializers">Queue.serializers module</a><ul>
+<li><a class="reference internal" href="#Queue.serializers.QueueOwnerSerializer"><code class="docutils literal notranslate"><span class="pre">QueueOwnerSerializer</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.serializers.QueueOwnerSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">QueueOwnerSerializer.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.serializers.QueueOwnerSerializer.Meta.fields"><code class="docutils literal notranslate"><span class="pre">QueueOwnerSerializer.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#Queue.serializers.QueueOwnerSerializer.Meta.model"><code class="docutils literal notranslate"><span class="pre">QueueOwnerSerializer.Meta.model</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Queue.serializers.QueueSerializer"><code class="docutils literal notranslate"><span class="pre">QueueSerializer</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.serializers.QueueSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">QueueSerializer.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.serializers.QueueSerializer.Meta.extra_kwargs"><code class="docutils literal notranslate"><span class="pre">QueueSerializer.Meta.extra_kwargs</span></code></a></li>
+<li><a class="reference internal" href="#Queue.serializers.QueueSerializer.Meta.fields"><code class="docutils literal notranslate"><span class="pre">QueueSerializer.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#Queue.serializers.QueueSerializer.Meta.model"><code class="docutils literal notranslate"><span class="pre">QueueSerializer.Meta.model</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Queue.serializers.QueueUserSerializer"><code class="docutils literal notranslate"><span class="pre">QueueUserSerializer</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.serializers.QueueUserSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">QueueUserSerializer.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.serializers.QueueUserSerializer.Meta.fields"><code class="docutils literal notranslate"><span class="pre">QueueUserSerializer.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#Queue.serializers.QueueUserSerializer.Meta.model"><code class="docutils literal notranslate"><span class="pre">QueueUserSerializer.Meta.model</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Queue.serializers.UserQueueRelationRegisterSerializer"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationRegisterSerializer</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.serializers.UserQueueRelationRegisterSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationRegisterSerializer.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.serializers.UserQueueRelationRegisterSerializer.Meta.extra_kwargs"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationRegisterSerializer.Meta.extra_kwargs</span></code></a></li>
+<li><a class="reference internal" href="#Queue.serializers.UserQueueRelationRegisterSerializer.Meta.fields"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationRegisterSerializer.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#Queue.serializers.UserQueueRelationRegisterSerializer.Meta.model"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationRegisterSerializer.Meta.model</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Queue.serializers.UserQueueRelationSerializer"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationSerializer</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.serializers.UserQueueRelationSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationSerializer.Meta</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.serializers.UserQueueRelationSerializer.Meta.fields"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationSerializer.Meta.fields</span></code></a></li>
+<li><a class="reference internal" href="#Queue.serializers.UserQueueRelationSerializer.Meta.model"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationSerializer.Meta.model</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Queue.services">Queue.services module</a><ul>
+<li><a class="reference internal" href="#Queue.services.get_queue"><code class="docutils literal notranslate"><span class="pre">get_queue()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Queue.signals">Queue.signals module</a><ul>
+<li><a class="reference internal" href="#Queue.signals.update_stock"><code class="docutils literal notranslate"><span class="pre">update_stock()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Queue.tasks">Queue.tasks module</a></li>
+<li><a class="reference internal" href="#module-Queue.tests">Queue.tests module</a></li>
+<li><a class="reference internal" href="#module-Queue.types">Queue.types module</a><ul>
+<li><a class="reference internal" href="#Queue.types.QueueType"><code class="docutils literal notranslate"><span class="pre">QueueType</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.types.QueueType.id_"><code class="docutils literal notranslate"><span class="pre">QueueType.id_</span></code></a></li>
+<li><a class="reference internal" href="#Queue.types.QueueType.resolve_id_"><code class="docutils literal notranslate"><span class="pre">QueueType.resolve_id_()</span></code></a></li>
+<li><a class="reference internal" href="#Queue.types.QueueType.resolve_users"><code class="docutils literal notranslate"><span class="pre">QueueType.resolve_users()</span></code></a></li>
+<li><a class="reference internal" href="#Queue.types.QueueType.users"><code class="docutils literal notranslate"><span class="pre">QueueType.users</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Queue.types.UserQueueRelationType"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationType</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Queue.views">Queue.views module</a><ul>
+<li><a class="reference internal" href="#Queue.views.QueueListView"><code class="docutils literal notranslate"><span class="pre">QueueListView</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.views.QueueListView.get_queryset"><code class="docutils literal notranslate"><span class="pre">QueueListView.get_queryset()</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.QueueListView.permission_classes"><code class="docutils literal notranslate"><span class="pre">QueueListView.permission_classes</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.QueueListView.queryset"><code class="docutils literal notranslate"><span class="pre">QueueListView.queryset</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.QueueListView.serializer_class"><code class="docutils literal notranslate"><span class="pre">QueueListView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Queue.views.QueueRegisterView"><code class="docutils literal notranslate"><span class="pre">QueueRegisterView</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.views.QueueRegisterView.create"><code class="docutils literal notranslate"><span class="pre">QueueRegisterView.create()</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.QueueRegisterView.permission_classes"><code class="docutils literal notranslate"><span class="pre">QueueRegisterView.permission_classes</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.QueueRegisterView.queryset"><code class="docutils literal notranslate"><span class="pre">QueueRegisterView.queryset</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.QueueRegisterView.serializer_class"><code class="docutils literal notranslate"><span class="pre">QueueRegisterView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Queue.views.QueueRetrieveView"><code class="docutils literal notranslate"><span class="pre">QueueRetrieveView</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.views.QueueRetrieveView.permission_classes"><code class="docutils literal notranslate"><span class="pre">QueueRetrieveView.permission_classes</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.QueueRetrieveView.queryset"><code class="docutils literal notranslate"><span class="pre">QueueRetrieveView.queryset</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.QueueRetrieveView.serializer_class"><code class="docutils literal notranslate"><span class="pre">QueueRetrieveView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Queue.views.QueueViewSet"><code class="docutils literal notranslate"><span class="pre">QueueViewSet</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.views.QueueViewSet.permission_classes"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.permission_classes</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.QueueViewSet.queryset"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.queryset</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.QueueViewSet.serializer_class"><code class="docutils literal notranslate"><span class="pre">QueueViewSet.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Queue.views.UserQueueRelationDestroyView"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationDestroyView</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.views.UserQueueRelationDestroyView.delete"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationDestroyView.delete()</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.UserQueueRelationDestroyView.permission_classes"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationDestroyView.permission_classes</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.UserQueueRelationDestroyView.queryset"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationDestroyView.queryset</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.UserQueueRelationDestroyView.serializer_class"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationDestroyView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Queue.views.UserQueueRelationRegisterView"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationRegisterView</span></code></a><ul>
+<li><a class="reference internal" href="#Queue.views.UserQueueRelationRegisterView.permission_classes"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationRegisterView.permission_classes</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.UserQueueRelationRegisterView.queryset"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationRegisterView.queryset</span></code></a></li>
+<li><a class="reference internal" href="#Queue.views.UserQueueRelationRegisterView.serializer_class"><code class="docutils literal notranslate"><span class="pre">UserQueueRelationRegisterView.serializer_class</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Queue">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">service</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Queue package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Queue.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="queue-package">
+<h1>Queue package<a class="headerlink" href="#queue-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Queue.migrations.html">Queue.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Queue.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Queue.migrations.html#module-Queue.migrations.0001_initial">Queue.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Queue.migrations.html#Queue.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Queue.migrations.html#Queue.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Queue.migrations.html#Queue.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Queue.migrations.html#Queue.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Queue.migrations.html#module-Queue.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-Queue.admin">
+<span id="queue-admin-module"></span><h2>Queue.admin module<a class="headerlink" href="#module-Queue.admin" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-Queue.apps">
+<span id="queue-apps-module"></span><h2>Queue.apps module<a class="headerlink" href="#module-Queue.apps" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.apps.QueueConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.apps.</span></span><span class="sig-name descname"><span class="pre">QueueConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/apps.html#QueueConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.apps.QueueConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.apps.QueueConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#Queue.apps.QueueConfig.default_auto_field" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.apps.QueueConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Queue'</span></em><a class="headerlink" href="#Queue.apps.QueueConfig.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.apps.QueueConfig.ready">
+<span class="sig-name descname"><span class="pre">ready</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/apps.html#QueueConfig.ready"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.apps.QueueConfig.ready" title="Permalink to this definition"></a></dt>
+<dd><p>Override this method in subclasses to run code when Django starts.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Queue.models">
+<span id="queue-models-module"></span><h2>Queue.models module<a class="headerlink" href="#module-Queue.models" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.models.Queue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.models.</span></span><span class="sig-name descname"><span class="pre">Queue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/models.html#Queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.models.Queue" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Queue model.</p>
+<p>This model represents a queue with a name, owner, and a list of subscribed users.</p>
+<p>Attributes:
+- name (str): The name of the queue.
+- owner (ForeignKey): The user who owns the queue.
+- users (ManyToManyField): The list of users subscribed to the queue.
+- date_created (DateTimeField): The time at which the queue was created.
+- date_activation (DateTimeField): The time after which the queue should become active.
+- is_active (BooleanField): The Indicator of the queue’s readiness for use.</p>
+<p>Methods:
+- __str__(): Returns a string representation of the queue, which includes the queue name and its primary key.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Queue.models.Queue.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Queue.models.Queue.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Queue.models.Queue.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Queue.models.Queue.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.Queue.date_activation">
+<span class="sig-name descname"><span class="pre">date_activation</span></span><a class="headerlink" href="#Queue.models.Queue.date_activation" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.Queue.date_creation">
+<span class="sig-name descname"><span class="pre">date_creation</span></span><a class="headerlink" href="#Queue.models.Queue.date_creation" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.models.Queue.get_next_by_date_activation">
+<span class="sig-name descname"><span class="pre">get_next_by_date_activation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">date_activation&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Queue.models.Queue.get_next_by_date_activation" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.models.Queue.get_next_by_date_creation">
+<span class="sig-name descname"><span class="pre">get_next_by_date_creation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">date_creation&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Queue.models.Queue.get_next_by_date_creation" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.models.Queue.get_previous_by_date_activation">
+<span class="sig-name descname"><span class="pre">get_previous_by_date_activation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">date_activation&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Queue.models.Queue.get_previous_by_date_activation" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.models.Queue.get_previous_by_date_creation">
+<span class="sig-name descname"><span class="pre">get_previous_by_date_creation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">date_creation&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Queue.models.Queue.get_previous_by_date_creation" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.Queue.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Queue.models.Queue.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.Queue.is_active">
+<span class="sig-name descname"><span class="pre">is_active</span></span><a class="headerlink" href="#Queue.models.Queue.is_active" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.Queue.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#Queue.models.Queue.name" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.Queue.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Queue.models.Queue.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.Queue.owner">
+<span class="sig-name descname"><span class="pre">owner</span></span><a class="headerlink" href="#Queue.models.Queue.owner" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.Queue.owner_id">
+<span class="sig-name descname"><span class="pre">owner_id</span></span><a class="headerlink" href="#Queue.models.Queue.owner_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.Queue.userqueuerelation_set">
+<span class="sig-name descname"><span class="pre">userqueuerelation_set</span></span><a class="headerlink" href="#Queue.models.Queue.userqueuerelation_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.Queue.users">
+<span class="sig-name descname"><span class="pre">users</span></span><a class="headerlink" href="#Queue.models.Queue.users" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.models.</span></span><span class="sig-name descname"><span class="pre">UserQueueRelation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/models.html#UserQueueRelation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.models.UserQueueRelation" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>UserQueueRelation model.</p>
+<p>This model represents the relationship between a user and a queue. It includes the user, the queue, and the date they
+joined the queue.</p>
+<p>Attributes:
+- user (ForeignKey): The user subscribed to the queue.
+- queue (ForeignKey): The queue the user is subscribed to.
+- date_joined (datetime): The date and time the user joined the queue.</p>
+<p>Methods:
+- __str__(): Returns a string representation of the UserQueueRelation instance, which includes the email of the user,</p>
+<blockquote>
+<div><p>the name of the queue, and the date they joined the queue.</p>
+</div></blockquote>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Queue.models.UserQueueRelation.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Queue.models.UserQueueRelation.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation.date_joined">
+<span class="sig-name descname"><span class="pre">date_joined</span></span><a class="headerlink" href="#Queue.models.UserQueueRelation.date_joined" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation.get_next_by_date_joined">
+<span class="sig-name descname"><span class="pre">get_next_by_date_joined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">date_joined&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Queue.models.UserQueueRelation.get_next_by_date_joined" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation.get_previous_by_date_joined">
+<span class="sig-name descname"><span class="pre">get_previous_by_date_joined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">date_joined&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Queue.models.UserQueueRelation.get_previous_by_date_joined" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Queue.models.UserQueueRelation.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Queue.models.UserQueueRelation.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation.queue">
+<span class="sig-name descname"><span class="pre">queue</span></span><a class="headerlink" href="#Queue.models.UserQueueRelation.queue" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation.queue_id">
+<span class="sig-name descname"><span class="pre">queue_id</span></span><a class="headerlink" href="#Queue.models.UserQueueRelation.queue_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#Queue.models.UserQueueRelation.user" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.models.UserQueueRelation.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#Queue.models.UserQueueRelation.user_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Queue.serializers">
+<span id="queue-serializers-module"></span><h2>Queue.serializers module<a class="headerlink" href="#module-Queue.serializers" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.serializers.QueueOwnerSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.serializers.</span></span><span class="sig-name descname"><span class="pre">QueueOwnerSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/serializers.html#QueueOwnerSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.serializers.QueueOwnerSerializer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.serializers.QueueOwnerSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Queue/serializers.html#QueueOwnerSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.serializers.QueueOwnerSerializer.Meta" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.QueueOwnerSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'username',</span> <span class="pre">'first_name',</span> <span class="pre">'last_name',</span> <span class="pre">'email')</span></em><a class="headerlink" href="#Queue.serializers.QueueOwnerSerializer.Meta.fields" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.QueueOwnerSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Queue.serializers.QueueOwnerSerializer.Meta.model" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="JWTUser.html#JWTUser.models.User" title="JWTUser.models.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.serializers.QueueSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.serializers.</span></span><span class="sig-name descname"><span class="pre">QueueSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/serializers.html#QueueSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.serializers.QueueSerializer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.serializers.QueueSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Queue/serializers.html#QueueSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.serializers.QueueSerializer.Meta" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.QueueSerializer.Meta.extra_kwargs">
+<span class="sig-name descname"><span class="pre">extra_kwargs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'date_activation':</span> <span class="pre">{'required':</span> <span class="pre">True},</span> <span class="pre">'date_creation':</span> <span class="pre">{'read_only':</span> <span class="pre">True},</span> <span class="pre">'is_active':</span> <span class="pre">{'read_only':</span> <span class="pre">True}}</span></em><a class="headerlink" href="#Queue.serializers.QueueSerializer.Meta.extra_kwargs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.QueueSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'name',</span> <span class="pre">'owner',</span> <span class="pre">'users',</span> <span class="pre">'date_creation',</span> <span class="pre">'date_activation',</span> <span class="pre">'is_active')</span></em><a class="headerlink" href="#Queue.serializers.QueueSerializer.Meta.fields" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.QueueSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Queue.serializers.QueueSerializer.Meta.model" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Queue.models.Queue" title="Queue.models.Queue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Queue</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.serializers.QueueUserSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.serializers.</span></span><span class="sig-name descname"><span class="pre">QueueUserSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/serializers.html#QueueUserSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.serializers.QueueUserSerializer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.serializers.QueueUserSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Queue/serializers.html#QueueUserSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.serializers.QueueUserSerializer.Meta" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.QueueUserSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'username',</span> <span class="pre">'first_name',</span> <span class="pre">'last_name',</span> <span class="pre">'email')</span></em><a class="headerlink" href="#Queue.serializers.QueueUserSerializer.Meta.fields" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.QueueUserSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Queue.serializers.QueueUserSerializer.Meta.model" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="JWTUser.html#JWTUser.models.User" title="JWTUser.models.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.serializers.UserQueueRelationRegisterSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.serializers.</span></span><span class="sig-name descname"><span class="pre">UserQueueRelationRegisterSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/serializers.html#UserQueueRelationRegisterSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.serializers.UserQueueRelationRegisterSerializer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.serializers.UserQueueRelationRegisterSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Queue/serializers.html#UserQueueRelationRegisterSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.serializers.UserQueueRelationRegisterSerializer.Meta" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.UserQueueRelationRegisterSerializer.Meta.extra_kwargs">
+<span class="sig-name descname"><span class="pre">extra_kwargs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'date_joined':</span> <span class="pre">{'read_only':</span> <span class="pre">True},</span> <span class="pre">'queue':</span> <span class="pre">{'required':</span> <span class="pre">True},</span> <span class="pre">'user':</span> <span class="pre">{'required':</span> <span class="pre">True}}</span></em><a class="headerlink" href="#Queue.serializers.UserQueueRelationRegisterSerializer.Meta.extra_kwargs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.UserQueueRelationRegisterSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('user',</span> <span class="pre">'queue',</span> <span class="pre">'date_joined')</span></em><a class="headerlink" href="#Queue.serializers.UserQueueRelationRegisterSerializer.Meta.fields" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.UserQueueRelationRegisterSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Queue.serializers.UserQueueRelationRegisterSerializer.Meta.model" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Queue.models.UserQueueRelation" title="Queue.models.UserQueueRelation"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserQueueRelation</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.serializers.UserQueueRelationSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.serializers.</span></span><span class="sig-name descname"><span class="pre">UserQueueRelationSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/serializers.html#UserQueueRelationSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.serializers.UserQueueRelationSerializer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.serializers.UserQueueRelationSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Queue/serializers.html#UserQueueRelationSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.serializers.UserQueueRelationSerializer.Meta" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.UserQueueRelationSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('user',</span> <span class="pre">'date_joined')</span></em><a class="headerlink" href="#Queue.serializers.UserQueueRelationSerializer.Meta.fields" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.serializers.UserQueueRelationSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Queue.serializers.UserQueueRelationSerializer.Meta.model" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Queue.models.UserQueueRelation" title="Queue.models.UserQueueRelation"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserQueueRelation</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Queue.services">
+<span id="queue-services-module"></span><h2>Queue.services module<a class="headerlink" href="#module-Queue.services" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Queue.services.get_queue">
+<span class="sig-prename descclassname"><span class="pre">Queue.services.</span></span><span class="sig-name descname"><span class="pre">get_queue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#Queue.models.Queue" title="Queue.models.Queue"><span class="pre">Queue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/Queue/services.html#get_queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.services.get_queue" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-Queue.signals">
+<span id="queue-signals-module"></span><h2>Queue.signals module<a class="headerlink" href="#module-Queue.signals" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Queue.signals.update_stock">
+<span class="sig-prename descclassname"><span class="pre">Queue.signals.</span></span><span class="sig-name descname"><span class="pre">update_stock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#Queue.models.Queue" title="Queue.models.Queue"><span class="pre">Queue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">created</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/signals.html#update_stock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.signals.update_stock" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-Queue.tasks">
+<span id="queue-tasks-module"></span><h2>Queue.tasks module<a class="headerlink" href="#module-Queue.tasks" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-Queue.tests">
+<span id="queue-tests-module"></span><h2>Queue.tests module<a class="headerlink" href="#module-Queue.tests" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-Queue.types">
+<span id="queue-types-module"></span><h2>Queue.types module<a class="headerlink" href="#module-Queue.types" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.types.QueueType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.types.</span></span><span class="sig-name descname"><span class="pre">QueueType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_creation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_activation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_active</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/types.html#QueueType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.types.QueueType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">InterObjectType</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DjangoObjectType</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.types.QueueType.id_">
+<span class="sig-name descname"><span class="pre">id_</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;graphene.types.scalars.Int</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Queue.types.QueueType.id_" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.types.QueueType.resolve_id_">
+<span class="sig-name descname"><span class="pre">resolve_id_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/types.html#QueueType.resolve_id_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.types.QueueType.resolve_id_" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.types.QueueType.resolve_users">
+<span class="sig-name descname"><span class="pre">resolve_users</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/types.html#QueueType.resolve_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.types.QueueType.resolve_users" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.types.QueueType.users">
+<span class="sig-name descname"><span class="pre">users</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;graphene_django.filter.fields.DjangoFilterConnectionField</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Queue.types.QueueType.users" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.types.UserQueueRelationType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.types.</span></span><span class="sig-name descname"><span class="pre">UserQueueRelationType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">queue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_joined</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/types.html#UserQueueRelationType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.types.UserQueueRelationType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">InterObjectType</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DjangoObjectType</span></code></p>
+</dd></dl>
+
+</section>
+<section id="module-Queue.views">
+<span id="queue-views-module"></span><h2>Queue.views module<a class="headerlink" href="#module-Queue.views" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.views.QueueListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.views.</span></span><span class="sig-name descname"><span class="pre">QueueListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/views.html#QueueListView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.views.QueueListView" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ListAPIView</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.views.QueueListView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/views.html#QueueListView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.views.QueueListView.get_queryset" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of all queues with optional filtering by user_id or owner_id.</p>
+<p>Parameters:
+- user_id (int): optional. Filters queues by user_id.
+- owner_id (int): optional. Filters queues by owner_id.</p>
+<p>Returns:
+- queryset (QuerySet): The filtered queryset of queues.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueListView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;,)</span></em><a class="headerlink" href="#Queue.views.QueueListView.permission_classes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueListView.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#Queue.views.QueueListView.queryset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueListView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#Queue.views.QueueListView.serializer_class" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Queue.serializers.QueueSerializer" title="Queue.serializers.QueueSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueSerializer</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.views.QueueRegisterView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.views.</span></span><span class="sig-name descname"><span class="pre">QueueRegisterView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/views.html#QueueRegisterView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.views.QueueRegisterView" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateAPIView</span></code></p>
+<p>View for registering a new queue with the authenticated user as the owner.</p>
+<p>Required Payload:
+{</p>
+<blockquote>
+<div><p>“name”: “string”,
+“description”: “string”</p>
+</div></blockquote>
+<p>}</p>
+<p>If successful, returns the created queue data with HTTP status code 201 Created.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.views.QueueRegisterView.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/views.html#QueueRegisterView.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.views.QueueRegisterView.create" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new queue with the authenticated user as the owner.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Response – The serialized data of the created queue with HTTP status code 201 Created.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueRegisterView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;,)</span></em><a class="headerlink" href="#Queue.views.QueueRegisterView.permission_classes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueRegisterView.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#Queue.views.QueueRegisterView.queryset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueRegisterView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#Queue.views.QueueRegisterView.serializer_class" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Queue.serializers.QueueSerializer" title="Queue.serializers.QueueSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueSerializer</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.views.QueueRetrieveView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.views.</span></span><span class="sig-name descname"><span class="pre">QueueRetrieveView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/views.html#QueueRetrieveView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.views.QueueRetrieveView" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RetrieveAPIView</span></code></p>
+<p>A view that allows authenticated users to retrieve a single Queue object.</p>
+<p>Endpoint: <cite>api/queue/&lt;int:pk&gt;/</cite></p>
+<dl class="simple">
+<dt>HTTP Methods:</dt><dd><ul class="simple">
+<li><p>GET: Retrieve a Queue object by primary key.</p></li>
+</ul>
+</dd>
+<dt>Permissions:</dt><dd><ul class="simple">
+<li><p>User must be authenticated.</p></li>
+</ul>
+</dd>
+<dt>Query Parameters:</dt><dd><ul class="simple">
+<li><p><cite>pk</cite>: The primary key of the Queue object to retrieve.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>On success: A JSON representation of the retrieved Queue object.</p></li>
+<li><p>On failure: An error message and the corresponding HTTP status code.</p></li>
+</ul>
+</dd>
+<dt>Example:</dt><dd><p><a href="#id1"><span class="problematic" id="id2">``</span></a>`
+GET api/queue/2/`</p>
+</dd>
+</dl>
+<dl>
+<dt>{</dt><dd><p>“id”: 2,
+“name”: “queue 2”,
+“owner”: {</p>
+<blockquote>
+<div><p>“id”: 4,
+“username”: “admin”,
+“first_name”: “admin”,
+“last_name”: “admin”,
+“email”: “<a class="reference external" href="mailto:admin&#37;&#52;&#48;mail&#46;ru">admin<span>&#64;</span>mail<span>&#46;</span>ru</a>”</p>
+</div></blockquote>
+<p>},
+“users”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><dl class="simple">
+<dt>“user”: {</dt><dd><p>“id”: 4,
+“username”: “admin”,
+“first_name”: “admin”,
+“last_name”: “admin”,
+“email”: “<a class="reference external" href="mailto:admin&#37;&#52;&#48;mail&#46;ru">admin<span>&#64;</span>mail<span>&#46;</span>ru</a>”</p>
+</dd>
+</dl>
+<p>},
+“date_joined”: “2023-03-17T22:34:54Z”</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>}</dt><dd><p><a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueRetrieveView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;,)</span></em><a class="headerlink" href="#Queue.views.QueueRetrieveView.permission_classes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueRetrieveView.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#Queue.views.QueueRetrieveView.queryset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueRetrieveView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#Queue.views.QueueRetrieveView.serializer_class" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Queue.serializers.QueueSerializer" title="Queue.serializers.QueueSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueSerializer</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.views.QueueViewSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.views.</span></span><span class="sig-name descname"><span class="pre">QueueViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/views.html#QueueViewSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.views.QueueViewSet" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelViewSet</span></code></p>
+<p>A ViewSet for viewing, creating, updating, and deleting queue instances.</p>
+<p>…</p>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>queryset<span class="classifier">QuerySet</span></dt><dd><p>The queryset of all Queue instances.</p>
+</dd>
+<dt>serializer_class<span class="classifier">Serializer</span></dt><dd><p>The serializer class used for (de)serializing Queue instances.</p>
+</dd>
+<dt>permission_classes<span class="classifier">tuple</span></dt><dd><p>The permission classes that the view requires. In this case, only users with admin credentials can access the view.</p>
+</dd>
+</dl>
+</section>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>list(self, request, <a href="#id7"><span class="problematic" id="id8">*</span></a>args, <a href="#id9"><span class="problematic" id="id10">**</span></a>kwargs):</dt><dd><p>Get a list of all queues.</p>
+</dd>
+<dt>retrieve(self, request, <a href="#id11"><span class="problematic" id="id12">*</span></a>args, <a href="#id13"><span class="problematic" id="id14">**</span></a>kwargs):</dt><dd><p>Get a single queue instance by id.</p>
+</dd>
+<dt>create(self, request, <a href="#id15"><span class="problematic" id="id16">*</span></a>args, <a href="#id17"><span class="problematic" id="id18">**</span></a>kwargs):</dt><dd><p>Create a new queue instance.</p>
+</dd>
+<dt>update(self, request, <a href="#id19"><span class="problematic" id="id20">*</span></a>args, <a href="#id21"><span class="problematic" id="id22">**</span></a>kwargs):</dt><dd><p>Update an existing queue instance by id.</p>
+</dd>
+<dt>partial_update(self, request, <a href="#id23"><span class="problematic" id="id24">*</span></a>args, <a href="#id25"><span class="problematic" id="id26">**</span></a>kwargs):</dt><dd><p>Partially update an existing queue instance by id.</p>
+</dd>
+<dt>destroy(self, request, <a href="#id27"><span class="problematic" id="id28">*</span></a>args, <a href="#id29"><span class="problematic" id="id30">**</span></a>kwargs):</dt><dd><p>Delete an existing queue instance by id.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueViewSet.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'rest_framework.permissions.IsAdminUser'&gt;,)</span></em><a class="headerlink" href="#Queue.views.QueueViewSet.permission_classes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueViewSet.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#Queue.views.QueueViewSet.queryset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.QueueViewSet.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#Queue.views.QueueViewSet.serializer_class" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Queue.serializers.QueueSerializer" title="Queue.serializers.QueueSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueSerializer</span></code></a></p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.views.UserQueueRelationDestroyView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.views.</span></span><span class="sig-name descname"><span class="pre">UserQueueRelationDestroyView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/views.html#UserQueueRelationDestroyView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.views.UserQueueRelationDestroyView" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DestroyAPIView</span></code></p>
+<p>This view handles the deletion of a UserQueueRelation instance. It requires authentication and the user must be the owner
+of the queue.</p>
+<p>Allowed HTTP methods: DELETE</p>
+<p>Parameters:
+- user_id: The ID of the user associated with the UserQueueRelation instance to be deleted.
+- queue_id: The ID of the queue associated with the UserQueueRelation instance to be deleted.</p>
+<p>Returns:
+- 204 No Content: If the UserQueueRelation instance was successfully deleted.
+- 404 Not Found: If the UserQueueRelation instance, the associated Queue instance or the provided user_id or queue_id</p>
+<blockquote>
+<div><p>do not exist.</p>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>401 Unauthorized: If the user is not authenticated or does not have permission to delete the UserQueueRelation</dt><dd><p>instance.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="Queue.views.UserQueueRelationDestroyView.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/views.html#UserQueueRelationDestroyView.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.views.UserQueueRelationDestroyView.delete" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.UserQueueRelationDestroyView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;rest_framework.permissions.OperandHolder</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;)</span></em><a class="headerlink" href="#Queue.views.UserQueueRelationDestroyView.permission_classes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.UserQueueRelationDestroyView.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#Queue.views.UserQueueRelationDestroyView.queryset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.UserQueueRelationDestroyView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#Queue.views.UserQueueRelationDestroyView.serializer_class" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Queue.serializers.UserQueueRelationRegisterSerializer" title="Queue.serializers.UserQueueRelationRegisterSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserQueueRelationRegisterSerializer</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Queue.views.UserQueueRelationRegisterView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Queue.views.</span></span><span class="sig-name descname"><span class="pre">UserQueueRelationRegisterView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Queue/views.html#UserQueueRelationRegisterView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Queue.views.UserQueueRelationRegisterView" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateAPIView</span></code></p>
+<p>A view that allows authenticated users to create a UserQueueRelation object.</p>
+<p>Endpoint: <cite>/api/queue/user/register/</cite></p>
+<dl>
+<dt>HTTP Methods:</dt><dd><ul class="simple">
+<li><p>POST: Create a new UserQueueRelation object.</p></li>
+</ul>
+</dd>
+<dt>Permissions:</dt><dd><ul class="simple">
+<li><p>User must be authenticated.</p></li>
+</ul>
+</dd>
+<dt>Required Request Body Parameters:</dt><dd><ul class="simple">
+<li><p><cite>user_id</cite>: The primary key of the User object to associate with the Queue.</p></li>
+<li><p><cite>queue_id</cite>: The primary key of the Queue object to associate with the User.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>On success: A JSON representation of the created UserQueueRelation object.</p></li>
+<li><p>On failure: An error message and the corresponding HTTP status code.</p></li>
+</ul>
+</dd>
+<dt>Example:</dt><dd><p><a href="#id31"><span class="problematic" id="id32">``</span></a>`
+POST /api/queue/user/register/</p>
+<dl class="simple">
+<dt>{</dt><dd><p>“user_id”: 1,
+“queue_id”: 2,</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="simple">
+<dt>{</dt><dd><p>“user”: 1,
+“queue”: 1,
+“date_joined”: “2023-03-17T22:51:39.900548Z”</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.UserQueueRelationRegisterView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;,)</span></em><a class="headerlink" href="#Queue.views.UserQueueRelationRegisterView.permission_classes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.UserQueueRelationRegisterView.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#Queue.views.UserQueueRelationRegisterView.queryset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Queue.views.UserQueueRelationRegisterView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#Queue.views.UserQueueRelationRegisterView.serializer_class" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Queue.serializers.UserQueueRelationRegisterSerializer" title="Queue.serializers.UserQueueRelationRegisterSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserQueueRelationRegisterSerializer</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Queue">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Queue" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Daniil C. S..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

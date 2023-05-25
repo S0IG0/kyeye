@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Queue.views &mdash; service  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            service
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">service</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Queue.views</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Queue.views</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">status</span>
+<span class="kn">from</span> <span class="nn">rest_framework.generics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CreateAPIView</span><span class="p">,</span>
+    <span class="n">ListAPIView</span><span class="p">,</span>
+    <span class="n">RetrieveAPIView</span><span class="p">,</span>
+    <span class="n">DestroyAPIView</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">rest_framework.permissions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">IsAdminUser</span><span class="p">,</span>
+    <span class="n">IsAuthenticated</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">rest_framework.response</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">rest_framework.viewsets</span> <span class="kn">import</span> <span class="n">ModelViewSet</span>
+
+<span class="kn">from</span> <span class="nn">JWTUser.permissions</span> <span class="kn">import</span> <span class="n">IsOwnerQueue</span><span class="p">,</span> <span class="n">IsSubscriberQueue</span>
+<span class="kn">from</span> <span class="nn">Queue.models</span> <span class="kn">import</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">UserQueueRelation</span>
+<span class="kn">from</span> <span class="nn">Queue.serializers</span> <span class="kn">import</span> <span class="n">QueueSerializer</span><span class="p">,</span> <span class="n">UserQueueRelationRegisterSerializer</span>
+
+
+<span class="c1"># Create your views here.</span>
+<div class="viewcode-block" id="QueueViewSet"><a class="viewcode-back" href="../../Queue.html#Queue.views.QueueViewSet">[docs]</a><span class="k">class</span> <span class="nc">QueueViewSet</span><span class="p">(</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A ViewSet for viewing, creating, updating, and deleting queue instances.</span>
+
+<span class="sd">    ...</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    queryset : QuerySet</span>
+<span class="sd">        The queryset of all Queue instances.</span>
+<span class="sd">    serializer_class : Serializer</span>
+<span class="sd">        The serializer class used for (de)serializing Queue instances.</span>
+<span class="sd">    permission_classes : tuple</span>
+<span class="sd">        The permission classes that the view requires. In this case, only users with admin credentials can access the view.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    list(self, request, *args, **kwargs):</span>
+<span class="sd">        Get a list of all queues.</span>
+
+<span class="sd">    retrieve(self, request, *args, **kwargs):</span>
+<span class="sd">        Get a single queue instance by id.</span>
+
+<span class="sd">    create(self, request, *args, **kwargs):</span>
+<span class="sd">        Create a new queue instance.</span>
+
+<span class="sd">    update(self, request, *args, **kwargs):</span>
+<span class="sd">        Update an existing queue instance by id.</span>
+
+<span class="sd">    partial_update(self, request, *args, **kwargs):</span>
+<span class="sd">        Partially update an existing queue instance by id.</span>
+
+<span class="sd">    destroy(self, request, *args, **kwargs):</span>
+<span class="sd">        Delete an existing queue instance by id.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">QueueSerializer</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">IsAdminUser</span><span class="p">,)</span></div>
+
+
+<div class="viewcode-block" id="QueueRegisterView"><a class="viewcode-back" href="../../Queue.html#Queue.views.QueueRegisterView">[docs]</a><span class="k">class</span> <span class="nc">QueueRegisterView</span><span class="p">(</span><span class="n">CreateAPIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View for registering a new queue with the authenticated user as the owner.</span>
+
+<span class="sd">    Required Payload:</span>
+<span class="sd">    {</span>
+<span class="sd">        &quot;name&quot;: &quot;string&quot;,</span>
+<span class="sd">        &quot;description&quot;: &quot;string&quot;</span>
+<span class="sd">    }</span>
+
+<span class="sd">    If successful, returns the created queue data with HTTP status code 201 Created.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">QueueSerializer</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">IsAuthenticated</span><span class="p">,)</span>
+
+<div class="viewcode-block" id="QueueRegisterView.create"><a class="viewcode-back" href="../../Queue.html#Queue.views.QueueRegisterView.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new queue with the authenticated user as the owner.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Response -- The serialized data of the created queue with HTTP status code 201 Created.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_serializer</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">raise_exception</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">perform_create</span><span class="p">(</span><span class="n">serializer</span><span class="p">)</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_success_headers</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_201_CREATED</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="QueueListView"><a class="viewcode-back" href="../../Queue.html#Queue.views.QueueListView">[docs]</a><span class="k">class</span> <span class="nc">QueueListView</span><span class="p">(</span><span class="n">ListAPIView</span><span class="p">):</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">QueueSerializer</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">IsAuthenticated</span><span class="p">,)</span>
+
+<div class="viewcode-block" id="QueueListView.get_queryset"><a class="viewcode-back" href="../../Queue.html#Queue.views.QueueListView.get_queryset">[docs]</a>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a list of all queues with optional filtering by user_id or owner_id.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">        - user_id (int): optional. Filters queues by user_id.</span>
+<span class="sd">        - owner_id (int): optional. Filters queues by owner_id.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">        - queryset (QuerySet): The filtered queryset of queues.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">user_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">owner_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;owner_id&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">user_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">owner_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">queryset</span> <span class="o">=</span> <span class="p">(</span><span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">users__id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span> <span class="o">|</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">owner__id</span><span class="o">=</span><span class="n">owner_id</span><span class="p">))</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">user_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">queryset</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">users__id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">owner_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">queryset</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">owner_id</span><span class="o">=</span><span class="n">owner_id</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">queryset</span></div></div>
+
+
+<div class="viewcode-block" id="QueueRetrieveView"><a class="viewcode-back" href="../../Queue.html#Queue.views.QueueRetrieveView">[docs]</a><span class="k">class</span> <span class="nc">QueueRetrieveView</span><span class="p">(</span><span class="n">RetrieveAPIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A view that allows authenticated users to retrieve a single Queue object.</span>
+
+<span class="sd">    Endpoint: `api/queue/&lt;int:pk&gt;/`</span>
+
+<span class="sd">    HTTP Methods:</span>
+<span class="sd">        - GET: Retrieve a Queue object by primary key.</span>
+
+<span class="sd">    Permissions:</span>
+<span class="sd">        - User must be authenticated.</span>
+
+<span class="sd">    Query Parameters:</span>
+<span class="sd">        - `pk`: The primary key of the Queue object to retrieve.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - On success: A JSON representation of the retrieved Queue object.</span>
+<span class="sd">        - On failure: An error message and the corresponding HTTP status code.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```</span>
+<span class="sd">        GET api/queue/2/`</span>
+
+<span class="sd">    {</span>
+<span class="sd">        &quot;id&quot;: 2,</span>
+<span class="sd">        &quot;name&quot;: &quot;queue 2&quot;,</span>
+<span class="sd">        &quot;owner&quot;: {</span>
+<span class="sd">            &quot;id&quot;: 4,</span>
+<span class="sd">            &quot;username&quot;: &quot;admin&quot;,</span>
+<span class="sd">            &quot;first_name&quot;: &quot;admin&quot;,</span>
+<span class="sd">            &quot;last_name&quot;: &quot;admin&quot;,</span>
+<span class="sd">            &quot;email&quot;: &quot;admin@mail.ru&quot;</span>
+<span class="sd">        },</span>
+<span class="sd">        &quot;users&quot;: [</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;user&quot;: {</span>
+<span class="sd">                    &quot;id&quot;: 4,</span>
+<span class="sd">                    &quot;username&quot;: &quot;admin&quot;,</span>
+<span class="sd">                    &quot;first_name&quot;: &quot;admin&quot;,</span>
+<span class="sd">                    &quot;last_name&quot;: &quot;admin&quot;,</span>
+<span class="sd">                    &quot;email&quot;: &quot;admin@mail.ru&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;date_joined&quot;: &quot;2023-03-17T22:34:54Z&quot;</span>
+<span class="sd">            }</span>
+<span class="sd">        ]</span>
+<span class="sd">    }</span>
+<span class="sd">        ```</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">QueueSerializer</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">IsAuthenticated</span><span class="p">,)</span></div>
+
+
+<div class="viewcode-block" id="UserQueueRelationRegisterView"><a class="viewcode-back" href="../../Queue.html#Queue.views.UserQueueRelationRegisterView">[docs]</a><span class="k">class</span> <span class="nc">UserQueueRelationRegisterView</span><span class="p">(</span><span class="n">CreateAPIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">       A view that allows authenticated users to create a UserQueueRelation object.</span>
+
+<span class="sd">       Endpoint: `/api/queue/user/register/`</span>
+
+<span class="sd">       HTTP Methods:</span>
+<span class="sd">           - POST: Create a new UserQueueRelation object.</span>
+
+<span class="sd">       Permissions:</span>
+<span class="sd">           - User must be authenticated.</span>
+
+<span class="sd">       Required Request Body Parameters:</span>
+<span class="sd">           - `user_id`: The primary key of the User object to associate with the Queue.</span>
+<span class="sd">           - `queue_id`: The primary key of the Queue object to associate with the User.</span>
+
+<span class="sd">       Returns:</span>
+<span class="sd">           - On success: A JSON representation of the created UserQueueRelation object.</span>
+<span class="sd">           - On failure: An error message and the corresponding HTTP status code.</span>
+
+<span class="sd">       Example:</span>
+<span class="sd">           ```</span>
+<span class="sd">           POST /api/queue/user/register/</span>
+
+<span class="sd">           {</span>
+<span class="sd">                &quot;user_id&quot;: 1,</span>
+<span class="sd">                &quot;queue_id&quot;: 2,</span>
+<span class="sd">           }</span>
+
+<span class="sd">           {</span>
+<span class="sd">                &quot;user&quot;: 1,</span>
+<span class="sd">                &quot;queue&quot;: 1,</span>
+<span class="sd">                &quot;date_joined&quot;: &quot;2023-03-17T22:51:39.900548Z&quot;</span>
+<span class="sd">           }</span>
+<span class="sd">           ```</span>
+<span class="sd">       &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">UserQueueRelation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">UserQueueRelationRegisterSerializer</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">IsAuthenticated</span><span class="p">,)</span></div>
+
+
+<div class="viewcode-block" id="UserQueueRelationDestroyView"><a class="viewcode-back" href="../../Queue.html#Queue.views.UserQueueRelationDestroyView">[docs]</a><span class="k">class</span> <span class="nc">UserQueueRelationDestroyView</span><span class="p">(</span><span class="n">DestroyAPIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    UserQueueRelationDestroyView</span>
+
+<span class="sd">    This view handles the deletion of a UserQueueRelation instance. It requires authentication and the user must be the owner</span>
+<span class="sd">    of the queue.</span>
+
+<span class="sd">    Allowed HTTP methods: DELETE</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - user_id: The ID of the user associated with the UserQueueRelation instance to be deleted.</span>
+<span class="sd">    - queue_id: The ID of the queue associated with the UserQueueRelation instance to be deleted.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - 204 No Content: If the UserQueueRelation instance was successfully deleted.</span>
+<span class="sd">    - 404 Not Found: If the UserQueueRelation instance, the associated Queue instance or the provided user_id or queue_id</span>
+<span class="sd">        do not exist.</span>
+<span class="sd">    - 401 Unauthorized: If the user is not authenticated or does not have permission to delete the UserQueueRelation</span>
+<span class="sd">        instance.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">UserQueueRelation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">UserQueueRelationRegisterSerializer</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">IsSubscriberQueue</span> <span class="o">|</span> <span class="n">IsOwnerQueue</span><span class="p">,</span> <span class="n">IsAuthenticated</span><span class="p">)</span>
+
+<div class="viewcode-block" id="UserQueueRelationDestroyView.delete"><a class="viewcode-back" href="../../Queue.html#Queue.views.UserQueueRelationDestroyView.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_permissions</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">user_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span>
+        <span class="n">queue_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;queue_id&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">queue_id</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check_object_permissions</span><span class="p">(</span>
+                <span class="n">request</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">,</span>
+                <span class="n">obj</span><span class="o">=</span><span class="n">queue</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">user_queue_relation</span> <span class="o">=</span> <span class="n">UserQueueRelation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="n">queue_id</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span>
+            <span class="n">user_queue_relation</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">UserQueueRelation</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">,</span> <span class="n">Queue</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;detail&#39;</span><span class="p">:</span> <span class="s1">&#39;UserQueueRelation not found&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Daniil C. S..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

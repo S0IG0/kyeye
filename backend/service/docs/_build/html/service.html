@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>service package &mdash; service  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            service
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">service package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-service.asgi">service.asgi module</a></li>
+<li><a class="reference internal" href="#module-service.schema">service.schema module</a><ul>
+<li><a class="reference internal" href="#service.schema.Query"><code class="docutils literal notranslate"><span class="pre">Query</span></code></a><ul>
+<li><a class="reference internal" href="#service.schema.Query.queues"><code class="docutils literal notranslate"><span class="pre">Query.queues</span></code></a></li>
+<li><a class="reference internal" href="#service.schema.Query.resolve_queues"><code class="docutils literal notranslate"><span class="pre">Query.resolve_queues()</span></code></a></li>
+<li><a class="reference internal" href="#service.schema.Query.userQueueRelationType"><code class="docutils literal notranslate"><span class="pre">Query.userQueueRelationType</span></code></a></li>
+<li><a class="reference internal" href="#service.schema.Query.userType"><code class="docutils literal notranslate"><span class="pre">Query.userType</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-service.settings">service.settings module</a></li>
+<li><a class="reference internal" href="#module-service.urls">service.urls module</a></li>
+<li><a class="reference internal" href="#module-service.wsgi">service.wsgi module</a></li>
+<li><a class="reference internal" href="#module-service">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">service</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">service package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/service.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="service-package">
+<h1>service package<a class="headerlink" href="#service-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-service.asgi">
+<span id="service-asgi-module"></span><h2>service.asgi module<a class="headerlink" href="#module-service.asgi" title="Permalink to this heading"></a></h2>
+<p>ASGI config for service project.</p>
+<p>It exposes the ASGI callable as a module-level variable named <code class="docutils literal notranslate"><span class="pre">application</span></code>.</p>
+<p>For more information on this file, see
+<a class="reference external" href="https://docs.djangoproject.com/en/4.1/howto/deployment/asgi/">https://docs.djangoproject.com/en/4.1/howto/deployment/asgi/</a></p>
+</section>
+<section id="module-service.schema">
+<span id="service-schema-module"></span><h2>service.schema module<a class="headerlink" href="#module-service.schema" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="service.schema.Query">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">service.schema.</span></span><span class="sig-name descname"><span class="pre">Query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queues</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/service/schema.html#Query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#service.schema.Query" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">InterObjectType</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectType</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="service.schema.Query.queues">
+<span class="sig-name descname"><span class="pre">queues</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;graphene_django.filter.fields.DjangoFilterConnectionField</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#service.schema.Query.queues" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="service.schema.Query.resolve_queues">
+<span class="sig-name descname"><span class="pre">resolve_queues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/service/schema.html#Query.resolve_queues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#service.schema.Query.resolve_queues" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="service.schema.Query.userQueueRelationType">
+<span class="sig-name descname"><span class="pre">userQueueRelationType</span></span><a class="headerlink" href="#service.schema.Query.userQueueRelationType" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="Queue.html#Queue.types.UserQueueRelationType" title="Queue.types.UserQueueRelationType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserQueueRelationType</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="service.schema.Query.userType">
+<span class="sig-name descname"><span class="pre">userType</span></span><a class="headerlink" href="#service.schema.Query.userType" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="JWTUser.html#JWTUser.types.UserType" title="JWTUser.types.UserType"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserType</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-service.settings">
+<span id="service-settings-module"></span><h2>service.settings module<a class="headerlink" href="#module-service.settings" title="Permalink to this heading"></a></h2>
+<p>Django settings for service project.</p>
+<p>Generated by ‘django-admin startproject’ using Django 4.1.7.</p>
+<p>For more information on this file, see
+<a class="reference external" href="https://docs.djangoproject.com/en/4.1/topics/settings/">https://docs.djangoproject.com/en/4.1/topics/settings/</a></p>
+<p>For the full list of settings and their values, see
+<a class="reference external" href="https://docs.djangoproject.com/en/4.1/ref/settings/">https://docs.djangoproject.com/en/4.1/ref/settings/</a></p>
+</section>
+<section id="module-service.urls">
+<span id="service-urls-module"></span><h2>service.urls module<a class="headerlink" href="#module-service.urls" title="Permalink to this heading"></a></h2>
+<p>service URL Configuration</p>
+<dl class="simple">
+<dt>The <cite>urlpatterns</cite> list routes URLs to views. For more information please see:</dt><dd><p><a class="reference external" href="https://docs.djangoproject.com/en/4.1/topics/http/urls/">https://docs.djangoproject.com/en/4.1/topics/http/urls/</a></p>
+</dd>
+</dl>
+<p>Examples:
+Function views</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Add an import:  from my_app import views</p></li>
+<li><p>Add a URL to urlpatterns:  path(‘’, views.home, name=’home’)</p></li>
+</ol>
+</div></blockquote>
+<dl class="simple">
+<dt>Class-based views</dt><dd><ol class="arabic simple">
+<li><p>Add an import:  from other_app.views import Home</p></li>
+<li><p>Add a URL to urlpatterns:  path(‘’, Home.as_view(), name=’home’)</p></li>
+</ol>
+</dd>
+<dt>Including another URLconf</dt><dd><ol class="arabic simple">
+<li><p>Import the include() function: from django.urls import include, path</p></li>
+<li><p>Add a URL to urlpatterns:  path(‘blog/’, include(‘blog.urls’))</p></li>
+</ol>
+</dd>
+</dl>
+</section>
+<section id="module-service.wsgi">
+<span id="service-wsgi-module"></span><h2>service.wsgi module<a class="headerlink" href="#module-service.wsgi" title="Permalink to this heading"></a></h2>
+<p>WSGI config for service project.</p>
+<p>It exposes the WSGI callable as a module-level variable named <code class="docutils literal notranslate"><span class="pre">application</span></code>.</p>
+<p>For more information on this file, see
+<a class="reference external" href="https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/">https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/</a></p>
+</section>
+<section id="module-service">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-service" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Daniil C. S..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -4,6 +4,7 @@ from django.utils import timezone
 from JWTUser.models import User
 from JWTUser.services import now_time_plus_2_minutes
 
+
 # Create your models here.
 class Queue(models.Model):
     """

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>graphene_django.filter.fields &mdash; service  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            service
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">service</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">graphene_django.filter.fields</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for graphene_django.filter.fields</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+
+<span class="kn">from</span> <span class="nn">graphene.types.enum</span> <span class="kn">import</span> <span class="n">EnumType</span>
+<span class="kn">from</span> <span class="nn">graphene.types.argument</span> <span class="kn">import</span> <span class="n">to_arguments</span>
+<span class="kn">from</span> <span class="nn">graphene.utils.str_converters</span> <span class="kn">import</span> <span class="n">to_snake_case</span>
+
+<span class="kn">from</span> <span class="nn">..fields</span> <span class="kn">import</span> <span class="n">DjangoConnectionField</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_filtering_args_from_filterset</span><span class="p">,</span> <span class="n">get_filterset_class</span>
+
+
+<span class="k">def</span> <span class="nf">convert_enum</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if the data is a enum option (or potentially nested list of enum option)</span>
+<span class="sd">    and convert it to its value.</span>
+
+<span class="sd">    This method is used to pre-process the data for the filters as they can take an</span>
+<span class="sd">    graphene.Enum as argument, but filters (from django_filters) expect a simple value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">convert_enum</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">EnumType</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">value</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+
+<span class="k">class</span> <span class="nc">DjangoFilterConnectionField</span><span class="p">(</span><span class="n">DjangoConnectionField</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">type_</span><span class="p">,</span>
+        <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_by</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">extra_filter_meta</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">filterset_class</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_provided_filterset_class</span> <span class="o">=</span> <span class="n">filterset_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_filterset_class</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_filtering_args</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extra_filter_meta</span> <span class="o">=</span> <span class="n">extra_filter_meta</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_base_args</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DjangoFilterConnectionField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">to_arguments</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_base_args</span> <span class="ow">or</span> <span class="n">OrderedDict</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">filtering_args</span><span class="p">)</span>
+
+    <span class="nd">@args</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_base_args</span> <span class="o">=</span> <span class="n">args</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">filterset_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filterset_class</span><span class="p">:</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_type</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">filter_fields</span>
+            <span class="n">meta</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">fields</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extra_filter_meta</span><span class="p">:</span>
+                <span class="n">meta</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_extra_filter_meta</span><span class="p">)</span>
+
+            <span class="n">filterset_class</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_provided_filterset_class</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_type</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">filterset_class</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_filterset_class</span> <span class="o">=</span> <span class="n">get_filterset_class</span><span class="p">(</span><span class="n">filterset_class</span><span class="p">,</span> <span class="o">**</span><span class="n">meta</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filterset_class</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">filtering_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filtering_args</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_filtering_args</span> <span class="o">=</span> <span class="n">get_filtering_args_from_filterset</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">filterset_class</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_type</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filtering_args</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">resolve_queryset</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">filtering_args</span><span class="p">,</span> <span class="n">filterset_class</span>
+    <span class="p">):</span>
+        <span class="k">def</span> <span class="nf">filter_kwargs</span><span class="p">():</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">filtering_args</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="s2">&quot;order_by&quot;</span> <span class="ow">and</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">v</span> <span class="o">=</span> <span class="n">to_snake_case</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                    <span class="n">kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">convert_enum</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">kwargs</span>
+
+        <span class="n">qs</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DjangoFilterConnectionField</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="n">resolve_queryset</span><span class="p">(</span>
+            <span class="n">connection</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">args</span>
+        <span class="p">)</span>
+
+        <span class="n">filterset</span> <span class="o">=</span> <span class="n">filterset_class</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">filter_kwargs</span><span class="p">(),</span> <span class="n">queryset</span><span class="o">=</span><span class="n">qs</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">info</span><span class="o">.</span><span class="n">context</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">filterset</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">filterset</span><span class="o">.</span><span class="n">qs</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">filterset</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">as_json</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_queryset_resolver</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resolve_queryset</span><span class="p">,</span>
+            <span class="n">filterset_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filterset_class</span><span class="p">,</span>
+            <span class="n">filtering_args</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filtering_args</span><span class="p">,</span>
+        <span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Daniil C. S..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
