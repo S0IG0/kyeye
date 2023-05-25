@@ -11,17 +11,17 @@
         <div class="menu">
             <ul>
                 <li>
-                    <button class="btn" @click="setPage(Pages.Account)">
+                    <button class="btn" @click="$router.push(`/account`); setPage(Pages.Account)">
                         <span class="material-icons">home</span>
                         <span class="text">Главная</span></button>
                 </li>
                 <li>
-                    <button  class="btn" @click="setPage(Pages.Queue)">
+                    <button  class="btn" @click="$router.push(`/account`); setPage(Pages.Queue)">
                         <span class="material-icons">description</span>
                         <span class="text">Список очередей</span></button>
                 </li>
                 <li>
-                    <button class="btn" @click="setPage(Pages.Settings)">
+                    <button class="btn" @click="$router.push(`/account`); setPage(Pages.Settings)">
                         <span class="material-icons">settings</span>
                         <span class="text">Настройки</span>
                     </button>
