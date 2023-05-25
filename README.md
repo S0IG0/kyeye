@@ -29,6 +29,9 @@ queue/
 │   └── loggs/
 │       ├── access.log
 │       └── errors.log
+├── source/
+│   ├── conf.py
+│   └── index.rst
 ├── docker-compose.yml
 ├── env_file.env
 └── README.md
@@ -47,6 +50,7 @@ queue/
 * nginx/ содержит конфигурацию для Nginx и логи.
 * nginx/conf.d/nginx.conf конфигурационный файл для Nginx.
 * nginx/loggs/ содержит в себе два файла в которых будут записываться логи.
+* source/ содержит файлы для настройки системы сборки документации.
 * docker-compose.yml содержит инструкции для запуска всех контейнеров проекта.
 * README.md содержит описание проекта.
 ### Архитектура проекта
