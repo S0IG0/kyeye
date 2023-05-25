@@ -49,5 +49,10 @@ export default {
     overflow: hidden;
 }
 
-
+@media (max-width: 768px){
+    .modal__content{
+        right: 5px;
+        left: 5px;
+    }
+}
 </style>

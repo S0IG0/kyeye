@@ -1,5 +1,5 @@
 <template>
-    <div class="queue-item" @click="$router.push('/queue')">
+    <div class="queue-item">
         <div class="queue__name">
             Название:
             <slot name="name"></slot>
@@ -30,5 +30,13 @@ export default {
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+}
+@media (max-width: 768px){
+    .queue__name, .queue__info{
+        width: 50%;
+    }
+    .queue-item{
+        padding: 15px 25px;
+    }
 }
 </style>
