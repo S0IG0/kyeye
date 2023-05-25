@@ -1,22 +1,26 @@
 <template>
-  <div class="queue">
-<!--    <user-item v-for="user in users" :user="user"></user-item>-->
-    <div v-if="queues">
-      <div v-for="item in queues['edges']">
-        <div class="queue_item">
-          name: {{ item['node']['name'] }} |
-          dateActivation: {{ item['node']['dateActivation'] }} |
-          dateCreation: {{ item['node']['dateCreation'] }}
-          <div class="users">
-            <div class="user_item" v-for="user_node in item['node']['users']['edges']">
-              email: {{ user_node['node']['user']['email'] }} |
-              username: {{ user_node['node']['user']['username'] }}
+    <div class="wrapper" v-if="Auth.onLogin">
+        <sidebar-menu class="sidebar" v-if="isDesktop"></sidebar-menu>
+        <navbar-menu v-else></navbar-menu>
+        <div v-if="queue" class="queue">
+            <div class="queue__name">
+                {{ queue.name }} [{{ queue.id }}]
             </div>
-          </div>
+            <div class="queue__item" v-for="(users, index) in queue.users">
+                <div class="item__number">
+                    {{ index +1 }}
+                </div>
+                <div class="item__user">
+                    {{ users.user.first_name }} «{{ users.user.username }}»
+                    {{ users.user.last_name }}
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+    <div v-else class="auth-message">
+        <div class="text">Для просмотра данной страницы вам необходимо авторизоваться</div>
+        <my-button @click="$router.push('/login')">Авторизоваться</my-button>
+    </div>
 </template>
 
 <script>
@@ -24,52 +28,132 @@ import UserList from "@/components/User/UserList.vue"
 import UserItem from "@/components/User/UserItem.vue"
 import MyButton from "@/components/UI/MyButton.vue";
 import gql from "graphql-tag";
+import {Auth} from "@/components/js/AuthModule";
+import {urlBackend} from "@/components/config";
+import SidebarMenu from "@/components/UI/PersonalAccount/SidebarMenu.vue";
+import NavbarMenu from "@/components/UI/PersonalAccount/NavbarMenu.vue";
 
 export default {
-  components: {
-    MyButton,
-    UserList, UserItem
-  },
-  data() {
-    return {
-      queues: null,
-    };
-  },
-  apollo: {
-    queues: {
-      query: gql`query{queues (first: 10, ) {edges {node {id, name, dateActivation, dateCreation, users{edges{node{id, user{email, username}}}}}}}}`,
+    components: {
+        NavbarMenu, SidebarMenu,
+        MyButton,
+        UserList, UserItem
     },
-  },
+    data() {
+        return {
+            Auth: Auth,
+            queue: {
+                id: '',
+                name: '',
+                owner: {
+                    id: '',
+                    username: "",
+                    email: "",
+                    password: "",
+                    first_name: "",
+                    last_name: "",
+                },
+                users: [],
+                date_creation: '',
+                date_activation: '',
+                is_active: ''
+            },
+            isDesktop: false,
+        };
+    },
+    // apollo: {queue: {
+    //         query: gql`query{queue () {edges {node {id,name,dateActivation,dateCreation,users{edges{node{id,user{email,username}}}}}}}}`,
+    //     },
+    // },
+    methods: {
+        async getQueue() {
+            const queueId = this.$route.params.id;
+            const response = await this.Auth.requestToBackend(
+                'get',
+                `${urlBackend}/api/queue/${queueId}`,
+                {}
+            )
+            for (let key in response.data) {
+                this.queue[key] = response.data[key]
+            }
+        },
+    },
+    mounted() {
+        this.getQueue();
+        const mediaQuery = window.matchMedia("(min-width: 768px)")
+        this.isDesktop = mediaQuery.matches;
+        mediaQuery.addListener((event) => {
+            this.isDesktop = event.matches;
+        });
+    }
 }
 </script>
 
 <style scoped>
-form {
-  display: flex;
-  flex-direction: column;
+.wrapper{
+    display: flex;
+}
+.queue {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: Helvetica, sans-serif;
+    width: 100%;
 }
 
-.queue_item {
-  margin: 15px;
-  padding: 15px;
-  background-color: whitesmoke;
-  border: black 2px solid;
-  border-radius: 15px;
-  font-size: 20px;
+.queue__name {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 50px;
 }
 
-.users {
-  margin: 20px;
-  border: black 2px solid;
-  border-radius: 15px;
+.queue__item {
+    display: flex;
+    min-width: 70%;
+    margin: 15px;
+    background-color: white;
+    border: rgb(52, 114, 238) 3px solid;
+    font-size: 20px;
+    overflow: hidden;
 }
 
-.user_item {
-  margin: 15px;
-  padding: 15px;
-  background-color: dodgerblue;
-  border-radius: 15px;
-  color: white;
-  font-size: 20px;
+.item__number {
+    background: rgb(52, 114, 238);
+    padding: 15px;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+}
+
+.item__user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    font-weight: 600;
+    text-align: center;
+}
+.auth-message{
+    margin-top: 50px;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.auth-message .text{
+    margin-bottom: 40px;
+}
+@media (max-width: 768px){
+    .wrapper{
+        display: block;
+    }
+    .queue__item{
+        min-width: 80%;
+        font-size: 18px;
+    }
 }
 </style>
