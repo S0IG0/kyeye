@@ -1,6 +1,7 @@
 <template>
-    <div class="wrapper">
-        <sidebar-menu class="sidebar"></sidebar-menu>
+    <div class="wrapper" v-if="Auth.onLogin">
+        <sidebar-menu class="sidebar" v-if="isDesktop"></sidebar-menu>
+        <navbar-menu v-else></navbar-menu>
         <div class="pages">
             <div class="page" v-if="currentPage === Pages.Account" >
                 <div class="page__title">
@@ -26,10 +27,17 @@
                         <div class="title">E-mail</div>
                         <div class="value">{{ user.email }}</div>
                     </div>
+                    <div class="logout-button">
+                        <my-button @click="() => {
+                            Auth.logOut()
+                            $router.push('/login')
+                            }">Выйти
+                        </my-button>
+                    </div>
                 </div>
             </div>
             <div class="page" v-if="currentPage === Pages.Queue" >
-                <modal-window v-model:show="modalVisible">
+                <modal-window v-model:show="modalCreateVisible">
                     <div class="modal__header">Создание очереди</div>
                     <div class="input__container">
                         <div class="modal__title">Название и время</div>
@@ -56,13 +64,30 @@
                         <my-button id="copy">Скопировать</my-button>
                     </div>
                 </modal-window>
+                <modal-window v-model:show="modalAppendVisible">
+                    <div class="modal__header">Присоединение к очереди</div>
+                    <div class="input__container">
+                        <div class="modal__title">ID очереди</div>
+                        <div class="input__block">
+                            <my-input id="modal-input1"
+                                      class="input"
+                                      placeholder="Например: 68"
+                                      v-model="queue.id"
+                                      required
+                            ></my-input>
+                        </div>
+                        <div class="input__button">
+                            <my-button @click="appendToQueue" id="create">Присоединиться к очереди</my-button>
+                        </div>
+                    </div>
+                </modal-window>
                 <div class="queues">
                     <div class="queues-own">
                         <div class="queues__title">
                             <h2>Созданные вами очереди</h2>
                         </div>
                         <div class="queues__list">
-                            <queue-item v-for="edge in queues_owner">
+                            <queue-item v-for="edge in queues_owner" @click="$router.push(`/queue/${edge['node']['id_']}`)">
                                 <template v-slot:name>
                                     {{ edge['node']['name'] }}
                                 </template>
@@ -81,7 +106,7 @@
                             <h2>Очереди, в которых вы состоите</h2>
                         </div>
                         <div class="queues__list">
-                            <queue-item v-for="edge in queues_subscriber">
+                            <queue-item v-for="edge in queues_subscriber" @click="$router.push(`/queue/${edge['node']['id_']}`)">
                                 <template v-slot:name>
                                     {{ edge['node']['name'] }}
                                 </template>
@@ -96,16 +121,26 @@
                     </div>
                 </div>
                 <div class="queue__buttons">
-                    <my-button class="button" @click="showModal">Создать очередь</my-button>
-                    <my-button class="button">Присоединиться к очереди</my-button>
+                    <my-button class="button" @click="showCreateModal">Создать очередь</my-button>
+                    <my-button class="button" @click="showAppendModal">Присоединиться к очереди</my-button>
                 </div>
             </div>
             <div class="page" v-if="currentPage === Pages.Settings">
-                <my-input placeholder="Новый пароль" v-model="this.password"></my-input>
-                <my-input placeholder="Повторите новый пароль"></my-input>
-                <my-button>Сменить пароль</my-button>
+                <div class="change-password__container">
+                    <div class="password-input">
+                        <my-input placeholder="Новый пароль" v-model="this.password"></my-input>
+                        <my-input placeholder="Повторите новый пароль"></my-input>
+                    </div>
+                    <div class="submit-button">
+                        <my-button>Сменить пароль</my-button>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    <div v-else class="auth-message">
+        <div class="text">Для просмотра данной страницы вам необходимо авторизоваться</div>
+        <my-button @click="$router.push('/login')">Авторизоваться</my-button>
     </div>
 </template>
 
@@ -121,6 +156,7 @@ import {Pages} from "@/components/UI/PersonalAccount/config";
 import {mapState} from "vuex";
 import Queue from "@/components/pages/Queue.vue";
 import QueueItem from "@/components/UI/PersonalAccount/QueueItem.vue";
+import NavbarMenu from "@/components/UI/PersonalAccount/NavbarMenu.vue";
 
 export default {
     name: "PersonalAccount",
@@ -132,7 +168,7 @@ export default {
             currentPage: state => state.currentPage
         }),
     },
-    components: {Queue, SidebarMenu, ModalWindow, MyInput, MyButton, QueueItem},
+    components: {NavbarMenu, Queue, SidebarMenu, ModalWindow, MyInput, MyButton, QueueItem},
     data() {
         return {
             Auth: Auth,
@@ -146,23 +182,28 @@ export default {
             },
             password: "",
             queue: {
+                id: '',
                 name: "",
                 time: new Date().getHours().toString().padStart(2, '0') + ":" +
                     new Date().getMinutes().toString().padStart(2, '0'),
             },
-            modalVisible: false,
+            modalCreateVisible: false,
+            modalAppendVisible: false,
             // Массив для хранение очередей где пользователь явлется участником
             queues_subscriber: [],
             // Массив для хранение очередей где пользователь является создателейм очереди
             queues_owner: [],
             queues: [],
-            state: Pages.Queue
+            state: Pages.Queue,
+            isDesktop: false,
         }
     },
 
     apollo: {
         queues: {
-            query: gql`query($userId: Int!, $ownerId: Int!){queues (first: 100, userId: $userId, ownerId: $ownerId) {edges {node {name, dateActivation, owner{username}, users{edges{node{id, user{username}}}}}}}}`,
+            query: gql`query($userId: Int!, $ownerId: Int!){
+            queues (first: 100, userId: $userId, ownerId: $ownerId){
+            edges {node {id_, name, dateActivation, owner{username}, users{edges{node{id, user{username}}}}}}}}`,
             variables() {
                 this.getUser()
                 return {
@@ -206,16 +247,19 @@ export default {
         //       {},
         //   )
         // },
-        showModal() {
-            this.modalVisible = true
+        showCreateModal() {
+            this.modalCreateVisible = true
+        },
+        showAppendModal() {
+            this.modalAppendVisible = true
         },
         async createQueue() { // Добавить response.data в queue owner
             let dateCreation = new Date();
             let dateActivation;
             let [hours, minutes] = this.queue.time.split(':');
             dateActivation = new Date();
-            dateActivation.setHours(hours);
-            dateActivation.setMinutes(minutes);
+            dateActivation.setHours(Number(hours));
+            dateActivation.setMinutes(Number(minutes));
 
             const response = await this.Auth.requestToBackend(
                 'post',
@@ -227,15 +271,33 @@ export default {
                     "date_activation": dateActivation.toISOString(),
                 })
         },
-        findUserPosition(array){
-            for (let index in array){
-                if (array[index]['node']['user']['username'] === this.user.username)
-                    return Number(index) + 1;
+        async appendToQueue(){
+            console.log(this.user.id)
+            console.log(this.queue.id)
+            if (this.queue.is_active) {
+                const response = await this.Auth.requestToBackend(
+                    'post',
+                    `${urlBackend}/api/queue/user/register/`,
+                    {
+                        "user": this.user.id,
+                        "queue": this.queue.id,
+                    })
             }
+        },
+        findUserPosition(array){
+             for (let index in array){
+                 if (array[index]['node']['user']['username'] === this.user.username)
+                     return Number(index) + 1;
+             }
         }
     },
     mounted() {
         this.getUser()
+        const mediaQuery = window.matchMedia("(min-width: 768px)")
+        this.isDesktop = mediaQuery.matches;
+        mediaQuery.addListener((event) => {
+            this.isDesktop = event.matches;
+        });
     }
 }
 </script>
@@ -273,6 +335,10 @@ export default {
     display: flex;
     font-family: Helvetica, sans-serif;
     border: 2px solid rgb(52, 114, 238);
+}
+
+.logout-button{
+    margin: 30px auto auto;
 }
 
 .title {
@@ -405,16 +471,48 @@ export default {
     font-family: Helvetica, sans-serif;
     font-size: 120%;
 }
+.password-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.submit-button{
+    margin-top: 20px;
+}
+.auth-message{
+    margin-top: 50px;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.auth-message .text{
+    margin-bottom: 40px;
+}
 
 @media (max-width: 1024px) {
     .page {
         margin-top: 50px;
-
     }
     .pages{
         width: 100%;
     }
 }
-
+@media (max-width: 768px){
+    .wrapper{
+        display: block;
+    }
+    .queues{
+        display: block;
+    }
+    .queues-subscriber{
+        margin-top: 30px;
+    }
+}
 </style>
 
