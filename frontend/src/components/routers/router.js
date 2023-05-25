@@ -11,7 +11,7 @@ const routes = [
         component: Register
     },
     {
-        path: '/queue',
+        path: '/queue/:id',
         component: Queue
     },
     {
