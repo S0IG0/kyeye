@@ -1,5 +1,8 @@
 FROM node:alpine3.17
 
+ARG ENV_FILE
+ENV HOST=${HOST}
+
 WORKDIR /app
 
 COPY . /app
