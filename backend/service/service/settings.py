@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-t8u$3e2_n%kzc!v3q9vnrdbu_)w#a=$l_2+2mn(w#uo@vlezn=
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    os.environ.get('HOST'),
+    os.environ.get('VUE_APP_API_HOST'),
     'localhost'
 ]
 

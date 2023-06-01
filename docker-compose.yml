@@ -30,8 +30,8 @@ services:
   frontend:
     container_name: Vue
     build:
-      context: ./frontend/
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: /frontend/Dockerfile
       args:
         - ENV_FILE=./env_file.env
     volumes:

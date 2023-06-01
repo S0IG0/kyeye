@@ -3,9 +3,10 @@ FROM node:alpine3.17
 ARG ENV_FILE
 ENV HOST=${HOST}
 
-WORKDIR /app
+COPY env_file.env ./app/.env
 
-COPY . /app
+WORKDIR /app
+COPY ./frontend/ /app
 
 RUN npm install
 RUN npm run build
