@@ -99,9 +99,6 @@
                   <template v-slot:data>
                     {{ queue.users.length }}
                   </template>
-                  <template v-slot:is_active>
-                    {{ queue.is_active }}
-                  </template>
                 </queue-item>
               </div>
             </div>
@@ -121,9 +118,6 @@
                   </template>
                   <template v-slot:data>
                     {{ findUserPosition(queue.users) }}
-                  </template>
-                  <template v-slot:is_active>
-                    {{ queue.is_active }}
                   </template>
                 </queue-item>
               </div>
@@ -158,7 +152,7 @@
 import MyButton from "@/components/UI/MyButton.vue";
 import {mapActions, mapState, mapGetters} from "vuex";
 import SidebarMenu from "@/components/UI/PersonalAccount/SidebarMenu.vue";
-import NavbarMenu from "@/components/UI/PersonalAccount/NavbarMenu.vue";
+import NavbarMenu from "@/components/UI/NavbarMenu.vue";
 import MyInput from "@/components/UI/MyInput.vue";
 import ModalWindow from "@/components/UI/ModalWindow.vue";
 import {Pages} from "@/components/store/config";
