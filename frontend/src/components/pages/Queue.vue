@@ -96,14 +96,30 @@ export default {
             })
         },
     },
-    mounted() {
-        this.getQueue();
-        const mediaQuery = window.matchMedia("(min-width: 768px)")
-        this.isDesktop = mediaQuery.matches;
-        mediaQuery.addListener((event) => {
-            this.isDesktop = event.matches;
-        });
+    async deleteUser(user_id, index) {
+      const queue_id = this.$route.params.id;
+
+      // api/queue/user/destroy/<int:user_id>/<int:queue_id>/
+      await axios({
+        method: 'delete',
+        url: `${urlBackend}/api/queue/user/destroy/${user_id}/${queue_id}/`,
+        data: {},
+        headers: {
+          Authorization: this.getAuthorization(),
+        }
+      }).then(response => {
+        this.queue.users.splice(index, 1)
+      })
     }
+  },
+  mounted() {
+    this.getQueue();
+    const mediaQuery = window.matchMedia("(min-width: 768px)")
+    this.isDesktop = mediaQuery.matches;
+    mediaQuery.addListener((event) => {
+      this.isDesktop = event.matches;
+    });
+  }
 }
 </script>
 
