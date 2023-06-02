@@ -11,9 +11,16 @@
         <div class="menu">
             <ul>
                 <li>
-                    <button class="btn" @click="$router.push(`/account`); setPage(Pages.Account)">
+                    <router-link class="btn"
+                                 to="/">
                         <span class="material-icons">home</span>
-                        <span class="text">Главная</span></button>
+                        <span class="text">Главная</span>
+                    </router-link>
+                </li>
+                <li>
+                    <button class="btn" @click="$router.push(`/account`); setPage(Pages.Account)">
+                        <span class="material-icons">account_circle</span>
+                        <span class="text">Личный кабинет</span></button>
                 </li>
                 <li>
                     <button  class="btn" @click="$router.push(`/account`); setPage(Pages.Queue)">
@@ -85,8 +92,11 @@ li{
 .logo img{
     width: 32px;
 }
-
-button{
+a{
+    text-decoration: none;
+    font-family: Helvetica, sans-serif;
+}
+button, a{
     background: transparent;
     border: none;
     color: white;

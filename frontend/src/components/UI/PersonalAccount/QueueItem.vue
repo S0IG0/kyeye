@@ -10,10 +10,6 @@
       <slot name="data">
       </slot>
     </div>
-    <div class="queue__info ms-2">
-      <slot name="is_active">
-      </slot>
-    </div>
   </div>
 
 </template>

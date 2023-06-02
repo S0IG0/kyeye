@@ -5,6 +5,7 @@ import ErrorList from "@/components/UX/ErrorList.vue";
 import ModalWindow from "@/components/UI/ModalWindow.vue";
 import SidebarMenu from "@/components/UI/PersonalAccount/SidebarMenu.vue";
 import QueueItem from "@/components/UI/PersonalAccount/QueueItem.vue";
+import navigationBar from "@/components/UI/navigationBar.vue";
 
 export default [
     MyButton, 
@@ -14,4 +15,5 @@ export default [
     ModalWindow,
     SidebarMenu,
     QueueItem,
+    navigationBar
 ]
