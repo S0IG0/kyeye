@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <navigation-bar></navigation-bar>
     <router-view>
     </router-view>
   </div>
@@ -33,16 +32,16 @@ export default {
 </script>
 
 <style>
-/** {*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/*  box-sizing: border-box;*/
-/*}*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/*form {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*}*/
+form {
+  display: flex;
+  flex-direction: column;
+}
 
 
 </style>
