@@ -3,9 +3,9 @@ export function validatePassword(password, repeat_password) {
     if (password !== repeat_password) {
         errors.push("Пароли не совпадают");
     }
-    if (!String(password).match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
-        errors.push("Пароль слишком простой");
-    }
+    // if (!String(password).match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
+    //     errors.push("Пароль слишком простой");
+    // }
     if (password === '') {
         errors.push("Заполните пароль");
     }

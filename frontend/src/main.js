@@ -3,7 +3,7 @@ import App from './App'
 import components from '@/components/UI';
 import router from "@/components/routers/router";
 import * as apolloProvider from './apollo.provider'
-import store from "@/components/UI/PersonalAccount/store";
+import store from "@/components/store";
 
 
 const app = createApp(App);

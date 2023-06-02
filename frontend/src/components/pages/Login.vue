@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="authentication" v-if="!Auth.onLogin">
+    <div class="authentication" v-if="true">
       <div class="title">Авторизация</div>
       <form @submit.prevent>
         <my-input placeholder="E-mail"
@@ -11,17 +11,27 @@
                   v-model="this.password"
                   required
                   type="password"
-                  ></my-input>
+        ></my-input>
         <div class="forgot__password">
           <a>Забыли пароль?</a>
         </div>
-        <my-button @click="logIn">Войти</my-button>
+        <my-button @click="logIn">
+          <div v-if="isLoading">
+            Загрузка...
+            <div class="spinner-border ms-2" style="width: 1.3rem; height: 1.3rem;" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <div v-else>
+            Войти
+          </div>
+        </my-button>
       </form>
       <div class="text">
         У вас нет аккаунта? <a class="link" @click="$router.push('/register')">Зарегистрироваться</a>
       </div>
     </div>
-    <my-button v-else @click="Auth.logOut()">Выйти</my-button>
+    <my-button v-else @click="">Выйти</my-button>
     <error-list :errors="errors" class="error-list"></error-list>
   </div>
 </template>
@@ -30,24 +40,30 @@
 
 import MyInput from "@/components/UI/MyInput.vue";
 import MyButton from "@/components/UI/MyButton.vue";
-import {Auth} from "@/components/js/AuthModule";
 import ErrorList from "@/components/UX/ErrorList.vue";
 import {validateEmail, validateName} from "@/components/validators/validators";
+import {mapActions, mapState} from "vuex";
 import router from "@/components/routers/router";
 
 export default {
   name: "login-form",
   components: {ErrorList, MyButton, MyInput},
+  computed: mapState({
+    error: state => state.auth.error,
+    isAuth: state => state.auth.isAuth,
+    isLoading: state => state.auth.isLoading,
+  }),
   data() {
     return {
       email: "",
       password: "",
-      Auth: Auth,
       errors: []
     }
   },
   methods: {
-
+    ...mapActions({
+      login: "auth/login",
+    }),
     validateData() {
       [
         validateEmail(
@@ -69,21 +85,25 @@ export default {
       this.errors = [];
       this.validateData();
       if (this.errors.length === 0) {
-        await this.Auth.logIn(this.email, this.password, this.errors)
+        await this.login({email: this.email, password: this.password})
       }
-      if (this.Auth.onLogin) {
+      if (this.isAuth) {
         router.push('/account').then()
       }
+      if (this.error) {
+        this.errors.push(this.error)
+      }
     }
-}
+  }
 
 }
 </script>
 
 <style scoped>
-.wrapper{
-    margin: 100px 500px;
+.wrapper {
+  margin: 100px 500px;
 }
+
 .link {
   color: rgb(52, 114, 238);
   cursor: pointer;
@@ -111,14 +131,16 @@ export default {
   font-size: 30px;
   font-weight: 600;
 }
-@media(max-width: 1024px){
-    .wrapper{
-        margin: 100px 200px;
-    }
+
+@media (max-width: 1024px) {
+  .wrapper {
+    margin: 100px 200px;
+  }
 }
-@media(max-width: 768px){
-    .wrapper{
-        margin: 30px 60px;
-    }
+
+@media (max-width: 768px) {
+  .wrapper {
+    margin: 30px 60px;
+  }
 }
 </style>

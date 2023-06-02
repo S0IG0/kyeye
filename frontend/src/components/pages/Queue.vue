@@ -1,159 +1,171 @@
 <template>
-    <div class="wrapper" v-if="Auth.onLogin">
-        <sidebar-menu class="sidebar" v-if="isDesktop"></sidebar-menu>
-        <navbar-menu v-else></navbar-menu>
-        <div v-if="queue" class="queue">
-            <div class="queue__name">
-                {{ queue.name }} [{{ queue.id }}]
-            </div>
-            <div class="queue__item" v-for="(users, index) in queue.users">
-                <div class="item__number">
-                    {{ index +1 }}
-                </div>
-                <div class="item__user">
-                    {{ users.user.first_name }} «{{ users.user.username }}»
-                    {{ users.user.last_name }}
-                </div>
-            </div>
+  <div class="wrapper" v-if="isAuth">
+    <sidebar-menu class="sidebar" v-if="isDesktop"></sidebar-menu>
+    <navbar-menu v-else></navbar-menu>
+    <div v-if="queue" class="queue">
+      <div class="queue__name">
+        {{ queue.name }} [{{ queue.id }}]
+      </div>
+      <div class="queue__item" v-for="(users, index) in queue.users">
+        <div class="item__number">
+          {{ index + 1 }}
         </div>
+        <div class="item__user">
+          {{ users.user.first_name }} «{{ users.user.username }}»
+          {{ users.user.last_name }}
+        </div>
+      </div>
     </div>
-    <div v-else class="auth-message">
-        <div class="text">Для просмотра данной страницы вам необходимо авторизоваться</div>
-        <my-button @click="$router.push('/login')">Авторизоваться</my-button>
-    </div>
+  </div>
+  <div v-else class="auth-message">
+    <div class="text">Для просмотра данной страницы вам необходимо авторизоваться</div>
+    <my-button @click="$router.push('/login')">Авторизоваться</my-button>
+  </div>
 </template>
 
 <script>
 import UserList from "@/components/User/UserList.vue"
 import UserItem from "@/components/User/UserItem.vue"
 import MyButton from "@/components/UI/MyButton.vue";
-import gql from "graphql-tag";
-import {Auth} from "@/components/js/AuthModule";
 import {urlBackend} from "@/components/config";
 import SidebarMenu from "@/components/UI/PersonalAccount/SidebarMenu.vue";
 import NavbarMenu from "@/components/UI/PersonalAccount/NavbarMenu.vue";
+import {mapGetters, mapState} from "vuex";
+import axios from "axios";
 
 export default {
-    components: {
-        NavbarMenu, SidebarMenu,
-        MyButton,
-        UserList, UserItem
-    },
-    data() {
-        return {
-            Auth: Auth,
-            queue: {
-                id: '',
-                name: '',
-                owner: {
-                    id: '',
-                    username: "",
-                    email: "",
-                    password: "",
-                    first_name: "",
-                    last_name: "",
-                },
-                users: [],
-                date_creation: '',
-                date_activation: '',
-                is_active: ''
-            },
-            isDesktop: false,
-        };
-    },
-    // apollo: {queue: {
-    //         query: gql`query{queue () {edges {node {id,name,dateActivation,dateCreation,users{edges{node{id,user{email,username}}}}}}}}`,
-    //     },
-    // },
-    methods: {
-        async getQueue() {
-            const queueId = this.$route.params.id;
-            const response = await this.Auth.requestToBackend(
-                'get',
-                `${urlBackend}/api/queue/${queueId}`,
-                {}
-            )
-            for (let key in response.data) {
-                this.queue[key] = response.data[key]
-            }
+  components: {
+    NavbarMenu, SidebarMenu,
+    MyButton,
+    UserList, UserItem
+  },
+  computed: {
+    ...mapState({
+      isAuth: state => state.auth.isAuth
+    }),
+  },
+  data() {
+    return {
+      ...mapGetters({
+        getAuthorization: "auth/getAuthorization",
+      }),
+      queue: {
+        id: '',
+        name: '',
+        owner: {
+          id: '',
+          username: "",
+          email: "",
+          password: "",
+          first_name: "",
+          last_name: "",
         },
+        users: [],
+        date_creation: '',
+        date_activation: '',
+        is_active: ''
+      },
+      isDesktop: false,
+    };
+  },
+  methods: {
+    async getQueue() {
+      const queueId = this.$route.params.id;
+      await axios({
+        method: 'get',
+        url: `${urlBackend}/api/queue/${queueId}`,
+        data: {},
+        headers: {
+          Authorization: this.getAuthorization(),
+        }
+      }).then(response => {
+        for (let key in response.data) {
+          this.queue[key] = response.data[key]
+        }
+      })
     },
-    mounted() {
-        this.getQueue();
-        const mediaQuery = window.matchMedia("(min-width: 768px)")
-        this.isDesktop = mediaQuery.matches;
-        mediaQuery.addListener((event) => {
-            this.isDesktop = event.matches;
-        });
-    }
+  },
+  mounted() {
+    this.getQueue();
+    const mediaQuery = window.matchMedia("(min-width: 768px)")
+    this.isDesktop = mediaQuery.matches;
+    mediaQuery.addListener((event) => {
+      this.isDesktop = event.matches;
+    });
+  }
 }
 </script>
 
 <style scoped>
-.wrapper{
-    display: flex;
+.wrapper {
+  display: flex;
 }
+
 .queue {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    font-family: Helvetica, sans-serif;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: Helvetica, sans-serif;
+  width: 100%;
 }
 
 .queue__name {
-    font-size: 30px;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 50px;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 50px;
 }
 
 .queue__item {
-    display: flex;
-    min-width: 70%;
-    margin: 15px;
-    background-color: white;
-    border: rgb(52, 114, 238) 3px solid;
-    font-size: 20px;
-    overflow: hidden;
+  display: flex;
+  min-width: 70%;
+  margin: 15px;
+  background-color: white;
+  border: rgb(52, 114, 238) 3px solid;
+  font-size: 20px;
+  overflow: hidden;
 }
 
 .item__number {
-    background: rgb(52, 114, 238);
-    padding: 15px;
-    color: white;
-    font-weight: 600;
-    text-align: center;
+  background: rgb(52, 114, 238);
+  padding: 15px;
+  color: white;
+  font-weight: 600;
+  text-align: center;
 }
 
 .item__user {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    font-weight: 600;
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  font-weight: 600;
+  text-align: center;
 }
-.auth-message{
-    margin-top: 50px;
-    font-size: 40px;
-    font-weight: 600;
-    font-family: Helvetica, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+
+.auth-message {
+  margin-top: 50px;
+  font-size: 40px;
+  font-weight: 600;
+  font-family: Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.auth-message .text{
-    margin-bottom: 40px;
+
+.auth-message .text {
+  margin-bottom: 40px;
 }
-@media (max-width: 768px){
-    .wrapper{
-        display: block;
-    }
-    .queue__item{
-        min-width: 80%;
-        font-size: 18px;
-    }
+
+@media (max-width: 768px) {
+  .wrapper {
+    display: block;
+  }
+
+  .queue__item {
+    min-width: 80%;
+    font-size: 18px;
+  }
 }
 </style>

@@ -1,12 +1,12 @@
 import {InMemoryCache, ApolloClient, ApolloLink, HttpLink} from "@apollo/client";
 import {createApolloProvider} from "@vue/apollo-option";
 import {setContext} from "@apollo/client/link/context";
-import {Auth} from "@/components/js/AuthModule";
-import {urlBackend} from "@/components/config";
+import {specialWord, urlBackend} from "@/components/config";
 
 let token;
 const contextLink = setContext(async () => {
-    token = await Auth.getAuthorization()
+    const data = JSON.parse(localStorage.getItem('JwtToken'));
+    token = `${specialWord} ${data.access}`
     return {token}
 })
 

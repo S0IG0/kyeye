@@ -33,13 +33,13 @@
 
 <script>
 import {mapMutations, mapState} from 'vuex'
-import { Pages } from '@/components/UI/PersonalAccount/config.js'
+import { Pages } from '@/components/store/config.js'
 export default {
     name: "NavbarMenu",
     methods: {
-        ...mapMutations([
-            'setPage'
-        ]),
+        ...mapMutations({
+          setPage: "pages/setPage"
+        }),
         Pages,
     }
 }

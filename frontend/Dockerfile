@@ -1,7 +1,7 @@
 FROM node:alpine3.17
 
 ARG ENV_FILE
-ENV HOST=${HOST}
+ENV HOST=$HOST
 
 COPY env_file.env ./app/.env
 
