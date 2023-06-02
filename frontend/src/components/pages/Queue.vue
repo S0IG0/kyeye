@@ -13,6 +13,7 @@
         <div class="item__user">
           {{ users.user.first_name }} «{{ users.user.username }}»
           {{ users.user.last_name }}
+          <MyButton @click="deleteUser(users.user.id, index)">delete</MyButton>
         </div>
       </div>
     </div>
@@ -84,6 +85,21 @@ export default {
         }
       })
     },
+    async deleteUser(user_id, index) {
+      const queue_id = this.$route.params.id;
+
+      // api/queue/user/destroy/<int:user_id>/<int:queue_id>/
+      await axios({
+        method: 'delete',
+        url: `${urlBackend}/api/queue/user/destroy/${user_id}/${queue_id}/`,
+        data: {},
+        headers: {
+          Authorization: this.getAuthorization(),
+        }
+      }).then(response => {
+        this.queue.users.splice(index, 1)
+      })
+    }
   },
   mounted() {
     this.getQueue();
