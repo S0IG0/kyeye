@@ -2,7 +2,7 @@ version: 3.2.47
 
 services:
   backend:
-    container_name: Django
+    container_name: Django-kyeye
     build:
       context: ./backend/
       dockerfile: Dockerfile
@@ -22,13 +22,15 @@ services:
       - database
   
   database:
-    container_name: Postgres
+    container_name: Postgres-kyeye
     image: postgres:14-alpine3.17
     env_file:
       - env_file.env
+    ports:
+      - "5432:5432"
 
   frontend:
-    container_name: Vue
+    container_name: Vue-kyeye
     env_file:
       - env_file.env
     build:
@@ -44,12 +46,12 @@ services:
       - backend
 
   redis:
-    container_name: Redis
+    container_name: Redis-kyeye
     image: redis:7.0.5-alpine3.17
     hostname: redis
 
   worker:
-    container_name: Celery
+    container_name: Celery-kyeye
     build:
       context: ./backend/
     hostname: worker
@@ -67,7 +69,7 @@ services:
       - database
 
   flower:
-    container_name: Flower
+    container_name: Flower-kyeye
     build:
       context: ./backend/
     hostname: flower
@@ -82,7 +84,7 @@ services:
     ports:
       - "5555:5555"
   nginx:
-    container_name: Nginx
+    container_name: Nginx-kyeye
     image: nginx:1.21.0-alpine
     env_file:
       - env_file.env

@@ -1,4 +1,4 @@
-FROM node:alpine3.17
+FROM node-18
 
 ARG ENV_FILE
 ENV HOST=$HOST
