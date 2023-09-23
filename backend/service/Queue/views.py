@@ -200,8 +200,8 @@ class UserQueueRelationRegisterView(CreateAPIView):
            POST /api/queue/user/register/
 
            {
-                "user_id": 1,
-                "queue_id": 2,
+                "user": 1,
+                "queue": 2,
            }
 
            {
