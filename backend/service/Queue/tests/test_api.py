@@ -39,6 +39,8 @@ class QueueRetrieveViewApiTestCase(APITestCase):
 
         serializer_data = QueueSerializer(queue).data
 
+        print(response.data)
+
         self.assertEquals(status.HTTP_200_OK, response.status_code)
         self.assertEquals(serializer_data, response.data)
 
