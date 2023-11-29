@@ -29,8 +29,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     os.environ.get('VUE_APP_API_HOST'),
-    'localhost'
+    'localhost',
+    "192.168.1.64",
 ]
+
+X_FRAME_OPTIONS = 'ALLOW-FROM http://localhost/'
+
 
 # Application definition
 

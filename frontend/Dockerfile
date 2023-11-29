@@ -1,15 +1,5 @@
 FROM node:alpine3.17
+WORKDIR frontend
+COPY package.json .
+RUN npm i
 
-ARG ENV_FILE
-ENV HOST=$HOST
-
-COPY env_file.env ./app/.env
-
-WORKDIR /app
-COPY ./frontend/ /app
-
-RUN npm install
-RUN npm run build
-
-RUN adduser --disabled-password service-user
-USER service-user

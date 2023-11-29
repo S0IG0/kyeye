@@ -27,22 +27,6 @@ services:
     env_file:
       - env_file.env
 
-  frontend:
-    container_name: Vue
-    env_file:
-      - env_file.env
-    build:
-      context: ./
-      dockerfile: /frontend/Dockerfile
-      args:
-        - ENV_FILE=./env_file.env
-    volumes:
-      - ./env_file.env:/app/.env
-      - ./frontend/:/app
-      - dist_data:/app/dist
-    depends_on:
-      - backend
-
   redis:
     container_name: Redis
     image: redis:7.0.5-alpine3.17
@@ -81,6 +65,25 @@ services:
       - redis
     ports:
       - "5555:5555"
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/public:/frontend/public
+      - ./frontend/src:/frontend/src
+      - ./frontend/.eslintrc.cjs:/frontend/.eslintrc.cjs
+      - ./frontend/index.html:/frontend/index.html
+      - ./frontend/tsconfig.json:/frontend/tsconfig.json
+      - ./frontend/tsconfig.node.json:/frontend/tsconfig.node.json
+      - ./frontend/vite.config.ts:/frontend/vite.config.ts
+    environment:
+      - VITE_HOST=localhost
+    ports:
+      - "5173:5173"
+    command: [ "npm", "run", "dev" ]
+
   nginx:
     container_name: Nginx
     image: nginx:1.21.0-alpine
