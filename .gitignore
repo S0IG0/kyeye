@@ -18,3 +18,4 @@ frontend/node_modules
 /nginx/loggs/errors.log
 
 **/node_modules
+**/venv
