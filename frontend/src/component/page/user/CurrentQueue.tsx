@@ -36,7 +36,7 @@ export const CurrentQueue = () => {
         },
         1: {
             className: "success",
-            text: "Ты следущий"
+            text: "Ты следующий"
         }
     }
 
@@ -102,7 +102,7 @@ export const CurrentQueue = () => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Qr для просомтра очереди</h1>
+                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Qr для просмотра очереди</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                         </div>
@@ -114,7 +114,7 @@ export const CurrentQueue = () => {
             </div>
 
 
-            <h5 className="card-title d-flex">
+            <h5 className="card-title d-flex  mb-2">
                 <div className="me-2">
                     {queue.name}
                 </div>
@@ -146,7 +146,7 @@ export const CurrentQueue = () => {
                                 {queue.is_active ? "Активирована" : "Не активирована"}
                             </span>
             </h5>
-            <h6 className="card-subtitle text-body-secondary">
+            <h6 className="card-subtitle text-body-secondary mb-2">
                 {"Дата создания "}
                 {new Date(queue.date_creation)
                     .toLocaleDateString(
@@ -192,7 +192,7 @@ export const CurrentQueue = () => {
                         <h3 className="h3 ">Панель управления</h3>
                         <div role="group">
                             <button type="button" className="btn btn-success me-1" onClick={next}>
-                                Следущий
+                                Следующий
                             </button>
                             <button type="button" className="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop">
@@ -206,9 +206,9 @@ export const CurrentQueue = () => {
 
             {!youInQueue && (
                 <div className="mb-4">
-                    <h4>Ты можешь проседенится к этой очереди </h4>
+                    <h4>Ты можешь присоединиться к этой очереди </h4>
                     <button className="btn btn-success" disabled={!queue.is_active} onClick={join}>
-                        {queue.is_active ? "Проседениться" : "Дождитесь активации"}
+                        {queue.is_active ? "Присоединиться" : "Дождитесь активации"}
                     </button>
                 </div>
             )}
@@ -231,14 +231,14 @@ export const CurrentQueue = () => {
                                     style={{maxHeight: "28px"}}
                                     className={`
                                     badge
-                                    bg-${index in status && status[index].className}-subtle
-                                    border-${index in status && status[index].className}-subtle
+                                    bg-${index in status ? status[index].className : "primary"}-subtle
+                                    border-${index in status ? status[index].className : "primary"}-subtle
                                     border
-                                    text-${index in status && status[index].className}-emphasis
+                                    text-${index in status ? status[index].className : "primary"}-emphasis
                                     rounded-pill
                                     `}
                                 >
-                                    {index in status ? status[index].text : `Перед тобой еще ${index}`}
+                                    {status[index] !== undefined ? status[index].text : `Перед тобой еще ${index}`}
                             </span>
                             </div>
                         </div>

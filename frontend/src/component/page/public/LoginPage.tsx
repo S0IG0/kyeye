@@ -7,20 +7,27 @@ import {NamePages, routes} from "@route/routes.tsx";
 
 
 export const LoginPage = () => {
+    const [detail, setDetail] = useState("")
     const [user, setUser] = useState<IUser>({
         email: "",
         password: ""
     })
-
     const [isLoading, setIsLoading] = useState(false);
-
     const navigate = useNavigate();
 
     function login() {
         setIsLoading(true);
         store.login(user)
-            .then(() => navigate(routes[NamePages.PERSONAL_ACCOUNT].path))
+            .then(() => {
+                navigate(routes[NamePages.PERSONAL_ACCOUNT].path);
+                setDetail("");
+            })
             .finally(() => setIsLoading(false))
+            .catch(reason => {
+                if (reason.response.status === 401) {
+                    setDetail(reason.response.data.detail);
+                }
+            })
     }
 
 
@@ -32,6 +39,11 @@ export const LoginPage = () => {
                 </div>
 
                 <div className="modal-body p-5 pt-0">
+                    {detail !== "" && (
+                        <div className="alert alert-danger" role="alert">
+                            {detail}
+                        </div>
+                    )}
                     <div className="form-floating mb-3">
                         <input type="email"
                                className="form-control rounded-3"

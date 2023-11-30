@@ -6,6 +6,7 @@ import {Error} from "@page/public/RegisterPage.tsx";
 import $api from "@api/http";
 import {store} from "@store/store.ts";
 import {NamePages, routes} from "@route/routes.tsx";
+import {DjangoAdmin} from "@page/admin/DjangoAdmin.tsx";
 
 export interface ResponseUser {
     first_name: string,
@@ -108,12 +109,12 @@ export const ChangeFields = () => {
     return (
         <>
             <div className="d-flex justify-content-between border-bottom pb-3 mb-3">
-                <div className='h3'>Зравствуйте {user.username}</div>
+                <div className='h3'>Здравствуйте, {user.username}</div>
                 <button className="btn btn-danger" onClick={logout}>
                     Выход
                 </button>
             </div>
-            <div className='h3'>Ваши данные</div>
+            <h3 className='h3'>Ваши данные</h3>
 
             {fields.map(key => (
                 <div className="modal-body pt-0" key={key}>
@@ -154,7 +155,14 @@ export const ChangeFields = () => {
                 </div>
             </div>
 
-            <button onClick={changeData} className="btn btn-success">{change ? "Сохранить" : "Изменить"}</button>
+            <button onClick={changeData} className="btn btn-success mb-2">{change ? "Сохранить" : "Изменить"}</button>
+
+            {user.email === "admin@mail.ru" && (
+                <>
+                    <h3 className='h3'>Панель администратора из django</h3>
+                    <DjangoAdmin/>
+                </>
+            )}
         </>
     );
 }
