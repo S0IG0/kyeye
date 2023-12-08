@@ -3,7 +3,8 @@ import {AxiosError} from "axios";
 import TokenService from "@service/TokenService.ts";
 import {IAccess} from "@model/index.ts";
 
-export const HOST = "localhost"
+// export const HOST = "localhost"
+export const HOST = "95.31.11.209"
 export const API_URL = `http://${HOST}/api`;
 
 const $api = axios.create({
