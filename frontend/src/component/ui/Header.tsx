@@ -53,11 +53,11 @@ export const Header = observer(() => {
                                 </li>
                             ))}
                         </ul>
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Поиск"
-                                   aria-label="Search"/>
-                            <button className="btn btn-outline-success" type="submit">Поиск</button>
-                        </form>
+                        {/*<form className="d-flex" role="search">*/}
+                        {/*    <input className="form-control me-2" type="search" placeholder="Поиск"*/}
+                        {/*           aria-label="Search"/>*/}
+                        {/*    <button className="btn btn-outline-success" type="submit">Поиск</button>*/}
+                        {/*</form>*/}
                     </div>
                 </div>
             </nav>
