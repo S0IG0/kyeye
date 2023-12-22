@@ -41,7 +41,6 @@ from Queue.views import (
 )
 from graphene_django.views import GraphQLView
 from django.views.decorators.csrf import csrf_exempt
-from backend.service.yasg import urlpatterns as doc_urls
 
 
 
@@ -107,4 +106,3 @@ urlpatterns = [
 ]
 urlpatterns += router.urls
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += doc_urls
